@@ -1,6 +1,6 @@
 <?php
 
-require_once APPPATH . "third_party/ciunit/system/autoload.php";
+require_once APPPATH . "third_party/ciunit/framework/autoload.php";
  
 
 class Ciunit {

@@ -1,0 +1,105 @@
+<?php
+/**
+ * CIUnit
+ *
+ * Copyright (c) 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in
+ *     the documentation and/or other materials provided with the
+ *     distribution.
+ *
+ *   * Neither the name of Agop Seropyan nor the names of his
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @package    CIUnit
+ * @subpackage Comparator
+ * @author     Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
+ * @since      File available since Release 1.0.0
+ */
+
+/**
+ * Compares two scalar values for equality
+ *
+ * @package    CIUnit
+ * @subpackage Comparator
+ * @author     Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
+ * @since      File available since Release 1.0.0
+ */
+class CIUnit_Framework_Comparator_Scalar extends CIUnit_Framework_Comparator {
+	
+    /**
+     * (non-PHPdoc)
+     * @see CIUnit_Framework_Comparator::accepts()
+     */
+	public function accepts($expected, $actual)
+	{
+		// Scalar variables are those containing an integer, float, string or boolean. Types array, object and resource are not scalar.
+
+		if((is_scalar($actual) XOR NULL === $actual) && (is_scalar($expected) XOR NULL === $expected) 
+				|| (is_string($actual) && is_object($expected) && method_exists($expected, '__toString'))
+				|| (is_string($expected) && is_object($actual) && method_exists($actual, '__toString'))) {
+			
+			return TRUE;
+		}
+		
+		return FALSE;
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see CIUnit_Framework_Comparator::assertEquals()
+	 */
+	public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
+	{
+		$actualToCompare = $actual;
+		$expectedToCompare = $expected;
+		
+		if(is_string($expected) || is_string($actual)) {
+			$expectedToCompare = (string)$expected;
+			$actualToCompare = (string)$actual;
+			
+			if($ignoreCase) {
+				$actualToCompare = strtolower($actualToCompare);
+				$expectedToCompare = strtolower($expectedToCompare);
+			}
+		}
+		
+		if($actualToCompare != $expectedToCompare) {
+			
+			if(is_string($expected) && is_string($actual)) { 
+			    throw new CIUnit_Framework_Exception_ComparissonFailure($expected, $actual, CIUnit_Util_Type::export($expected), CIUnit_Util_Type::export($actual),  'Failed asserting that two strings are equal.');
+			}
+			
+			throw new CIUnit_Framework_Exception_ComparissonFailure($expected, $actual, '', '', sprintf('Failed asserting that %s matches expected %s.', CIUnit_Util_Type::export($actual), CIUnit_Util_Type::export($expected)));
+		}
+	}
+}
+
+?>
