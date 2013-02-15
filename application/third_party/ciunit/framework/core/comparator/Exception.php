@@ -52,12 +52,12 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_Comparator_Exception extends CIUnit_Framework_Comparator_Object
+class CIUnit_Framework_ComparatorAbstract_Exception extends CIUnit_Framework_ComparatorAbstract_Object
 {
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Comparator_Object::accepts()
+     * @see CIUnit_Framework_ComparatorAbstract_Object::accepts()
      */
     public function accepts($expected, $actual) 
     {
@@ -66,7 +66,7 @@ class CIUnit_Framework_Comparator_Exception extends CIUnit_Framework_Comparator_
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Comparator_Object::toArray()
+     * @see CIUnit_Framework_ComparatorAbstract_Object::toArray()
      */
     protected function toArray($object)
     {

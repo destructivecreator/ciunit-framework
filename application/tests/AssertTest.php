@@ -1,9 +1,9 @@
 <?php
 
 /**
- * CIUnit_Framework_Assert test case.
+ * CIUnit_Framework_AssertAbstract test case.
  */
-class AssertTest extends CIUnit_Framework_TestCase
+class AssertTest extends CIUnit_Framework_TestCaseAbstract
 {
 
  	
@@ -569,7 +569,7 @@ class AssertTest extends CIUnit_Framework_TestCase
         $this->assertInstanceOf('RuntimeException', new RuntimeException());
         
         try {
-            $this->assertInstanceOf('CIUnit_Framework_Assert', new Exception());
+            $this->assertInstanceOf('CIUnit_Framework_AssertAbstract', new Exception());
         } catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }

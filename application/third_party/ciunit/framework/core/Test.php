@@ -52,7 +52,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-interface CIUnit_Framework_Test extends Countable
+interface CIUnit_Framework_TestInterface extends Countable
 {
     /**
      * This method runs a single test and collects its result in a CIUnit_Framework_TestResult object

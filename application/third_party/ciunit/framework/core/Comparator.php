@@ -52,18 +52,18 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-abstract class CIUnit_Framework_Comparator {
+abstract class CIUnit_Framework_ComparatorAbstract {
 	
     /**
-     * @var CIUnit_Framework_ComparatorFactory
+     * @var CIUnit_Framework_ComparatorAbstractFactory
      */
 	protected $factory;
 		
 	/**
 	 * Sets comparator factory
-	 * @param CIUnit_Framework_ComparatorFactory $factory
+	 * @param CIUnit_Framework_ComparatorAbstractFactory $factory
 	 */
-	public function setFactory(CIUnit_Framework_ComparatorFactory $factory)
+	public function setFactory(CIUnit_Framework_ComparatorAbstractFactory $factory)
 	{
 		$this->factory = $factory;
 	}

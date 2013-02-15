@@ -42,7 +42,7 @@
  * @since      File available since Release 1.0.0
  */
 
-class CIUnit_Framework_TestWarning extends CIUnit_Framework_TestCase
+class CIUnit_Framework_TestWarning extends CIUnit_Framework_TestCaseAbstract
 {
     protected $message;
     
@@ -60,7 +60,7 @@ class CIUnit_Framework_TestWarning extends CIUnit_Framework_TestCase
     
     /**
      * Overrite to make the test fail with appropriate message
-     * @see CIUnit_Framework_TestCase::runTest()
+     * @see CIUnit_Framework_TestCaseAbstract::runTest()
      */
     protected function runTest()
     {

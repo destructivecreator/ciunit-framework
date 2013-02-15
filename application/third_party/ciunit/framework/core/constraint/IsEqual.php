@@ -52,7 +52,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_Constraint_IsEqual extends CIUnit_Framework_Constraint {
+class CIUnit_Framework_ConstraintAbstract_IsEqual extends CIUnit_Framework_ConstraintAbstract {
 	
     /**
      * Value or object to evaluate against
@@ -101,11 +101,11 @@ class CIUnit_Framework_Constraint_IsEqual extends CIUnit_Framework_Constraint {
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Constraint::evaluate()
+     * @see CIUnit_Framework_ConstraintAbstract::evaluate()
      */
     public function evaluate($value, $description = '', $returnResult = FALSE)
     {
-    	$factory = CIUnit_Framework_ComparatorFactory::getInstance();
+    	$factory = CIUnit_Framework_ComparatorAbstractFactory::getInstance();
     	
     	try {
     		$comparator = $factory->getComparator($value, $this->expected);
@@ -124,7 +124,7 @@ class CIUnit_Framework_Constraint_IsEqual extends CIUnit_Framework_Constraint {
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Constraint::failureDescription()
+     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
      */
     public function failureDescription($evaluated)
     {    

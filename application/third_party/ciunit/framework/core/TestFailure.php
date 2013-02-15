@@ -66,10 +66,10 @@ class CIUnit_Framework_TestFailure
     
     /**
      * 
-     * @param CIUnit_Framework_Test $failedTest
+     * @param CIUnit_Framework_TestInterface$failedTest
      * @param Exception $thrownException
      */
-    public function __construct(CIUnit_Framework_Test $failedTest, Exception $thrownException)
+    public function __construct(CIUnit_Framework_TestInterface$failedTest, Exception $thrownException)
     {
         $this->failedTest = $failedTest;
         $this->thrownException = $thrownException;

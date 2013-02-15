@@ -52,7 +52,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert implements CIUnit_Framework_Test
+abstract class CIUnit_Framework_TestCaseAbstract extends CIUnit_Framework_AssertAbstract implements CIUnit_Framework_TestInterface
 {
     /**
      * Instance of CodeIgniter to use withing the TestCases
@@ -197,7 +197,7 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
         $testResult = NULL;
         try { 
             $testResult = $method->invokeArgs($this, array());
-            //$this->AddAssertionCount(CIUnit_Framework_Assert::getAssertionCount());
+            //$this->AddAssertionCount(CIUnit_Framework_AssertAbstract::getAssertionCount());
         }
         // catch exception if thrown
         catch (Exception $e) { 
@@ -218,7 +218,7 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
             
             if(TRUE == $check) {
                 
-                $constraint = new CIUnit_Framework_Constraint_Exception($this->expectedException);
+                $constraint = new CIUnit_Framework_ConstraintAbstract_Exception($this->expectedException);
                 $this->assertThat($e, $constraint);
                 
                 

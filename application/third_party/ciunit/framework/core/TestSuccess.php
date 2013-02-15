@@ -59,7 +59,7 @@ class CIUnit_Framework_TestSuccess
      */
     private $success;
     
-    public function __construct(CIUnit_Framework_Test $passedTest)
+    public function __construct(CIUnit_Framework_TestInterface$passedTest)
     {
         $this->success = $passedTest; 
     }

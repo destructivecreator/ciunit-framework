@@ -52,11 +52,11 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_Comparator_Numeric extends CIUnit_Framework_Comparator_Scalar {
+class CIUnit_Framework_ComparatorAbstract_Numeric extends CIUnit_Framework_ComparatorAbstract_Scalar {
 	
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Comparator_Scalar::accepts()
+     * @see CIUnit_Framework_ComparatorAbstract_Scalar::accepts()
      */
 	public function accepts($expected, $actual) 
 	{
@@ -65,7 +65,7 @@ class CIUnit_Framework_Comparator_Numeric extends CIUnit_Framework_Comparator_Sc
 	
 	/**
 	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_Comparator_Scalar::assertEquals()
+	 * @see CIUnit_Framework_ComparatorAbstract_Scalar::assertEquals()
 	 */
 	public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array()) 
 	{

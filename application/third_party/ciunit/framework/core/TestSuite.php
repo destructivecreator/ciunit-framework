@@ -54,7 +54,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_TestSuite implements CIUnit_Framework_Test, IteratorAggregate 
+class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface, IteratorAggregate 
 {
     /**
      * @var string
@@ -113,9 +113,9 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_Test, IteratorAggre
             throw new CIUnit_Framework_Exception_CIUnitException('class argument is not valid');
         }
         
-        // Throw exception if the class does not extend CIUnit_Framework_TestCase
-        if(! $class->isSubclassOf('CIUnit_Framework_TestCase')) {
-            throw new CIUnit_Framework_Exception_CIUnitException("Class " . $class->name . " does not extend CIUnit_Framework_TestCase");
+        // Throw exception if the class does not extend CIUnit_Framework_TestCaseAbstract
+        if(! $class->isSubclassOf('CIUnit_Framework_TestCaseAbstract')) {
+            throw new CIUnit_Framework_Exception_CIUnitException("Class " . $class->name . " does not extend CIUnit_Framework_TestCaseAbstract");
         }
         
         // Set the name of the suite
@@ -164,10 +164,10 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_Test, IteratorAggre
     
     /**
      * Add method to test suite
-     * @param CIUnit_Framework_Test $test
+     * @param CIUnit_Framework_TestInterface$test
      * @since version 1.0.0
      */
-    public function addTest(CIUnit_Framework_Test $test)
+    public function addTest(CIUnit_Framework_TestInterface$test)
     {
         $class = new ReflectionClass($test);
         
@@ -235,7 +235,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_Test, IteratorAggre
      * @param ReflectionClass $class
      * @param string $method
      * @throws CIUnit_Framework_Exception_CIUnitException
-     * @return CIUnit_Framework_Exception_CIUnitException|CIUnit_Framework_TestCase
+     * @return CIUnit_Framework_Exception_CIUnitException|CIUnit_Framework_TestCaseAbstract
      */
     public static function createNewTest(ReflectionClass $class, $method)
     {
@@ -264,8 +264,8 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_Test, IteratorAggre
             throw new CIUnit_Framework_Exception_CIUnitException("No valid test provided");
         } 
         
-        // Is test instance of CIUnit_Framework_TestCase
-        if($test instanceof CIUnit_Framework_TestCase) {
+        // Is test instance of CIUnit_Framework_TestCaseAbstract
+        if($test instanceof CIUnit_Framework_TestCaseAbstract) {
             $test->setName($method);
             $test->setClass($class->getName());
         }
@@ -325,7 +325,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_Test, IteratorAggre
                 $test->run($result);
             } 
             // test instanceof testcase
-            else if ($test instanceof CIUnit_Framework_TestCase) {
+            else if ($test instanceof CIUnit_Framework_TestCaseAbstract) {
                 // call $this->invoke...($test)
                 $this->invokeTestRunMethod($test, $result);
             }
@@ -339,7 +339,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_Test, IteratorAggre
     }
     
     
-    public function invokeTestRunMethod(CIUnit_Framework_Test $test, CIUnit_Framework_TestResult $result)
+    public function invokeTestRunMethod(CIUnit_Framework_TestInterface$test, CIUnit_Framework_TestResult $result)
     {
         $test->run($result); 
     }

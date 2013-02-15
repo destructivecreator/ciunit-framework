@@ -53,7 +53,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-abstract class CIUnit_Framework_Constraint implements Countable
+abstract class CIUnit_Framework_ConstraintAbstract implements Countable
 {
 
     /**

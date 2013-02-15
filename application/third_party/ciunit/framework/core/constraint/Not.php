@@ -52,7 +52,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_Constraint_Not extends CIUnit_Framework_Constraint
+class CIUnit_Framework_ConstraintAbstract_Not extends CIUnit_Framework_ConstraintAbstract
 {
     /**
      * @var string
@@ -64,13 +64,13 @@ class CIUnit_Framework_Constraint_Not extends CIUnit_Framework_Constraint
      */
     public function __construct($constraint)
     {
-        if($constraint instanceof CIUnit_Framework_Constraint)
+        if($constraint instanceof CIUnit_Framework_ConstraintAbstract)
             $this->constraint = $constraint;
     }
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Constraint::evaluate()
+     * @see CIUnit_Framework_ConstraintAbstract::evaluate()
      */
     public function evaluate($value, $description = '', $returnResult = FALSE)
     {
@@ -104,7 +104,7 @@ class CIUnit_Framework_Constraint_Not extends CIUnit_Framework_Constraint
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Constraint::failureDescription()
+     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
      */
     public function failureDescription($evaluated)
     {
@@ -113,7 +113,7 @@ class CIUnit_Framework_Constraint_Not extends CIUnit_Framework_Constraint
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Constraint::count()
+     * @see CIUnit_Framework_ConstraintAbstract::count()
      */
     public function count()
     {

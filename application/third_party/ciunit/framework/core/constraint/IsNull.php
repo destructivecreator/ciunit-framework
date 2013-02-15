@@ -52,11 +52,11 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_Constraint_isNull extends CIUnit_Framework_Constraint {
+class CIUnit_Framework_ConstraintAbstract_isNull extends CIUnit_Framework_ConstraintAbstract {
 	
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Constraint::matches()
+     * @see CIUnit_Framework_ConstraintAbstract::matches()
      */
 	protected function matches($value)
 	{
@@ -65,7 +65,7 @@ class CIUnit_Framework_Constraint_isNull extends CIUnit_Framework_Constraint {
 	
 	/**
 	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_Constraint::failureDescription()
+	 * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
 	 */
 	public function failureDescription($evaluated)
 	{

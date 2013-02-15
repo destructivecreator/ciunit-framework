@@ -52,7 +52,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorFactory {
+class CIUnit_Framework_ComparatorAbstractFactory {
 	
     /**
      * @var array
@@ -66,14 +66,14 @@ class CIUnit_Framework_ComparatorFactory {
 	
 	public function __construct()
 	{
-		$this->register(new CIUnit_Framework_Comparator_Type);
-		$this->register(new CIUnit_Framework_Comparator_Scalar);
-		$this->register(new CIUnit_Framework_Comparator_Numeric);
-		$this->register(new CIUnit_Framework_Comparator_Double);
-		$this->register(new CIUnit_Framework_Comparator_Array);
-		$this->register(new CIUnit_Framework_Comparator_Resource);
-		$this->register(new CIUnit_Framework_Comparator_Object);
-		$this->register(new CIUnit_Framework_Comparator_Exception);
+		$this->register(new CIUnit_Framework_ComparatorAbstract_Type);
+		$this->register(new CIUnit_Framework_ComparatorAbstract_Scalar);
+		$this->register(new CIUnit_Framework_ComparatorAbstract_Numeric);
+		$this->register(new CIUnit_Framework_ComparatorAbstract_Double);
+		$this->register(new CIUnit_Framework_ComparatorAbstract_Array);
+		$this->register(new CIUnit_Framework_ComparatorAbstract_Resource);
+		$this->register(new CIUnit_Framework_ComparatorAbstract_Object);
+		$this->register(new CIUnit_Framework_ComparatorAbstract_Exception);
 	}
 	
 	/**
@@ -84,7 +84,7 @@ class CIUnit_Framework_ComparatorFactory {
 	public static function getInstance()
 	{
 		if(self::$instance == NULL) {
-			self::$instance = new CIUnit_Framework_ComparatorFactory(); 
+			self::$instance = new CIUnit_Framework_ComparatorAbstractFactory(); 
 		}
 		
 		return self::$instance;
@@ -113,9 +113,9 @@ class CIUnit_Framework_ComparatorFactory {
 	 
 	/**
 	 * Registers comparator to the factory
-	 * @param CIUnit_Framework_Comparator $comparator
+	 * @param CIUnit_Framework_ComparatorAbstract $comparator
 	 */
-	public function register(CIUnit_Framework_Comparator $comparator)
+	public function register(CIUnit_Framework_ComparatorAbstract $comparator)
 	{
 		array_unshift($this->comparators, $comparator);
 		$comparator->setFactory($this);
@@ -123,9 +123,9 @@ class CIUnit_Framework_ComparatorFactory {
 	
 	/**
 	 * Unregisters comparator to the factory
-	 * @param CIUnit_Framework_Comparator $comparator
+	 * @param CIUnit_Framework_ComparatorAbstract $comparator
 	 */
-	public function unregister(CIUnit_Framework_Comparator $comparator)
+	public function unregister(CIUnit_Framework_ComparatorAbstract $comparator)
 	{
 	    foreach ($this->comparators as $key => $_comparator) {
             if ($comparator === $_comparator) {

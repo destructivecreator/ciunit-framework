@@ -52,7 +52,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_Constraint_Exception extends CIUnit_Framework_Constraint
+class CIUnit_Framework_ConstraintAbstract_Exception extends CIUnit_Framework_ConstraintAbstract
 {
     /**
      * @var string
@@ -69,7 +69,7 @@ class CIUnit_Framework_Constraint_Exception extends CIUnit_Framework_Constraint
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Constraint::matches()
+     * @see CIUnit_Framework_ConstraintAbstract::matches()
      */
     public function matches($value)
     {
@@ -78,7 +78,7 @@ class CIUnit_Framework_Constraint_Exception extends CIUnit_Framework_Constraint
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Constraint::failureDescription()
+     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
      */
     public function failureDescription($evaluated)
     {

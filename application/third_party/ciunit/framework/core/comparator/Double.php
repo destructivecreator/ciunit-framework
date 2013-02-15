@@ -52,7 +52,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_Comparator_Double extends CIUnit_Framework_Comparator_Numeric {
+class CIUnit_Framework_ComparatorAbstract_Double extends CIUnit_Framework_ComparatorAbstract_Numeric {
     
     /**
      * Represents the smallest positive Double value that is greater than zero
@@ -62,7 +62,7 @@ class CIUnit_Framework_Comparator_Double extends CIUnit_Framework_Comparator_Num
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Comparator_Numeric::accepts()
+     * @see CIUnit_Framework_ComparatorAbstract_Numeric::accepts()
      */
     public function accepts($expected, $actual) {
         return (is_double($expected) || is_double($actual)) && is_numeric($expected) && is_numeric($actual);
@@ -70,7 +70,7 @@ class CIUnit_Framework_Comparator_Double extends CIUnit_Framework_Comparator_Num
     
     /**
      * (non-PHPdoc)
-     * @see CIUnit_Framework_Comparator_Numeric::assertEquals()
+     * @see CIUnit_Framework_ComparatorAbstract_Numeric::assertEquals()
      */
     public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
     {

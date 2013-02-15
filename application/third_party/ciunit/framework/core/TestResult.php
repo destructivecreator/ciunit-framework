@@ -97,12 +97,12 @@ class CIUnit_Framework_TestResult implements Countable
     /**
      * Adds an error to the list of errors
      * 
-     * @param CIUnit_Framework_Test $test
+     * @param CIUnit_Framework_TestInterface$test
      * @param Exception $exception
      * @param float $time
      * @since version 1.0.0
      */
-    public function addError(CIUnit_Framework_Test $test, Exception $exception, $time)
+    public function addError(CIUnit_Framework_TestInterface$test, Exception $exception, $time)
     {
         //Check if incomplete
         if($exception instanceof CIUnit_Framework_Exception_IncompleteTest) {
@@ -123,7 +123,7 @@ class CIUnit_Framework_TestResult implements Countable
         $this->executionTime += $time;        
     }
     
-    public function addSuccess(CIUnit_Framework_Test $test, $time)
+    public function addSuccess(CIUnit_Framework_TestInterface$test, $time)
     {
         $this->passed[] = new CIUnit_Framework_TestSuccess($test);
         $this->executionTime += $time;
@@ -132,12 +132,12 @@ class CIUnit_Framework_TestResult implements Countable
     /**
      * Adds a fauilure to the list of failures
      * 
-     * @param CIUnit_Framework_Test $test
+     * @param CIUnit_Framework_TestInterface$test
      * @param CIUnit_Framework_Exception_AssertionFailed $exception
      * @param float $time
      * @since version 1.0.0
      */
-    public function addFailure(CIUnit_Framework_Test $test, CIUnit_Framework_Exception_AssertionFailed $exception, $time)
+    public function addFailure(CIUnit_Framework_TestInterface$test, CIUnit_Framework_Exception_AssertionFailed $exception, $time)
     {
         //Check if incomplete
         if($exception instanceof CIUnit_Framework_Exception_IncompleteTest) {
@@ -160,13 +160,13 @@ class CIUnit_Framework_TestResult implements Countable
     /**
      * Runs a TestCase
      * 
-     * @param CIUnit_Framework_Test $test
+     * @param CIUnit_Framework_TestInterface$test
      * @since version 1.0.0
      */
-    public function run(CIUnit_Framework_Test $test)
+    public function run(CIUnit_Framework_TestInterface$test)
     {
-        // Reset the number of assertions in CIUnit_Framework_Assert class
-        CIUnit_Framework_Assert::resetAssertionCount();
+        // Reset the number of assertions in CIUnit_Framework_AssertAbstract class
+        CIUnit_Framework_AssertAbstract::resetAssertionCount();
         
         // Create local flags for error, skipped incomplete and failure = FALSE
         $error = FALSE; 
@@ -201,7 +201,7 @@ class CIUnit_Framework_TestResult implements Countable
         $executionTime = CIUnit_Util_Timer::stop();
         
         // Add the current Asset class assertion count to TestCase assertions count
-        $test->addAssertionCount(CIUnit_Framework_Assert::getAssertionCount());
+        $test->addAssertionCount(CIUnit_Framework_AssertAbstract::getAssertionCount());
         
         $this->totalNuberOfTestsToRun += $test->count();
         $this->assertionsCount += $test->getNumberOfAssertions(); 
