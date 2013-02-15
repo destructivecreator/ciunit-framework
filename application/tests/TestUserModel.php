@@ -1,6 +1,6 @@
 <?php
 
-class TestUserModel extends \CIUnit_TestCase
+class TestUserModel extends \CIUnit_Framework_TestCase
 {
 
     /**
@@ -37,25 +37,25 @@ class TestUserModel extends \CIUnit_TestCase
 
     /**
      * @covers $this->assetArrayHasKey()
-     * @expectedException CIUnit_AssertionFailedException
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function testAssertArrayHasKeyProperlyFailsWithArrayAccessValue ()
     {
         $array = new ArrayObject();
         $array['foo'] = 'bar';
         
-        $this->setExpectedException('CIUnit_AssertionFailedException1');
+        $this->setExpectedException('CIUnit_Framework_Exception_AssertionFailed1');
         
         $this->assertArrayHasKey('bar', $array);
     }
 
     /**
      * @covers $this->assetArrayHasKey()
-     * @expectedException CIUnit_AssertionFailedException
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function tetsAssertArrayHasKeyThrowsException ()
     {
-        $this->setExpectedException('CIUnit_AssertionFailedException');
+        $this->setExpectedException('CIUnit_Framework_Exception_AssertionFailed');
         $this->assertArrayHasKey(array(), array());
     }
 
@@ -95,21 +95,21 @@ class TestUserModel extends \CIUnit_TestCase
 
     /**
      * @covers $this->assetCount()
-     * @expectedException CIUnit_InvalidArgumentException
+     * @expectedException CIUnit_Framework_Exception_InvalidArgument
      */
     public function testAssertCountThrowsExceptionIfNotCountable ()
     {
-        $this->setExpectedException('CIUnit_InvalidArgumentException');
+        $this->setExpectedException('CIUnit_Framework_Exception_InvalidArgument');
         $this->assertCount(2, new stdClass());
     }
 
     /**
      * @covers $this->assetCount()
-     * @expectedException CIUnit_InvalidArgumentException
+     * @expectedException CIUnit_Framework_Exception_InvalidArgument
      */
     public function testAssertCountThrowsExceptionIfExpectedNotInteger ()
     {
-        $this->setExpectedException('CIUnit_InvalidArgumentException');
+        $this->setExpectedException('CIUnit_Framework_Exception_InvalidArgument');
         $this->assertCount('dd', array());
     }
 
@@ -123,7 +123,7 @@ class TestUserModel extends \CIUnit_TestCase
 
     /**
      * @covers $this->assertNotEmpty()
-     * @expectedException CIUnit_AssertionFailedException
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function testAssertNotEmpty ()
     {
@@ -322,12 +322,12 @@ class TestUserModel extends \CIUnit_TestCase
      */
     public function testAssertThatIsInstanceOf ()
     {
-        $this->assertInstanceOf('CIUnit_Assert', new Exception());
+        $this->assertInstanceOf('CIUnit_Framework_Assert', new Exception());
     }
 
     /**
      * @covers $this->assertNotInstanceOf()
-     * @expectedException CIUnit_AssertionFailedException
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function testAssertThatIsNotInstanceOf ()
     {
@@ -344,7 +344,7 @@ class TestUserModel extends \CIUnit_TestCase
 
     /**
      * @covers $this->assertNotNull()
-     * @expectedException CIUnit_AssertionFailedException
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function testAssertNotNull ()
     {
@@ -361,7 +361,7 @@ class TestUserModel extends \CIUnit_TestCase
 
     /**
      * @covers $this->assertNotInternalType()
-     * @expectedException CIUnit_AssertionFailedException
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function testAssertNotInternalType ()
     {
@@ -381,7 +381,7 @@ class TestUserModel extends \CIUnit_TestCase
 
     /**
      * @covers $this->assertNotSameSize()
-     * @expectedException CIUnit_AssertionFailedException
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function testAssertNotSameSize ()
     {
@@ -395,7 +395,7 @@ class TestUserModel extends \CIUnit_TestCase
 
     public function testSkipTest ()
     {
-        // $this->setExpectedException('CIUnit_SkippedTestException');
+        // $this->setExpectedException('CIUnit_Framework_Exception_SkippedTest');
         $this->skip('Custom message for skipped test');
     }
 

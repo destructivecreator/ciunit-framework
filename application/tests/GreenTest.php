@@ -1,6 +1,6 @@
 <?php 
 
-class GreenTest extends CIUnit_TestCase
+class GreenTest extends CIUnit_Framework_TestCase
 {
     private $actual;
     

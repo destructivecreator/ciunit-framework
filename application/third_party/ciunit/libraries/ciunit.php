@@ -11,13 +11,13 @@ class Ciunit {
     public function run($testCase)
     {
         if($this->runner == NULL) {
-            $this->runner  = new CIUnit_TestRunner($testCase);
+            $this->runner  = new CIUnit_Framework_TestRunner($testCase);
         }
         
         try {
             $this->runner->run(); 
         }
-        catch (CIUnit_Exception $e) {
+        catch (CIUnit_Framework_Exception_CIUnitException $e) {
             $this->runFailure =  $e->getMessage();
         } 
     }

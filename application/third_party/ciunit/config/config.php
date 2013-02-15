@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 | The folder your tests are located in, with a trailing slash:
 |
-|	$config['ciunit_tests']	= 'tests/';
+|	$config['CIUnit_Framework_Tests']	= 'tests/';
 |
 | By default CIUnit would look for a folder named "tests" inside the 
 | application folder.
