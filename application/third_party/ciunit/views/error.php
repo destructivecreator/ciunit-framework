@@ -28,7 +28,7 @@
 
 		<div class="navbar navbar-inverse">
 			<div class="navbar-inner">
-				<a class="brand" href="#">CIUnit Framework 1.0</a>
+				<?php echo anchor('ciunit', 'CIUnit Framework 1.0', array('class' => 'brand')); ?>
 			</div>
 			<!-- /.navbar-inner -->
 		</div>

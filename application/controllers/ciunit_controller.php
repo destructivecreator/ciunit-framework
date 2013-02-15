@@ -15,16 +15,21 @@ class CIUnit_Controller extends CI_Controller
             // Load library
             $this->load->library('ciunit'); 
             
+
+            $data['testcases'] = $this->ciunit->buildTestTree();
             if($testCase != '') {
                 $this->ciunit->run($testCase);
                 
                 if($this->ciunit->runWasSuccessful()) {
-                    $data['runner'] = $this->ciunit->getRunner(); 
-                    $data['testcases'] = $this->ciunit->buildTestTree();
+                    $data['runner'] = $this->ciunit->getRunner();  
                     
                     $this->load->view('index', $data);
                     return;
                 }
+            }
+            else {
+                $this->load->view('index', $data);
+                return;
             }  
             
             $data['run_failure'] = sprintf("Error: %s", $this->ciunit->getRunFailure());
