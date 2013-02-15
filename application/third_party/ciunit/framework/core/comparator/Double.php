@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,42 +46,50 @@
 /**
  * Compares two float-point numbers for equality
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Comparator
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstract_Double extends CIUnit_Framework_ComparatorAbstract_Numeric {
-    
+class CIUnit_Framework_ComparatorAbstract_Double extends CIUnit_Framework_ComparatorAbstract_Numeric
+{
+
     /**
      * Represents the smallest positive Double value that is greater than zero
+     * 
      * @var double
      */
     const EPSILON = 0.0000000001;
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract_Numeric::accepts()
      */
-    public function accepts($expected, $actual) {
-        return (is_double($expected) || is_double($actual)) && is_numeric($expected) && is_numeric($actual);
+    public function accepts ($expected, $actual)
+    {
+        return (is_double($expected) || is_double($actual)) &&
+                 is_numeric($expected) && is_numeric($actual);
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract_Numeric::assertEquals()
      */
-    public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
+    public function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
     {
         if ($delta == 0) {
             $delta = self::EPSILON;
         }
-
-        parent::assertEquals($expected, $actual, $delta, $canonicalize, $ignoreCase);
+        
+        parent::assertEquals($expected, $actual, $delta, $canonicalize, 
+                $ignoreCase);
     }
-    
 }
 
 ?>

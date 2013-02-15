@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,42 +46,42 @@
 /**
  * Compares two exceptions for equality
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Comparator
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_ComparatorAbstract_Exception extends CIUnit_Framework_ComparatorAbstract_Object
 {
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract_Object::accepts()
      */
-    public function accepts($expected, $actual) 
+    public function accepts ($expected, $actual)
     {
         return ($actual instanceof Exception && $expected instanceof Exception);
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract_Object::toArray()
      */
-    protected function toArray($object)
+    protected function toArray ($object)
     {
-        // Remove some of the contetn of the exception that would be different if not comparing two identical exceptions
+        // Remove some of the contetn of the exception that would be different
+        // if not comparing two identical exceptions
         $array = CIUnit_Util_Type::toArray($object);
         
-         unset(
-            $array['file'],
-            $array['line'],
-            $array['trace'],
-            $array['string'], // some internal property of Exception
-            $array['xdebug_message'] // some internal property added by XDebug
-        );
-
+        unset($array['file'], $array['line'], $array['trace'], $array['string'],  // some internal property of Exception
+                $array['xdebug_message'])        // some internal property added by XDebug
+        ;
+        
         return $array;
     }
 }

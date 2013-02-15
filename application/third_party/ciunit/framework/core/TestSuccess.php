@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,35 +46,40 @@
 /**
  * Class collects a successful test.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Core
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_TestSuccess
 {
+
     /**
+     *
      * @var CIUnit_Framework_Test
      */
     private $success;
-    
-    public function __construct(CIUnit_Framework_TestInterface$passedTest)
+
+    public function __construct (CIUnit_Framework_TestInterface $passedTest)
     {
-        $this->success = $passedTest; 
+        $this->success = $passedTest;
     }
-    
-	/**
+
+    /**
+     *
      * @return the $success
      */
-    public function getSuccess()
+    public function getSuccess ()
     {
         return $this->success;
     }
 
-	/**
-     * @param field_type $success
+    /**
+     *
+     * @param field_type $success            
      */
     public function setSuccess ($success)
     {
@@ -82,14 +88,13 @@ class CIUnit_Framework_TestSuccess
 
     /**
      * String representation of the test
+     * 
      * @return string
      */
-    public function toString()
+    public function toString ()
     {
         return sprintf("%s", $this->success->getName()->getName());
     }
-    
-    
 }
 
 ?>

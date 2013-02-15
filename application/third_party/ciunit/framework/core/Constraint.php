@@ -44,24 +44,29 @@
  */
 
 /**
- * Abstract base class for constraints. which are placed upon any value.
+ * Abstract base class for constraints.
+ * which are placed upon any value.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 abstract class CIUnit_Framework_ConstraintAbstract implements Countable
 {
 
     /**
      * Evaluates the constraint for parameter $value
-     * 
-     * @param mixed $value Value or Object to evaluate
-     * @param string $description Additional description about the test
-     * @param boolean $returnResult Return boolean or throw an exception
+     *
+     * @param mixed $value
+     *            Value or Object to evaluate
+     * @param string $description
+     *            Additional description about the test
+     * @param boolean $returnResult
+     *            Return boolean or throw an exception
      * @return mixed
      * @throws CIUnit_Framework_Exception_ExpectationFailed
      */
@@ -83,10 +88,11 @@ abstract class CIUnit_Framework_ConstraintAbstract implements Countable
     }
 
     /**
-     * Evaluates the constraint for parameter $value. Returns TRUE if the
+     * Evaluates the constraint for parameter $value.
+     * Returns TRUE if the
      * constraint is met, FALSE otherwise.
-     * 
-     * @param mixed $value
+     *
+     * @param mixed $value            
      * @return boolean
      */
     protected function matches ($value)
@@ -96,23 +102,25 @@ abstract class CIUnit_Framework_ConstraintAbstract implements Countable
 
     /**
      * Throws an exception for the given compared value and test description
-     * 
-     * @param mixed $value
-     * @param string $message
-     * @param CIUnit_Framework_Exception_ComparissonFailure $comparisonFailure
+     *
+     * @param mixed $value            
+     * @param string $message            
+     * @param CIUnit_Framework_Exception_ComparissonFailure $comparisonFailure            
      * @throws CIUnit_Framework_Exception_ExpectationFailed
      */
-    protected function fail ($value = null, $message = '', CIUnit_Framework_Exception_ComparissonFailure $comparisonFailure = NULL)
+    protected function fail ($value = null, $message = '', 
+            CIUnit_Framework_Exception_ComparissonFailure $comparisonFailure = NULL)
     {
-    	$failureDescription = '';
-    	
-    	if(!empty($message))
-    		$failureDescription .= sprintf("%s\n", $message);
-    	
+        $failureDescription = '';
+        
+        if (! empty($message))
+            $failureDescription .= sprintf("%s\n", $message);
+        
         $failureDescription .= sprintf('Failed asserting that %s.', 
                 $this->failureDescription($value));
         
-        throw new CIUnit_Framework_Exception_ExpectationFailed($failureDescription, $comparisonFailure);
+        throw new CIUnit_Framework_Exception_ExpectationFailed(
+                $failureDescription, $comparisonFailure);
     }
 
     protected function failureDescription ($evaluated)
@@ -121,9 +129,7 @@ abstract class CIUnit_Framework_ConstraintAbstract implements Countable
     }
 
     protected function addFailureDescription ()
-    {
-    	
-    }
+    {}
 
     /**
      * Counts the number of constraint elements.

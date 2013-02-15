@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,94 +46,101 @@
 /**
  * Factory for comparators
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Core
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstractFactory {
-	
+class CIUnit_Framework_ComparatorAbstractFactory
+{
+
     /**
+     *
      * @var array
      */
-	protected $comparators = array(); 
-	
-	/**
-	 * @var mixed
-	 */
-	private static $instance = NULL;
-	
-	public function __construct()
-	{
-		$this->register(new CIUnit_Framework_ComparatorAbstract_Type);
-		$this->register(new CIUnit_Framework_ComparatorAbstract_Scalar);
-		$this->register(new CIUnit_Framework_ComparatorAbstract_Numeric);
-		$this->register(new CIUnit_Framework_ComparatorAbstract_Double);
-		$this->register(new CIUnit_Framework_ComparatorAbstract_Array);
-		$this->register(new CIUnit_Framework_ComparatorAbstract_Resource);
-		$this->register(new CIUnit_Framework_ComparatorAbstract_Object);
-		$this->register(new CIUnit_Framework_ComparatorAbstract_Exception);
-	}
-	
-	/**
-	 * Returns a factory instance, singleton
-	 * 
-	 * @return mixed
-	 */
-	public static function getInstance()
-	{
-		if(self::$instance == NULL) {
-			self::$instance = new CIUnit_Framework_ComparatorAbstractFactory(); 
-		}
-		
-		return self::$instance;
-	}
-	
-	/**
-	 * Returns a comparator for comparing two values
-	 * 
-	 * @param mixed $expected
-	 * @param mixed $actual
-	 * @throws CIUnit_Framework_Exception_CIUnitException
-	 * @return mixed
-	 * @throws CIUnit_Framework_Exception_CIUnitException
-	 */
-	public function getComparator($expected, $actual) 
-	{
-		foreach ($this->comparators as $comparator) {
-			if($comparator->accepts($expected, $actual)) {
-				return $comparator;
-			}
-		}
-		
-		throw new CIUnit_Framework_Exception_CIUnitException(sprintf('No comparator found for comparing "%s" and "%s"', gettype($expected), gettype($actual)));
-	}
-	
-	 
-	/**
-	 * Registers comparator to the factory
-	 * @param CIUnit_Framework_ComparatorAbstract $comparator
-	 */
-	public function register(CIUnit_Framework_ComparatorAbstract $comparator)
-	{
-		array_unshift($this->comparators, $comparator);
-		$comparator->setFactory($this);
-	}
-	
-	/**
-	 * Unregisters comparator to the factory
-	 * @param CIUnit_Framework_ComparatorAbstract $comparator
-	 */
-	public function unregister(CIUnit_Framework_ComparatorAbstract $comparator)
-	{
-	    foreach ($this->comparators as $key => $_comparator) {
+    protected $comparators = array();
+
+    /**
+     *
+     * @var mixed
+     */
+    private static $instance = NULL;
+
+    public function __construct ()
+    {
+        $this->register(new CIUnit_Framework_ComparatorAbstract_Type());
+        $this->register(new CIUnit_Framework_ComparatorAbstract_Scalar());
+        $this->register(new CIUnit_Framework_ComparatorAbstract_Numeric());
+        $this->register(new CIUnit_Framework_ComparatorAbstract_Double());
+        $this->register(new CIUnit_Framework_ComparatorAbstract_Array());
+        $this->register(new CIUnit_Framework_ComparatorAbstract_Resource());
+        $this->register(new CIUnit_Framework_ComparatorAbstract_Object());
+        $this->register(new CIUnit_Framework_ComparatorAbstract_Exception());
+    }
+
+    /**
+     * Returns a factory instance, singleton
+     *
+     * @return mixed
+     */
+    public static function getInstance ()
+    {
+        if (self::$instance == NULL) {
+            self::$instance = new CIUnit_Framework_ComparatorAbstractFactory();
+        }
+        
+        return self::$instance;
+    }
+
+    /**
+     * Returns a comparator for comparing two values
+     *
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @throws CIUnit_Framework_Exception_CIUnitException
+     * @return mixed
+     * @throws CIUnit_Framework_Exception_CIUnitException
+     */
+    public function getComparator ($expected, $actual)
+    {
+        foreach ($this->comparators as $comparator) {
+            if ($comparator->accepts($expected, $actual)) {
+                return $comparator;
+            }
+        }
+        
+        throw new CIUnit_Framework_Exception_CIUnitException(
+                sprintf('No comparator found for comparing "%s" and "%s"', 
+                        gettype($expected), gettype($actual)));
+    }
+
+    /**
+     * Registers comparator to the factory
+     * 
+     * @param CIUnit_Framework_ComparatorAbstract $comparator            
+     */
+    public function register (CIUnit_Framework_ComparatorAbstract $comparator)
+    {
+        array_unshift($this->comparators, $comparator);
+        $comparator->setFactory($this);
+    }
+
+    /**
+     * Unregisters comparator to the factory
+     * 
+     * @param CIUnit_Framework_ComparatorAbstract $comparator            
+     */
+    public function unregister (CIUnit_Framework_ComparatorAbstract $comparator)
+    {
+        foreach ($this->comparators as $key => $_comparator) {
             if ($comparator === $_comparator) {
                 unset($this->comparators[$key]);
             }
         }
-	}
+    }
 }
 
 ?>

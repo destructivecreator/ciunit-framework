@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -43,84 +44,98 @@
  */
 
 /**
- * Constraint that asserts that the value or object it is evaluated for is NOT what the constraint asserts.
+ * Constraint that asserts that the value or object it is evaluated for is NOT
+ * what the constraint asserts.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_ConstraintAbstract_Not extends CIUnit_Framework_ConstraintAbstract
 {
+
     /**
+     *
      * @var string
      */
     protected $constraint;
-    
+
     /**
-     * @param string $constraint
+     *
+     * @param string $constraint            
      */
-    public function __construct($constraint)
+    public function __construct ($constraint)
     {
-        if($constraint instanceof CIUnit_Framework_ConstraintAbstract)
+        if ($constraint instanceof CIUnit_Framework_ConstraintAbstract)
             $this->constraint = $constraint;
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::evaluate()
      */
-    public function evaluate($value, $description = '', $returnResult = FALSE)
+    public function evaluate ($value, $description = '', $returnResult = FALSE)
     {
-        $success = !$this->constraint->evaluate($value, $description, TRUE);
-
+        $success = ! $this->constraint->evaluate($value, $description, TRUE);
         
         if ($returnResult) {
             return $success;
         }
         
-        if (!$success) {
-            $this->fail($value, $description); 
+        if (! $success) {
+            $this->fail($value, $description);
         }
     }
-    
+
     /**
      * Convert possitive verbs from failure description into negative
-     * 
-     * @param string $string
+     *
+     * @param string $string            
      * @return mixed
      */
-    private function negate($string)
+    private function negate ($string)
     {
         // Convert constraint failureDescription() to match NOT
-        $possitive = array('has', 'matches', 'is');
-        $negative  = array('does not have', 'does not match', 'is not');
+        $possitive = array(
+                'has',
+                'matches',
+                'is'
+        );
+        $negative = array(
+                'does not have',
+                'does not match',
+                'is not'
+        );
         
         return str_replace($possitive, $negative, $string);
-        
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
      */
-    public function failureDescription($evaluated)
+    public function failureDescription ($evaluated)
     {
         return $this->negate($this->constraint->failureDescription($evaluated));
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::count()
      */
-    public function count()
+    public function count ()
     {
         return count($this->constraint);
     }
-    
-    public function toString()
+
+    public function toString ()
     {
         return $this->negate($this->constraint->toString());
     }

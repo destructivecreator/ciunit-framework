@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,41 +46,45 @@
 /**
  * Constraint that asserts that the boolean value it is evaluated for is TRUE.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_IsTrue extends CIUnit_Framework_ConstraintAbstract {
-	
+class CIUnit_Framework_ConstraintAbstract_IsTrue extends CIUnit_Framework_ConstraintAbstract
+{
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::matches()
      */
-	protected function matches($value)
-	{
-		return TRUE === $value;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
-	 */
-	public function failureDescription($evaluated)
-	{ 
-		return sprintf('%s is true', CIUnit_Util_Type::export($evaluated));
-	}
-	
-	/**
-	 * 
-	 * @return string
-	 */
-	public function toString()
-	{
-	    return 'is true';
-	}
+    protected function matches ($value)
+    {
+        return TRUE === $value;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
+     */
+    public function failureDescription ($evaluated)
+    {
+        return sprintf('%s is true', CIUnit_Util_Type::export($evaluated));
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function toString ()
+    {
+        return 'is true';
+    }
 }
 
 ?>

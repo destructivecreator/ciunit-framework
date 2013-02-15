@@ -46,12 +46,13 @@
 /**
  * A set of assert methods.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Core
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 abstract class CIUnit_Framework_AssertAbstract
 {
@@ -65,7 +66,7 @@ abstract class CIUnit_Framework_AssertAbstract
 
     /**
      * Assert that array has a specified key
-     * 
+     *
      * @param mixed $key            
      * @param array $array            
      * @param string $message            
@@ -75,11 +76,13 @@ abstract class CIUnit_Framework_AssertAbstract
     public static function assertArrayHasKey ($key, $array, $message = '')
     {
         if (! (is_numeric($key) || is_string($key))) {
-            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'integer or string');
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 
+                    'integer or string');
         }
         
         if (! (is_array($array) || ($array instanceof ArrayAccess))) {
-            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'array or arrayAccess');
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 
+                    'array or arrayAccess');
         }
         
         $constraint = new CIUnit_Framework_ConstraintAbstract_ArrayHasKey($key);
@@ -88,7 +91,7 @@ abstract class CIUnit_Framework_AssertAbstract
 
     /**
      * Assert that array does not have a specified key
-     * 
+     *
      * @param mixed $key            
      * @param array $array            
      * @param string $message            
@@ -98,247 +101,275 @@ abstract class CIUnit_Framework_AssertAbstract
     public static function assertArrayNotHasKey ($key, $array, $message = '')
     {
         if (! (is_numeric($key) || is_string($key))) {
-            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'integer or string');
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 
+                    'integer or string');
         }
         
         if (! (is_array($array) || ($array instanceof ArrayAccess))) {
-            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'array or ArrayAccess');
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 
+                    'array or ArrayAccess');
         }
         
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(new CIUnit_Framework_ConstraintAbstract_ArrayHasKey($key));
+        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
+                new CIUnit_Framework_ConstraintAbstract_ArrayHasKey($key));
         self::assertThat($array, $constraint, $message);
     }
-    
+
     /**
      * Asserts the number of elements of an array, Countable or Iterator
-     * 
-     * @param integer $expectedCount
-     * @param array or ArrayAccess $haystack
-     * @param string $message
+     *
+     * @param integer $expectedCount            
+     * @param
+     *            array or ArrayAccess $haystack
+     * @param string $message            
      * @throws CIUnit_Framework_Exception_InvalidArgument
      */
-    public static function assertCount($expectedCount, $haystack, $message = '')
+    public static function assertCount ($expectedCount, $haystack, $message = '')
     {
-    	if(! is_numeric($expectedCount)) {
-    		throw new CIUnit_Framework_Exception_InvalidArgument(1, 'integer');
-    	}
-    	
-    	if(! (is_array($haystack) || $haystack instanceof ArrayAccess)) {
-    		throw new CIUnit_Framework_Exception_InvalidArgument(2, 'array or ArrayAccess');
-    	}
-    	
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_Count($expectedCount);
-    	self::assertThat($haystack, $constraint, $message);
+        if (! is_numeric($expectedCount)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'integer');
+        }
+        
+        if (! (is_array($haystack) || $haystack instanceof ArrayAccess)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 
+                    'array or ArrayAccess');
+        }
+        
+        $constraint = new CIUnit_Framework_ConstraintAbstract_Count(
+                $expectedCount);
+        self::assertThat($haystack, $constraint, $message);
     }
-    
+
     /**
      * Asserts that a variable is empty
-     * 
-     * @param midex $actual
-     * @param string $message
+     *
+     * @param midex $actual            
+     * @param string $message            
      */
-    public static function assertEmpty($actual, $message = '')
+    public static function assertEmpty ($actual, $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_IsEmpty($actual);
-    	self::assertThat($actual, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_IsEmpty($actual);
+        self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
      * Asserts that a variable is not empty
-     * 
-     * @param midex $actual
-     * @param string $message
+     *
+     * @param midex $actual            
+     * @param string $message            
      */
-    public static function assertNotEmpty($actual, $message = '')
+    public static function assertNotEmpty ($actual, $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_Not(new CIUnit_Framework_ConstraintAbstract_IsEmpty());
-    	self::assertThat($actual, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
+                new CIUnit_Framework_ConstraintAbstract_IsEmpty());
+        self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
      * Asserts that a condition is true
-     * 
-     * @param boolean $expected
-     * @param string $message
+     *
+     * @param boolean $expected            
+     * @param string $message            
      */
-    public static function assertTrue($expected, $message = '')
+    public static function assertTrue ($expected, $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_IsTrue();
-    	self::assertThat($expected, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_IsTrue();
+        self::assertThat($expected, $constraint, $message);
     }
-    
+
     /**
      * Asserts that a condition is false
      *
-     * @param boolean $expected
-     * @param string $message
+     * @param boolean $expected            
+     * @param string $message            
      */
-    public static function assertFalse($expected, $message = '')
+    public static function assertFalse ($expected, $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_IsFalse();
-    	self::assertThat($expected, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_IsFalse();
+        self::assertThat($expected, $constraint, $message);
     }
 
     /**
      * Asserts that a variable is of a given type
-     * 
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param string $message
+     *
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param string $message            
      */
-    public static function assertInstanceOf($expected, $actual, $message = '')
+    public static function assertInstanceOf ($expected, $actual, $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_IsInstanceOf($expected);
-    	self::assertThat($actual, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_IsInstanceOf(
+                $expected);
+        self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
      * Asserts that a variable is not of a given type
-     * 
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param string $message
+     *
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param string $message            
      */
-    public static function assertNotInstanceOf($expected, $actual, $message = '')
+    public static function assertNotInstanceOf ($expected, $actual, 
+            $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_Not(new CIUnit_Framework_ConstraintAbstract_IsInstanceOf($expected));
-    	self::assertThat($actual, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
+                new CIUnit_Framework_ConstraintAbstract_IsInstanceOf($expected));
+        self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
      * Asserts that a variable is NULL
-     * 
-     * @param mixed $actual
-     * @param string $message
+     *
+     * @param mixed $actual            
+     * @param string $message            
      */
-    public static function assertNull($actual, $message = '')
+    public static function assertNull ($actual, $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_isNull();
-    	self::assertThat($actual, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_isNull();
+        self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
      * Asserts that a variable is not NULL
      *
-     * @param mixed $actual
-     * @param string $message
+     * @param mixed $actual            
+     * @param string $message            
      */
-    public static function assertNotNull($actual, $message = '')
+    public static function assertNotNull ($actual, $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_Not(new CIUnit_Framework_ConstraintAbstract_isNull());
-    	self::assertThat($actual, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
+                new CIUnit_Framework_ConstraintAbstract_isNull());
+        self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
      * Assert that variable is of a given type
-     * 
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param string $message
+     *
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param string $message            
      */
-    public static function assertInternalType($expected, $actual, $message = '')
+    public static function assertInternalType ($expected, $actual, $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_IsType($expected);
-    	self::assertThat($actual, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_IsType($expected);
+        self::assertThat($actual, $constraint, $message);
     }
 
     /**
      * Assert that variable is not of a given type
      *
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param string $message
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param string $message            
      */
-    public static function assertNotInternalType($expected, $actual, $message = '')
+    public static function assertNotInternalType ($expected, $actual, 
+            $message = '')
     {
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_Not(new CIUnit_Framework_ConstraintAbstract_IsType($expected));
-    	self::assertThat($actual, $constraint, $message);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
+                new CIUnit_Framework_ConstraintAbstract_IsType($expected));
+        self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
-     * Assert that the size of two arrays (or `Countable` or `Iterator` objects) is the same
-     * 
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param String $message
+     * Assert that the size of two arrays (or `Countable` or `Iterator` objects)
+     * is the same
+     *
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param String $message            
      * @throws CIUnit_Framework_Exception_InvalidArgument
      */
-	public static function assertSameSize($expected, $actual, $message = '')
+    public static function assertSameSize ($expected, $actual, $message = '')
     {
-        if (!$expected instanceof Countable && !$expected instanceof Iterator && !is_array($expected)) {
+        if (! $expected instanceof Countable && ! $expected instanceof Iterator &&
+                 ! is_array($expected)) {
             throw new CIUnit_Framework_Exception_InvalidArgument(1, 'countable');
         }
-
-     if (!$actual instanceof Countable && !$actual instanceof Iterator && !is_array($actual)) {
+        
+        if (! $actual instanceof Countable && ! $actual instanceof Iterator &&
+                 ! is_array($actual)) {
             throw new CIUnit_Framework_Exception_InvalidArgument(2, 'countable');
         }
-
+        
         $constraint = new CIUnit_Framework_ConstraintAbstract_SameSize($expected);
         self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
-     * Assert that the size of two arrays (or `Countable` or `Iterator` objects) is not the same
+     * Assert that the size of two arrays (or `Countable` or `Iterator` objects)
+     * is not the same
      *
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param String $message
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param String $message            
      * @throws CIUnit_Framework_Exception_InvalidArgument
      */
-    public static function assertNotSameSize($expected, $actual, $message = '')
+    public static function assertNotSameSize ($expected, $actual, $message = '')
     {
-    	if (!$expected instanceof Countable && !$expected instanceof Iterator && !is_array($expected)) {
-    		throw new CIUnit_Framework_Exception_InvalidArgument(1, 'countable');
-    	}
-    
-    	if (!$actual instanceof Countable && !$actual instanceof Iterator && !is_array($actual)) {
-    		throw new CIUnit_Framework_Exception_InvalidArgument(2, 'countable');
-    	}
-    
-    	$constraint = new CIUnit_Framework_ConstraintAbstract_Not(new CIUnit_Framework_ConstraintAbstract_SameSize($expected));
-    	self::assertThat($actual, $constraint, $message);
+        if (! $expected instanceof Countable && ! $expected instanceof Iterator &&
+                 ! is_array($expected)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'countable');
+        }
+        
+        if (! $actual instanceof Countable && ! $actual instanceof Iterator &&
+                 ! is_array($actual)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'countable');
+        }
+        
+        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
+                new CIUnit_Framework_ConstraintAbstract_SameSize($expected));
+        self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
      * Asserts that two variables are equal
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param numeric $delta
-     * @param boolean $canonicalize
-     * @param boolean $ignoreCase
-     * @param string $message
+     * 
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param numeric $delta            
+     * @param boolean $canonicalize            
+     * @param boolean $ignoreCase            
+     * @param string $message            
      */
- 	public static function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
+    public static function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_IsEqual($expected, $delta,  $canonicalize, $ignoreCase);
+        $constraint = new CIUnit_Framework_ConstraintAbstract_IsEqual($expected, 
+                $delta, $canonicalize, $ignoreCase);
         self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
      * Asserts that two variables are not equal
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param numeric $delta
-     * @param boolean $canonicalize
-     * @param boolean $ignoreCase
-     * @param string $message
+     * 
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param numeric $delta            
+     * @param boolean $canonicalize            
+     * @param boolean $ignoreCase            
+     * @param string $message            
      */
-    public static function assertNotEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
+    public static function assertNotEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(new CIUnit_Framework_ConstraintAbstract_IsEqual($expected, $delta,  $canonicalize, $ignoreCase));
+        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
+                new CIUnit_Framework_ConstraintAbstract_IsEqual($expected, 
+                        $delta, $canonicalize, $ignoreCase));
         self::assertThat($actual, $constraint, $message);
     }
-    
+
     /**
-     * 
-     * @param mixed $value
-     * @param CIUnit_Framework_ConstraintAbstract $constraint
-     * @param string $message
+     *
+     * @param mixed $value            
+     * @param CIUnit_Framework_ConstraintAbstract $constraint            
+     * @param string $message            
      * @since version 1.0.0
      */
-    public static function assertThat ($value, CIUnit_Framework_ConstraintAbstract $constraint, $message = '')
+    public static function assertThat ($value, 
+            CIUnit_Framework_ConstraintAbstract $constraint, $message = '')
     {
-        self::$assertionCount += count($constraint);        
+        self::$assertionCount += count($constraint);
         $constraint->evaluate($value, $message);
     }
 
@@ -348,7 +379,7 @@ abstract class CIUnit_Framework_AssertAbstract
      * @return number
      * @since version 1.0.0
      */
-    public static function getAssertionCount()
+    public static function getAssertionCount ()
     {
         return self::$assertionCount;
     }
@@ -362,30 +393,29 @@ abstract class CIUnit_Framework_AssertAbstract
     {
         self::$assertionCount = 0;
     }
-    
+
     /**
      * Fails a test with the given message.
-     * 
-     * @param string $message
+     *
+     * @param string $message            
      * @throws CIUnit_Framework_Exception_AssertionFailed
      * @since version 1.0.0
      */
-    public function fail($message = '')
-    {    	
+    public function fail ($message = '')
+    {
         throw new CIUnit_Framework_Exception_AssertionFailed($message);
     }
-    
+
     /**
      * Mark test as skipped
-     * 
-     * @param string $message
+     *
+     * @param string $message            
      * @throws CIUnit_Framework_Exception_SkippedTest
      */
-    public function skip($message = '')
+    public function skip ($message = '')
     {
-    	throw new CIUnit_Framework_Exception_SkippedTest($message);
+        throw new CIUnit_Framework_Exception_SkippedTest($message);
     }
-    
 }
 
 ?>

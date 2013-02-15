@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,37 +46,39 @@
 /**
  * Compares two resources for equality
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Comparator
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_ComparatorAbstract_Resource extends CIUnit_Framework_ComparatorAbstract
 {
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract::accepts()
-     */ 
-    public function accepts($expected, $actual)
+     */
+    public function accepts ($expected, $actual)
     {
         return is_resource($expected) && is_resource($actual);
     }
-     
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract::assertEquals()
      */
-    public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
+    public function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
     {
         if ($actual != $expected) {
-            throw new CIUnit_Framework_Exception_ComparissonFailure(
-                    $expected,
-                    $actual,
-                    CIUnit_Util_Type::export($expected),
-                    CIUnit_Util_Type::export($actual)
-            );
+            throw new CIUnit_Framework_Exception_ComparissonFailure($expected, 
+                    $actual, CIUnit_Util_Type::export($expected), 
+                    CIUnit_Util_Type::export($actual));
         }
     }
 }

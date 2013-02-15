@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -41,27 +42,29 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
- 
+
 /**
  * Thrown when assertion fails
- * 
- * @package    CIUnit
+ *
+ * @package CIUnit
  * @subpackage Exception
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_Exception_AssertionFailed extends CIUnit_Framework_Exception_CIUnitException
 {
-	/**
-	 * Wrapper for getMessage() which is declared as final.
-	 *
-	 * @return string
-	 */
-	public function toString()
-	{
-		return $this->getMessage();
-	}
+
+    /**
+     * Wrapper for getMessage() which is declared as final.
+     *
+     * @return string
+     */
+    public function toString ()
+    {
+        return $this->getMessage();
+    }
 }
 

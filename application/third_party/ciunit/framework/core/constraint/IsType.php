@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -43,95 +44,121 @@
  */
 
 /**
- * Constraint that asserts that the value it is evaluated for is form a given type.
+ * Constraint that asserts that the value it is evaluated for is form a given
+ * type.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_IsType extends CIUnit_Framework_ConstraintAbstract {
-	
-	// Define the supported types
-	const T_ARRAY = 'array';
-	const T_STRING = 'string';
-	const T_FLOAT = 'float'; 
-	const T_INTEGER = 'integer';
-	const T_INT = 'int';
-	const T_NUMERIC = 'numeric';
-	const T_SCALAR = 'scalar';
-	const T_NULL = 'null';
-	const T_OBJECT = 'object';
+class CIUnit_Framework_ConstraintAbstract_IsType extends CIUnit_Framework_ConstraintAbstract
+{
+    
+    // Define the supported types
+    const T_ARRAY = 'array';
 
-	/**
-	 * @var array
-	 */
-	private $types = array('array', 'string', 'float', 'integer', 'numeric', 'scalar', 'null', 'object', 'int');
-	
-	/**
-	 * @var string
-	 */
-	protected $type;
-	
-	public function __construct($type)
-	{
-		if(! in_array($type, $this->types)) {
-			throw new CIUnit_Framework_Exception_CIUnitException(sprintf('%s is not supported type in CIUnit', $type));
-		}
-		
-		$this->type = $type;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ConstraintAbstract::matches()
-	 */
-	protected function matches($value)
-	{
-		switch($this->type) {
-			case self::T_ARRAY: 
-				return is_array($value);
-				
-			case self::T_INTEGER:
-			case self::T_INT:
-				return is_integer($value);
-				
-			case self::T_SCALAR: 
-				return is_scalar($value);
-			
-			case self::T_FLOAT: 
-				return is_float($value);
-			
-			case self::T_NUMERIC: 
-				return is_numeric($value);
-				
-			case self::T_STRING:
-				return is_string($value);
-				
-			case self::T_NULL:
-				return is_null($value);
-				
-			case self::T_OBJECT:
-				return is_object($value);
-		}
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
-	 */
-	public function failureDescription($evaluated)
-	{
-		return sprintf('%s is of type "%s"', CIUnit_Util_Type::export($evaluated), $this->type);
-	}
-	
-	
-	public function toString()
-	{
-	    return sprintf('is of type "%s"', $this->type);
-	}
+    const T_STRING = 'string';
+
+    const T_FLOAT = 'float';
+
+    const T_INTEGER = 'integer';
+
+    const T_INT = 'int';
+
+    const T_NUMERIC = 'numeric';
+
+    const T_SCALAR = 'scalar';
+
+    const T_NULL = 'null';
+
+    const T_OBJECT = 'object';
+
+    /**
+     *
+     * @var array
+     */
+    private $types = array(
+            'array',
+            'string',
+            'float',
+            'integer',
+            'numeric',
+            'scalar',
+            'null',
+            'object',
+            'int'
+    );
+
+    /**
+     *
+     * @var string
+     */
+    protected $type;
+
+    public function __construct ($type)
+    {
+        if (! in_array($type, $this->types)) {
+            throw new CIUnit_Framework_Exception_CIUnitException(
+                    sprintf('%s is not supported type in CIUnit', $type));
+        }
+        
+        $this->type = $type;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ConstraintAbstract::matches()
+     */
+    protected function matches ($value)
+    {
+        switch ($this->type) {
+            case self::T_ARRAY:
+                return is_array($value);
+            
+            case self::T_INTEGER:
+            case self::T_INT:
+                return is_integer($value);
+            
+            case self::T_SCALAR:
+                return is_scalar($value);
+            
+            case self::T_FLOAT:
+                return is_float($value);
+            
+            case self::T_NUMERIC:
+                return is_numeric($value);
+            
+            case self::T_STRING:
+                return is_string($value);
+            
+            case self::T_NULL:
+                return is_null($value);
+            
+            case self::T_OBJECT:
+                return is_object($value);
+        }
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
+     */
+    public function failureDescription ($evaluated)
+    {
+        return sprintf('%s is of type "%s"', 
+                CIUnit_Util_Type::export($evaluated), $this->type);
+    }
+
+    public function toString ()
+    {
+        return sprintf('is of type "%s"', $this->type);
+    }
 }
 
 ?>

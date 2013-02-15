@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -41,68 +42,70 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-
 class CIUnit_Util_FileLoader
 {
-    public static function checkAndLoad($filename)
+
+    public static function checkAndLoad ($filename)
     {
         $testsAvailable = self::directory_map(TRUE);
         
-        if(FALSE === $testsAvailable)
+        if (FALSE === $testsAvailable)
             throw new CIUnit_Framework_Exception_CIUnitException("CIUnit can't");
         
         foreach ($testsAvailable as $test) {
             self::load($test);
         }
-    }   
-    
-    public static function load($filePath)
-    { 
-        if(!file_exists($filePath) and is_readable($filePath))
-            throw new CIUnit_Framework_Exception_CIUnitException(sprintf("CIUnit can't open file %s for reading!", $filePath));
-            
-        include_once $filePath; 
+    }
+
+    public static function load ($filePath)
+    {
+        if (! file_exists($filePath) and is_readable($filePath))
+            throw new CIUnit_Framework_Exception_CIUnitException(
+                    sprintf("CIUnit can't open file %s for reading!", $filePath));
+        
+        include_once $filePath;
         
         return $filePath;
-    } 
-    
-    public static function directory_map($fullPath = FALSE, $directory_depth = 0, $hidden = FALSE)
+    }
+
+    public static function directory_map ($fullPath = FALSE, $directory_depth = 0, 
+            $hidden = FALSE)
     {
-        $ci =& get_instance();
-        $ci->load->add_package_path(APPPATH.'third_party/ciunit', FALSE);
+        $ci = & get_instance();
+        $ci->load->add_package_path(APPPATH . 'third_party/ciunit', FALSE);
         $ci->config->load('config');
         $source = $ci->config->item('test_dir');
         $source_dir = APPPATH . $source;
         
-        if(!file_exists($source_dir) || !is_readable($source_dir))
-            throw new CIUnit_Framework_Exception_CIUnitException(sprintf("CIUnit can't open or read your %s folder", $source));
+        if (! file_exists($source_dir) || ! is_readable($source_dir))
+            throw new CIUnit_Framework_Exception_CIUnitException(
+                    sprintf("CIUnit can't open or read your %s folder", $source));
         
-        if ($fp = @opendir($source_dir))
-        {
-            $filedata	= array();
-            $new_depth	= $directory_depth - 1;
-            $source_dir	= rtrim($source_dir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
-    
-            while (FALSE !== ($file = readdir($fp))){
+        if ($fp = @opendir($source_dir)) {
+            $filedata = array();
+            $new_depth = $directory_depth - 1;
+            $source_dir = rtrim($source_dir, DIRECTORY_SEPARATOR) .
+                     DIRECTORY_SEPARATOR;
+            
+            while (FALSE !== ($file = readdir($fp))) {
                 // Remove '.', '..', and hidden files [optional]
-                if ( ! trim($file, '.') OR ($hidden == FALSE && $file[0] == '.')) {
+                if (! trim($file, '.') or ($hidden == FALSE && $file[0] == '.')) {
                     continue;
-                } 
+                }
                 
-                if(substr(strrchr($file,'.'),1) == 'php') {
-                    if($fullPath) { 
+                if (substr(strrchr($file, '.'), 1) == 'php') {
+                    if ($fullPath) {
                         $filedata[] = $source_dir . $file;
-                    }
-                    else {
+                    } else {
                         $filedata[] = substr($file, 0, strrpos($file, '.'));
-                    } 
+                    }
                 }
             }
-    
+            
             closedir($fp);
             return $filedata;
         }
-    
+        
         return FALSE;
     }
 }

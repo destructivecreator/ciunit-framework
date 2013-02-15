@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -41,129 +42,136 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
+class CIUnit_ResultPresenter
+{
+    
+    // Change protected to private
+    protected $result;
 
-class CIUnit_ResultPresenter {
-	  
-	// Change protected to private
-	protected $result;
-	
-	public function __construct(CIUnit_Framework_TestResult $result)
-	{
-		if(NULL == $result)
-			throw new CIUnit_Framework_Exception_CIUnitException("Result can not be null");
-			
-		$this->result = $result; 
-	}
-	
-	public function getHeader()
-	{
-		return sprintf(
+    public function __construct (CIUnit_Framework_TestResult $result)
+    {
+        if (NULL == $result)
+            throw new CIUnit_Framework_Exception_CIUnitException(
+                    "Result can not be null");
+        
+        $this->result = $result;
+    }
+
+    public function getHeader ()
+    {
+        return sprintf(
                 "Assertions: %d, Tests: %d, Failures: %d, Errors: %d, Ignored: %d, Incomplete: %d, Time: %f seconds, Memory: %s \n", 
-               $this->result->getAssertionsCount(),$this->result->count(), 
-               $this->result->getFailureCount(), 
-               $this->result->getErrorCount(),
-               $this->result->getSkippedCount(), 
-               $this->result->getNotImplementedCount(), 
+                $this->result->getAssertionsCount(), $this->result->count(), 
+                $this->result->getFailureCount(), $this->result->getErrorCount(), 
+                $this->result->getSkippedCount(), 
+                $this->result->getNotImplementedCount(), 
                 CIUnit_Util_Timer::secondsToTimeString(
-                       $this->result->getExecutionTime()), 
+                        $this->result->getExecutionTime()), 
                 CIUnit_Util_Memory::getUsedMemory());
-	}
-	
-	
-	public function getFooter()
-	{
-		
-	}
-	
-	public function wasSuccessful()
-	{
-		return $this->result->wasSuccessful();
-	}	
-	
-	public function hasErrors()
-	{
-		return $this->result->getErrorCount() != 0;
-	}
-	
-	public function hasFailures()
-	{
-		return $this->result->getFailureCount() != 0;
-	}
-	
-	/**
-	 * @param  CIUnit_Framework_TestResult  $result
-	 */
-	public function getErrors()
-	{
-		return $this->getDefects($this->result->getErrors(),$this->result->getErrorCount());
-	}
-	
-	/**
-	 * @param  CIUnit_Framework_TestResult  $result
-	 */
-	public function getFailures()
-	{
-		return $this->getDefects($this->result->getFailures(),$this->result->getFailureCount());
-	}
-	
-	/**
-	 * @param  CIUnit_Framework_TestResult  $result
-	 */
-	public function getIncompletes()
-	{
-		return $this->getDefects($this->result->getNotImplemented(), $this->result->getNotImplementedCount());
-	}
-	
-	/**
-	 * @param  CIUnit_Framework_TestResult  $result
-	 */
-	public function getSkipped()
-	{
-		return $this->getDefects($this->result->getSkipped(),$this->result->getSkippedCount());
-	}
-	
-	protected function getDefects(array $defects, $count)
-	{
-		$i = 1; 
-		$defectsArray = array();
-		foreach ($defects as $defect) {
-			array_push($defectsArray, $this->getDefect($defect, $i++));
-		} 
-		
-		return $defectsArray;
-	}
-	
-	protected function getDefect(CIUnit_Framework_TestFailure $test, $count)
-	{
-		$defect = array();
-		// Print header
-		$defect['header'] = $this->getDefectHeader($test, $count);
-		// Print trace
-		$defect['trace'] = $this->getDefectTrace($test);
-		
-		return $defect;
-	}
-	
-	protected function getDefectHeader(CIUnit_Framework_TestFailure $defect, $count)
-	{
-		$failedTest = $defect->failedTest();
-		$testName = get_class($failedTest);
-	
-		return sprintf("\n%d) %s::%s\n", $count, $testName, $failedTest->getName());
-	}
-	
-	protected function getDefectTrace(CIUnit_Framework_TestFailure $defect)
-	{ 
-		$e = $defect->getThrownException();
-		  
-		
-		$eTrace = $e->getTrace(); 
-		 
-		$filePath = $eTrace[2]['file'];
-		$line = $eTrace[2]['line'];
-		
-		return sprintf("%s \n# %s at line %s", $e->getMessage(), $filePath, $line);
-	}   
+    }
+
+    public function getFooter ()
+    {}
+
+    public function wasSuccessful ()
+    {
+        return $this->result->wasSuccessful();
+    }
+
+    public function hasErrors ()
+    {
+        return $this->result->getErrorCount() != 0;
+    }
+
+    public function hasFailures ()
+    {
+        return $this->result->getFailureCount() != 0;
+    }
+
+    /**
+     *
+     * @param CIUnit_Framework_TestResult $result            
+     */
+    public function getErrors ()
+    {
+        return $this->getDefects($this->result->getErrors(), 
+                $this->result->getErrorCount());
+    }
+
+    /**
+     *
+     * @param CIUnit_Framework_TestResult $result            
+     */
+    public function getFailures ()
+    {
+        return $this->getDefects($this->result->getFailures(), 
+                $this->result->getFailureCount());
+    }
+
+    /**
+     *
+     * @param CIUnit_Framework_TestResult $result            
+     */
+    public function getIncompletes ()
+    {
+        return $this->getDefects($this->result->getNotImplemented(), 
+                $this->result->getNotImplementedCount());
+    }
+
+    /**
+     *
+     * @param CIUnit_Framework_TestResult $result            
+     */
+    public function getSkipped ()
+    {
+        return $this->getDefects($this->result->getSkipped(), 
+                $this->result->getSkippedCount());
+    }
+
+    protected function getDefects (array $defects, $count)
+    {
+        $i = 1;
+        $defectsArray = array();
+        foreach ($defects as $defect) {
+            array_push($defectsArray, $this->getDefect($defect, $i ++));
+        }
+        
+        return $defectsArray;
+    }
+
+    protected function getDefect (CIUnit_Framework_TestFailure $test, $count)
+    {
+        $defect = array();
+        // Print header
+        $defect['header'] = $this->getDefectHeader($test, $count);
+        // Print trace
+        $defect['trace'] = $this->getDefectTrace($test);
+        
+        return $defect;
+    }
+
+    protected function getDefectHeader (CIUnit_Framework_TestFailure $defect, 
+            $count)
+    {
+        $failedTest = $defect->failedTest();
+        $testName = get_class($failedTest);
+        
+        return sprintf("\n%d) %s::%s\n", $count, $testName, 
+                $failedTest->getName());
+    }
+
+    protected function getDefectTrace (CIUnit_Framework_TestFailure $defect)
+    {
+        $e = $defect->getThrownException();
+        
+        $eTrace = $e->getTrace();
+        
+        $filePath = $eTrace[2]['file'];
+        $line = $eTrace[2]['line'];
+        
+        return sprintf("%s \n# %s at line %s", $e->getMessage(), $filePath, 
+                $line);
+    }
 }
 
 ?>

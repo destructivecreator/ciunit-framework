@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,47 +46,53 @@
 /**
  * Abstract base class for comparators which compare values for equality.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Core
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-abstract class CIUnit_Framework_ComparatorAbstract {
-	
+abstract class CIUnit_Framework_ComparatorAbstract
+{
+
     /**
+     *
      * @var CIUnit_Framework_ComparatorAbstractFactory
      */
-	protected $factory;
-		
-	/**
-	 * Sets comparator factory
-	 * @param CIUnit_Framework_ComparatorAbstractFactory $factory
-	 */
-	public function setFactory(CIUnit_Framework_ComparatorAbstractFactory $factory)
-	{
-		$this->factory = $factory;
-	}
-	
-	/**
-	 * Asserts that two values are equal
-	 * 
-	 * @param mixed $expected
-	 * @param mixed $actual
-	 * @param double $delta
-	 * @param boolean $canonicalize
-	 * @param boolean $ignoreCase
-	 */
-	abstract public function assertEquals($expected, $actual, $delta = 0,$canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array());
-	
-	/**
-	 * Returns whether the comparator can compate the current values
-	 * 
-	 * @param mixed $expected
-	 * @param mixed $actual
-	 */
-	abstract public function accepts($expected, $actual);
+    protected $factory;
+
+    /**
+     * Sets comparator factory
+     *
+     * @param CIUnit_Framework_ComparatorAbstractFactory $factory            
+     */
+    public function setFactory (
+            CIUnit_Framework_ComparatorAbstractFactory $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
+     * Asserts that two values are equal
+     *
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param double $delta            
+     * @param boolean $canonicalize            
+     * @param boolean $ignoreCase            
+     */
+    abstract public function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array());
+
+    /**
+     * Returns whether the comparator can compate the current values
+     *
+     * @param mixed $expected            
+     * @param mixed $actual            
+     */
+    abstract public function accepts ($expected, $actual);
 }
 
 ?>

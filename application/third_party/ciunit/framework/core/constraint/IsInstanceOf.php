@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -43,52 +44,60 @@
  */
 
 /**
- * Constraint that asserts that the object it is evaluated for is instance of a given object.
+ * Constraint that asserts that the object it is evaluated for is instance of a
+ * given object.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_IsInstanceOf extends CIUnit_Framework_ConstraintAbstract {
-	
+class CIUnit_Framework_ConstraintAbstract_IsInstanceOf extends CIUnit_Framework_ConstraintAbstract
+{
+
     /**
+     *
      * @var string
      */
-	protected $class;
-	
-	/**
-	 * @param string $class
-	 */
-	public function __construct($class)
-	{
-		$this->class = $class;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ConstraintAbstract::matches()
-	 */
-	protected function matches($value)
-	{
-		return ($value instanceof $this->class);
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
-	 */
-	public function failureDescription($evaluated)
-	{
-		return sprintf('%s is an instance of %s', CIUnit_Util_Type::shortExport($evaluated), $this->class);
-	}
-	
-	public function toString()
-	{
-	    return sprintf('is instance of %s', $this->class);
-	}
+    protected $class;
+
+    /**
+     *
+     * @param string $class            
+     */
+    public function __construct ($class)
+    {
+        $this->class = $class;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ConstraintAbstract::matches()
+     */
+    protected function matches ($value)
+    {
+        return ($value instanceof $this->class);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
+     */
+    public function failureDescription ($evaluated)
+    {
+        return sprintf('%s is an instance of %s', 
+                CIUnit_Util_Type::shortExport($evaluated), $this->class);
+    }
+
+    public function toString ()
+    {
+        return sprintf('is instance of %s', $this->class);
+    }
 }
 
 ?>

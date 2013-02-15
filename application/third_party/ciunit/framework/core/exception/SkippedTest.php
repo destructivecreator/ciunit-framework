@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -41,24 +42,27 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
- 
+
 /**
  * Exception for tests that are skipped by the runner.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Exception
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_Exception_SkippedTest extends CIUnit_Framework_Exception_CIUnitException
 {
+
     /**
      * (non-PHPdoc)
+     * 
      * @see RuntimeException::__toString()
      */
-    public function __toString()
+    public function __toString ()
     {
         return $this->getMessage();
     }

@@ -46,44 +46,55 @@
 /**
  * Memory Util Class implementation
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Util
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Util_Memory {
- 
-	/**
-	 * Get memory used
-	 * 
-	 * @param boolean $format
-	 * @return string|number
-	 */
-	public static function getUsedMemory($format = TRUE)
-	{
-	    $memory = function_exists('memory_get_usage') ? memory_get_usage() : 0;
-	    
-		if($format === TRUE) {
-			return self::formatSizeUnits($memory);	
-		}
-		
-		return $memory;
-	}
-	
-	/**
-	 * Convert to size units
-	 * 
-	 * @param int $bytes
-	 * @param int $precision
-	 * @return string
-	 */
-	private static function formatSizeUnits($bytes, $precision = 2) {
-		$unit=array('b','kb','mb','gb','tb','pb');
-    
-		return @round($bytes/pow(1024,($i=floor(log($bytes,1024)))),$precision).' '.strtoupper($unit[$i]);
-	}
+class CIUnit_Util_Memory
+{
+
+    /**
+     * Get memory used
+     *
+     * @param boolean $format            
+     * @return string number
+     */
+    public static function getUsedMemory ($format = TRUE)
+    {
+        $memory = function_exists('memory_get_usage') ? memory_get_usage() : 0;
+        
+        if ($format === TRUE) {
+            return self::formatSizeUnits($memory);
+        }
+        
+        return $memory;
+    }
+
+    /**
+     * Convert to size units
+     *
+     * @param int $bytes            
+     * @param int $precision            
+     * @return string
+     */
+    private static function formatSizeUnits ($bytes, $precision = 2)
+    {
+        $unit = array(
+                'b',
+                'kb',
+                'mb',
+                'gb',
+                'tb',
+                'pb'
+        );
+        
+        return @round($bytes / pow(1024, ($i = floor(log($bytes, 1024)))), 
+                $precision) . ' ' . strtoupper($unit[$i]);
+    }
 }
 
 ?>

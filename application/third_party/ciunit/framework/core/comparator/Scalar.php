@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,61 +46,76 @@
 /**
  * Compares two scalar values for equality
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Comparator
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstract_Scalar extends CIUnit_Framework_ComparatorAbstract {
-	
+class CIUnit_Framework_ComparatorAbstract_Scalar extends CIUnit_Framework_ComparatorAbstract
+{
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract::accepts()
      */
-	public function accepts($expected, $actual)
-	{
-		// Scalar variables are those containing an integer, float, string or boolean. Types array, object and resource are not scalar.
+    public function accepts ($expected, $actual)
+    {
+        // Scalar variables are those containing an integer, float, string or
+        // boolean. Types array, object and resource are not scalar.
+        if ((is_scalar($actual) xor NULL === $actual) &&
+                 (is_scalar($expected) xor NULL === $expected) ||
+                 (is_string($actual) && is_object($expected) &&
+                 method_exists($expected, '__toString')) ||
+                 (is_string($expected) && is_object($actual) &&
+                 method_exists($actual, '__toString'))) {
+            
+            return TRUE;
+        }
+        
+        return FALSE;
+    }
 
-		if((is_scalar($actual) XOR NULL === $actual) && (is_scalar($expected) XOR NULL === $expected) 
-				|| (is_string($actual) && is_object($expected) && method_exists($expected, '__toString'))
-				|| (is_string($expected) && is_object($actual) && method_exists($actual, '__toString'))) {
-			
-			return TRUE;
-		}
-		
-		return FALSE;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ComparatorAbstract::assertEquals()
-	 */
-	public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
-	{
-		$actualToCompare = $actual;
-		$expectedToCompare = $expected;
-		
-		if(is_string($expected) || is_string($actual)) {
-			$expectedToCompare = (string)$expected;
-			$actualToCompare = (string)$actual;
-			
-			if($ignoreCase) {
-				$actualToCompare = strtolower($actualToCompare);
-				$expectedToCompare = strtolower($expectedToCompare);
-			}
-		}
-		
-		if($actualToCompare != $expectedToCompare) {
-			
-			if(is_string($expected) && is_string($actual)) { 
-			    throw new CIUnit_Framework_Exception_ComparissonFailure($expected, $actual, CIUnit_Util_Type::export($expected), CIUnit_Util_Type::export($actual),  'Failed asserting that two strings are equal.');
-			}
-			
-			throw new CIUnit_Framework_Exception_ComparissonFailure($expected, $actual, '', '', sprintf('Failed asserting that %s matches expected %s.', CIUnit_Util_Type::export($actual), CIUnit_Util_Type::export($expected)));
-		}
-	}
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ComparatorAbstract::assertEquals()
+     */
+    public function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
+    {
+        $actualToCompare = $actual;
+        $expectedToCompare = $expected;
+        
+        if (is_string($expected) || is_string($actual)) {
+            $expectedToCompare = (string) $expected;
+            $actualToCompare = (string) $actual;
+            
+            if ($ignoreCase) {
+                $actualToCompare = strtolower($actualToCompare);
+                $expectedToCompare = strtolower($expectedToCompare);
+            }
+        }
+        
+        if ($actualToCompare != $expectedToCompare) {
+            
+            if (is_string($expected) && is_string($actual)) {
+                throw new CIUnit_Framework_Exception_ComparissonFailure(
+                        $expected, $actual, CIUnit_Util_Type::export($expected), 
+                        CIUnit_Util_Type::export($actual), 
+                        'Failed asserting that two strings are equal.');
+            }
+            
+            throw new CIUnit_Framework_Exception_ComparissonFailure($expected, 
+                    $actual, '', '', 
+                    sprintf('Failed asserting that %s matches expected %s.', 
+                            CIUnit_Util_Type::export($actual), 
+                            CIUnit_Util_Type::export($expected)));
+        }
+    }
 }
 
 ?>

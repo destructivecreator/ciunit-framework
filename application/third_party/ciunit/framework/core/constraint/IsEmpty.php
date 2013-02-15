@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,38 +46,43 @@
 /**
  * Constraint that asserts that thevalue it is evaluated for is empty.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_IsEmpty extends CIUnit_Framework_ConstraintAbstract {
-	
+class CIUnit_Framework_ConstraintAbstract_IsEmpty extends CIUnit_Framework_ConstraintAbstract
+{
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::matches()
      */
-	protected function matches($value)
-	{
-		return empty($value);
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
-	 */
-	public function failureDescription($evaluated)
-	{
-		$type = gettype($evaluated); 
-		return sprintf('%s %s is empty', $type[0] == 'a' || $type[0] == 'o' ? 'an' : 'a',  $type);
-	}
-	
-	public function toString()
-	{
-	    return 'is empty';
-	}
+    protected function matches ($value)
+    {
+        return empty($value);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
+     */
+    public function failureDescription ($evaluated)
+    {
+        $type = gettype($evaluated);
+        return sprintf('%s %s is empty', 
+                $type[0] == 'a' || $type[0] == 'o' ? 'an' : 'a', $type);
+    }
+
+    public function toString ()
+    {
+        return 'is empty';
+    }
 }
 
 ?>

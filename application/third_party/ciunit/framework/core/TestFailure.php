@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,59 +46,65 @@
 /**
  * Class collects a failed test together with the caught exception.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Core
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_TestFailure
 {
+
     /**
+     *
      * @var CIUnit_Framework_Test
      */
     protected $failedTest;
-    
+
     /**
+     *
      * @var Exception
      */
     protected $thrownException;
-    
+
     /**
-     * 
-     * @param CIUnit_Framework_TestInterface$failedTest
-     * @param Exception $thrownException
+     *
+     * @param
+     *            CIUnit_Framework_TestInterface$failedTest
+     * @param Exception $thrownException            
      */
-    public function __construct(CIUnit_Framework_TestInterface$failedTest, Exception $thrownException)
+    public function __construct (CIUnit_Framework_TestInterface $failedTest, 
+            Exception $thrownException)
     {
         $this->failedTest = $failedTest;
         $this->thrownException = $thrownException;
     }
-    
-    public function getThrownException()
+
+    public function getThrownException ()
     {
         return $this->thrownException;
     }
-    
-        
+
     /**
      * Returns a short description of the failure.
      *
      * @return string
      */
-    public function toString()
+    public function toString ()
     {
-        return  sprintf("%s \n%s", $this->failedTest->toString(), $this->thrownException->getMessage());        
+        return sprintf("%s \n%s", $this->failedTest->toString(), 
+                $this->thrownException->getMessage());
     }
 
     /**
      * Returns a description for the thrown exception.
      *
      * @return string
-     * @since  Method available since Release 3.4.0
+     * @since Method available since Release 3.4.0
      */
-    public function getExceptionAsString()
+    public function getExceptionAsString ()
     {
         return self::exceptionToString($this->thrownException);
     }
@@ -105,15 +112,14 @@ class CIUnit_Framework_TestFailure
     /**
      * Returns a description for an exception.
      *
-     * @param  Exception $e
+     * @param Exception $e            
      * @return string
-     * @since  Method available since Release 3.2.0
+     * @since Method available since Release 3.2.0
      */
-    public static function exceptionToString(Exception $e)
-    { 
-            $buffer = get_class($e) . ': ' . $e->getMessage() . "\n";
-         
-
+    public static function exceptionToString (Exception $e)
+    {
+        $buffer = get_class($e) . ': ' . $e->getMessage() . "\n";
+        
         return $buffer;
     }
 
@@ -122,7 +128,7 @@ class CIUnit_Framework_TestFailure
      *
      * @return Test
      */
-    public function failedTest()
+    public function failedTest ()
     {
         return $this->failedTest;
     }
@@ -132,7 +138,7 @@ class CIUnit_Framework_TestFailure
      *
      * @return Exception
      */
-    public function thrownException()
+    public function thrownException ()
     {
         return $this->thrownException;
     }
@@ -142,7 +148,7 @@ class CIUnit_Framework_TestFailure
      *
      * @return string
      */
-    public function exceptionMessage()
+    public function exceptionMessage ()
     {
         return $this->thrownException()->getMessage();
     }
@@ -153,11 +159,10 @@ class CIUnit_Framework_TestFailure
      *
      * @return boolean
      */
-    public function isFailure()
+    public function isFailure ()
     {
         return ($this->thrownException() instanceof CIUnit_Framework_Exception_AssertionFailed);
     }
-     
 }
 
 ?>

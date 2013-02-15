@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -41,41 +42,38 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
+class CIUnit_Framework_TestSuiteLoader
+{
 
-class CIUnit_Framework_TestSuiteLoader {
-	
-	const TEST_DIR = 'tests/';
-	const MODEL_DIR = 'models/';
-	const LIB_DIR = 'libraries/';
-	const HELPER_DIR = 'helpers/';
-	
-	
-	public function __construct()
-	{
-		
-	}
-	
-	public function load($suiteClassName, $suiteClassFile = '')
-	{
-		// Remove .php from className
-		
-		
-	}
-	
-	public static function checkAndLoad($filename)
-	{
-		$includePathFilename = stream_resolve_include_path($filename);
-	
-		if (!$includePathFilename || !is_readable($includePathFilename)) {
-			throw new CIUnit_Framework_Exception_CIUnitException(
-					sprintf('Cannot open file "%s".' . "\n", $filename)
-			);
-		}
-	
-		include_once $includePathFilename;
-	
-		return $includePathFilename;
-	}
+    const TEST_DIR = 'tests/';
+
+    const MODEL_DIR = 'models/';
+
+    const LIB_DIR = 'libraries/';
+
+    const HELPER_DIR = 'helpers/';
+
+    public function __construct ()
+    {}
+
+    public function load ($suiteClassName, $suiteClassFile = '')
+    {
+        // Remove .php from className
+    }
+
+    public static function checkAndLoad ($filename)
+    {
+        $includePathFilename = stream_resolve_include_path($filename);
+        
+        if (! $includePathFilename || ! is_readable($includePathFilename)) {
+            throw new CIUnit_Framework_Exception_CIUnitException(
+                    sprintf('Cannot open file "%s".' . "\n", $filename));
+        }
+        
+        include_once $includePathFilename;
+        
+        return $includePathFilename;
+    }
 }
 
 ?>

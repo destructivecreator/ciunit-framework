@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -41,49 +42,48 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
- 
+
 /**
  * Exception for invalid arguments passed to method.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Exception
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_Exception_InvalidArgument extends CIUnit_Framework_Exception_CIUnitException
 {
+
     /**
+     *
      * @var string
      */
     protected $message;
-    
+
     /**
-     * 
-     * @param mixed $argument
-     * @param mixed $type
-     * @param mixed $value
+     *
+     * @param mixed $argument            
+     * @param mixed $type            
+     * @param mixed $value            
      */
-    public function __construct($argument, $type, $value = NULL)
+    public function __construct ($argument, $type, $value = NULL)
     {
         $stack = debug_backtrace(FALSE);
         
-        $this->message =  sprintf(
-            'Argument #%d%sof %s::%s() must be a %s',
-            $argument,
-            $value !== NULL ? ' (' . $value . ')' : ' ',
-            $stack[1]['class'],
-            $stack[1]['function'],
-            $type
-          );
+        $this->message = sprintf('Argument #%d%sof %s::%s() must be a %s', 
+                $argument, $value !== NULL ? ' (' . $value . ')' : ' ', 
+                $stack[1]['class'], $stack[1]['function'], $type);
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see RuntimeException::__toString()
      */
-    public function __toString()
+    public function __toString ()
     {
         return $this->message;
     }

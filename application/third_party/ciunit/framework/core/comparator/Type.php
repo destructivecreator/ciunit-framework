@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,34 +46,44 @@
 /**
  * Compares two values for type equality
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Comparator
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstract_Type extends CIUnit_Framework_ComparatorAbstract {
-	
+class CIUnit_Framework_ComparatorAbstract_Type extends CIUnit_Framework_ComparatorAbstract
+{
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract::accepts()
      */
-	public function accepts($expected, $actual) {
-		return TRUE;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ComparatorAbstract::assertEquals()
-	 */
-	public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array()) {
-		if (gettype ( $expected ) != gettype ( $actual )) {
-			$message = sprintf ( '%s does not match expected type "%s".', CIUnit_Util_Type::shortExport( $actual ), gettype ( $expected ) );
-			
-			throw new CIUnit_Framework_Exception_ComparissonFailure ( $expected, $actual, '', '', $message );
-		}
-	}
+    public function accepts ($expected, $actual)
+    {
+        return TRUE;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ComparatorAbstract::assertEquals()
+     */
+    public function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
+    {
+        if (gettype($expected) != gettype($actual)) {
+            $message = sprintf('%s does not match expected type "%s".', 
+                    CIUnit_Util_Type::shortExport($actual), 
+                    gettype($expected));
+            
+            throw new CIUnit_Framework_Exception_ComparissonFailure($expected, 
+                    $actual, '', '', $message);
+        }
+    }
 }
 
 ?>

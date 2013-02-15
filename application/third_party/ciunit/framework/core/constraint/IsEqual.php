@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -43,99 +44,110 @@
  */
 
 /**
- * Constraint that asserts that the value or object it is evaluated for is equal to another value or object.
+ * Constraint that asserts that the value or object it is evaluated for is equal
+ * to another value or object.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_IsEqual extends CIUnit_Framework_ConstraintAbstract {
-	
+class CIUnit_Framework_ConstraintAbstract_IsEqual extends CIUnit_Framework_ConstraintAbstract
+{
+
     /**
      * Value or object to evaluate against
+     * 
      * @var mixed
      */
-	protected $expected;
-	
-	/**
-	 * @var boolean
-	 */
-	protected $canonicalize = FALSE;
-	
-	/**
-	 * @var boolean
-	 */
-    protected $ignoreCase = FALSE;
-    
+    protected $expected;
+
     /**
+     *
+     * @var boolean
+     */
+    protected $canonicalize = FALSE;
+
+    /**
+     *
+     * @var boolean
+     */
+    protected $ignoreCase = FALSE;
+
+    /**
+     *
      * @var double
      */
     protected $delta;
-    
+
     /**
-     * 
-     * @param mixed $expected
-     * @param double $delta
-     * @param boolean $canonicalize
-     * @param boolean $ignoreCase
+     *
+     * @param mixed $expected            
+     * @param double $delta            
+     * @param boolean $canonicalize            
+     * @param boolean $ignoreCase            
      * @throws CIUnit_Framework_Exception_InvalidArgument
      */
-    public function __construct($expected, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE)
+    public function __construct ($expected, $delta = 0, $canonicalize = FALSE, 
+            $ignoreCase = FALSE)
     {
-   		if (!is_bool($canonicalize)) {
+        if (! is_bool($canonicalize)) {
             throw new CIUnit_Framework_Exception_InvalidArgument(3, 'boolean');
         }
-
-        if (!is_bool($ignoreCase)) {
-        	throw new CIUnit_Framework_Exception_InvalidArgument(4, 'boolean');
+        
+        if (! is_bool($ignoreCase)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(4, 'boolean');
         }
         
         $this->expected = $expected;
-        $this->canonicalize  =$canonicalize;
+        $this->canonicalize = $canonicalize;
         $this->ignoreCase = $ignoreCase;
         $this->delta = $delta;
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::evaluate()
      */
-    public function evaluate($value, $description = '', $returnResult = FALSE)
+    public function evaluate ($value, $description = '', $returnResult = FALSE)
     {
-    	$factory = CIUnit_Framework_ComparatorAbstractFactory::getInstance();
-    	
-    	try {
-    		$comparator = $factory->getComparator($value, $this->expected);
-    		$comparator->assertEquals($this->expected, $value, $this->delta);
-    	}
-    	catch (CIUnit_Framework_Exception_ComparissonFailure $e) {
-    		if($returnResult) {
-    			return FALSE;
-    		} 
-    		
-    		throw new CIUnit_Framework_Exception_ExpectationFailed(trim($description . "\n" . $e->getFailureMessage()), $e);
-    	}
-
-    	return TRUE;
+        $factory = CIUnit_Framework_ComparatorAbstractFactory::getInstance();
+        
+        try {
+            $comparator = $factory->getComparator($value, $this->expected);
+            $comparator->assertEquals($this->expected, $value, $this->delta);
+        } catch (CIUnit_Framework_Exception_ComparissonFailure $e) {
+            if ($returnResult) {
+                return FALSE;
+            }
+            
+            throw new CIUnit_Framework_Exception_ExpectationFailed(
+                    trim($description . "\n" . $e->getFailureMessage()), $e);
+        }
+        
+        return TRUE;
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
      */
-    public function failureDescription($evaluated)
-    {    
-		return sprintf(
-    				'%s is equal to %s', CIUnit_Util_Type::shortExport($evaluated), CIUnit_Util_Type::shortExport($this->expected)
-    		);
-    }
-    
-    public function toString()
+    public function failureDescription ($evaluated)
     {
-        return sprintf('is equal to %s', CIUnit_Util_Type::export($this->expected));
+        return sprintf('%s is equal to %s', 
+                CIUnit_Util_Type::shortExport($evaluated), 
+                CIUnit_Util_Type::shortExport($this->expected));
+    }
+
+    public function toString ()
+    {
+        return sprintf('is equal to %s', 
+                CIUnit_Util_Type::export($this->expected));
     }
 }
 

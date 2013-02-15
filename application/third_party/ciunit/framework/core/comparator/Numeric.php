@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,49 +46,59 @@
 /**
  * Compares two numeric values for equality
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Comparator
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstract_Numeric extends CIUnit_Framework_ComparatorAbstract_Scalar {
-	
+class CIUnit_Framework_ComparatorAbstract_Numeric extends CIUnit_Framework_ComparatorAbstract_Scalar
+{
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract_Scalar::accepts()
      */
-	public function accepts($expected, $actual) 
-	{
-	    return (is_numeric($expected) && is_numeric($actual) && !is_double($actual) && !is_double($expected));
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ComparatorAbstract_Scalar::assertEquals()
-	 */
-	public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array()) 
-	{
-	
-	    // Finds whether a value is infinite
-	    if (is_infinite($actual) && is_infinite($expected)) {
-	        return;
-	    }
-	    
-	    // Find whether a value is not a number
-	    if (is_nan($actual) && is_nan($expected)) {
-	        return;
-	    }
-	    
-	    // Check for nan and infinite + compare with delta
-	    if ((is_infinite($actual) XOR is_infinite($expected)) || (is_nan($actual) XOR is_nan($expected)) ||
-            abs($actual - $expected) > $delta) {
-	    
-	        throw new CIUnit_Framework_Exception_ComparissonFailure($expected, $actual, '', '', sprintf('Failed asserting that %s matches expected %s.', CIUnit_Util_Type::export($actual), CIUnit_Util_Type::export($expected)));
-	    }    
-	
-	}
+    public function accepts ($expected, $actual)
+    {
+        return (is_numeric($expected) && is_numeric($actual) &&
+                 ! is_double($actual) && ! is_double($expected));
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ComparatorAbstract_Scalar::assertEquals()
+     */
+    public function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
+    {
+        
+        // Finds whether a value is infinite
+        if (is_infinite($actual) && is_infinite($expected)) {
+            return;
+        }
+        
+        // Find whether a value is not a number
+        if (is_nan($actual) && is_nan($expected)) {
+            return;
+        }
+        
+        // Check for nan and infinite + compare with delta
+        if ((is_infinite($actual) xor is_infinite($expected)) ||
+                 (is_nan($actual) xor is_nan($expected)) ||
+                 abs($actual - $expected) > $delta) {
+            
+            throw new CIUnit_Framework_Exception_ComparissonFailure($expected, 
+                    $actual, '', '', 
+                    sprintf('Failed asserting that %s matches expected %s.', 
+                            CIUnit_Util_Type::export($actual), 
+                            CIUnit_Util_Type::export($expected)));
+        }
+    }
 }
 
 ?>

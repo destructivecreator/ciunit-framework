@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -41,37 +42,37 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-
 class CIUnit_Framework_TestWarning extends CIUnit_Framework_TestCaseAbstract
 {
+
     protected $message;
-    
-    public function __construct($message = "") 
+
+    public function __construct ($message = "")
     {
         $this->message = $message;
-        //call parent
+        // call parent
         parent::__construct('Warning');
     }
-    
-    public function getMessage()
+
+    public function getMessage ()
     {
         return $this->message;
     }
-    
+
     /**
      * Overrite to make the test fail with appropriate message
+     * 
      * @see CIUnit_Framework_TestCaseAbstract::runTest()
      */
-    protected function runTest()
+    protected function runTest ()
     {
         $this->fail($this->message);
     }
-    
-    public function toString()
+
+    public function toString ()
     {
         return 'Warning';
     }
 }
-
 
 ?>

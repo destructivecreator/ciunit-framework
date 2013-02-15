@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,44 +46,48 @@
 /**
  * Timer Util Class implementation
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Util
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Util_Timer
 {
+
     /**
+     *
      * @var array
      */
-    private static $startTimes = array(); 
-    
+    private static $startTimes = array();
+
     /**
      * Start timer
      */
-    public static function start()
+    public static function start ()
     {
         array_push(self::$startTimes, microtime(TRUE));
     }
-    
+
     /**
      * Stop timer
+     * 
      * @return integer
      */
-    public static function stop()
+    public static function stop ()
     {
         return microtime(TRUE) - array_pop(self::$startTimes);
     }
-    
+
     /**
      * Formats the elapsed time as a string.
      *
-     * @param  float $time
+     * @param float $time            
      * @return string
      */
-    public static function secondsToTimeString($time)
+    public static function secondsToTimeString ($time)
     {
         return $time;
     }

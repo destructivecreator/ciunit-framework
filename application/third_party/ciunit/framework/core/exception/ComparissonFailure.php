@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,49 +46,57 @@
 /**
  * Thrown when the comparisson between two values or objects has failed
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Exception
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_Exception_ComparissonFailure extends CIUnit_Framework_Exception_AssertionFailed
 {
+
     /**
+     *
      * @var mixed
      */
     protected $expected;
-    
+
     /**
+     *
      * @var mixed
      */
     protected $actual;
-    
+
     /**
+     *
      * @var string
      */
     protected $expectedAsString;
-    
+
     /**
+     *
      * @var string
      */
     protected $actualAsString;
-    
+
     /**
+     *
      * @var string
      */
     protected $message;
-    
+
     /**
-     * 
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param string $expectedAsString
-     * @param string $actualAsString
-     * @param string $message
+     *
+     * @param mixed $expected            
+     * @param mixed $actual            
+     * @param string $expectedAsString            
+     * @param string $actualAsString            
+     * @param string $message            
      */
-    public function __construct($expected, $actual, $expectedAsString, $actualAsString, $message = '')
+    public function __construct ($expected, $actual, $expectedAsString, 
+            $actualAsString, $message = '')
     {
         $this->expected = $expected;
         $this->actual = $actual;
@@ -95,40 +104,42 @@ class CIUnit_Framework_Exception_ComparissonFailure extends CIUnit_Framework_Exc
         $this->actualAsString = $actualAsString;
         $this->message = $message;
     }
-    
+
     /**
      */
-    public function getExpected()
+    public function getExpected ()
     {
         return $this->expected;
     }
-    
-    public function getExpectedAsString()
+
+    public function getExpectedAsString ()
     {
         return $this->expectedAsString;
     }
-    
-    public function getActual()
+
+    public function getActual ()
     {
         return $this->actual;
     }
-    
-    public function getActualAsString()
+
+    public function getActualAsString ()
     {
         return $this->actualAsString;
     }
-    
+
     /**
      * Get the difference between the compared values as string
+     * 
      * @return string
      */
-    public function getDifference()
+    public function getDifference ()
     {
-        return $this->actualAsString || $this->expectedAsString ? CIUnit_Util_Difference::getDifference($this->expectedAsString, $this->actualAsString) : '';
+        return $this->actualAsString || $this->expectedAsString ? CIUnit_Util_Difference::getDifference(
+                $this->expectedAsString, $this->actualAsString) : '';
     }
-    
-    public function getFailureMessage()
+
+    public function getFailureMessage ()
     {
         return $this->message . $this->getDifference();
-    }  
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -43,68 +44,72 @@
  */
 
 /**
- * Constraint that asserts that the exception it is evaluated for is form a given type.
+ * Constraint that asserts that the exception it is evaluated for is form a
+ * given type.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_ConstraintAbstract_Exception extends CIUnit_Framework_ConstraintAbstract
 {
+
     /**
+     *
      * @var string
      */
     protected $exception;
-    
+
     /**
-     * @param string $exception
+     *
+     * @param string $exception            
      */
-    public function __construct($exception)
+    public function __construct ($exception)
     {
         $this->exception = $exception;
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::matches()
      */
-    public function matches($value)
+    public function matches ($value)
     {
         return $value instanceof $this->exception;
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
      */
-    public function failureDescription($evaluated)
+    public function failureDescription ($evaluated)
     {
-         if($evaluated !== NULL) {
-             $exceptionMessage = '';
-             if($evaluated instanceof Exception && $evaluated->getMessage())
-                 $exeptionMessage = $evaluated->getMessage();
-             
-             return sprintf(
-                     'exception of type "%s" matches expected exception "%s"%s',
-             
-                     get_class($evaluated),
-                     $this->exception,
-                     $exceptionMessage
-             );
-         }
-         
-         return sprintf('exception of type "%s" is thrown', $this->exception);
+        if ($evaluated !== NULL) {
+            $exceptionMessage = '';
+            if ($evaluated instanceof Exception && $evaluated->getMessage())
+                $exeptionMessage = $evaluated->getMessage();
+            
+            return sprintf(
+                    'exception of type "%s" matches expected exception "%s"%s', 
+                    
+                    get_class($evaluated), $this->exception, $exceptionMessage);
+        }
+        
+        return sprintf('exception of type "%s" is thrown', $this->exception);
     }
-    
+
     /**
      * Returns a string representation of the constraint.
-     * 
+     *
      * @return string
      */
-    public function toString()
+    public function toString ()
     {
         return sprintf("exception of type %s", $this->exception->getMessage());
     }

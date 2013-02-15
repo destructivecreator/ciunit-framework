@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,20 +46,23 @@
 /**
  * Exception for test that are not implemented or incomplete.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Exception
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_Exception_IncompleteTest extends CIUnit_Framework_Exception_AssertionFailed
 {
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_Exception_AssertionFailed::__toString()
      */
-    public function __toString()
+    public function __toString ()
     {
         return 'This mehtod is not yet implemented.';
     }

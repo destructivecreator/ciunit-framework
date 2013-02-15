@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,76 +46,91 @@
 /**
  * Compares two objects for equality
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Comparator
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_ComparatorAbstract_Object extends CIUnit_Framework_ComparatorAbstract_Array
 {
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract_Array::accepts()
      */
-    public function accepts($expected, $actual) 
+    public function accepts ($expected, $actual)
     {
         return (is_object($expected) && is_object($actual));
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract_Array::assertEquals()
      */
-    public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
+    public function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
     {
         // Check object for class equality
-        if(get_class($expected) !== get_class($actual)) {
-          
-            throw new CIUnit_Framework_Exception_ComparissonFailure($expected, $actual,
-                     CIUnit_Util_Type::export($expected), 
-                     CIUnit_Util_Type::export($actual),
-                      sprintf(
-                '%s is not instance of expected class "%s".',
-
-                get_class($actual),
-                get_class($expected))); 
+        if (get_class($expected) !== get_class($actual)) {
+            
+            throw new CIUnit_Framework_Exception_ComparissonFailure($expected, 
+                    $actual, CIUnit_Util_Type::export($expected), 
+                    CIUnit_Util_Type::export($actual), 
+                    sprintf('%s is not instance of expected class "%s".', 
+                            
+                            get_class($actual), get_class($expected)));
         }
         
         // CAUTION !!!
-        //  Check for processed object to escape cyclic dependencies in objects
-        if (in_array(array($actual, $expected), $processedObjects, TRUE) ||
-                in_array(array($expected, $actual), $processedObjects, TRUE)) {
+        // Check for processed object to escape cyclic dependencies in objects
+        if (in_array(array(
+                $actual,
+                $expected
+        ), $processedObjects, TRUE) ||
+                 in_array(array(
+                        $expected,
+                        $actual
+                ), $processedObjects, TRUE)) {
             return;
         }
         
-        $processedObjects[] = array($actual, $expected);
+        $processedObjects[] = array(
+                $actual,
+                $expected
+        );
         
         if ($actual !== $expected) {
             try {
-                parent::assertEquals($this->toArray($expected), $this->toArray($actual), $delta, $canonicalize, $ignoreCase, $processedObjects);
-            }
-        
+                parent::assertEquals($this->toArray($expected), 
+                        $this->toArray($actual), $delta, $canonicalize, 
+                        $ignoreCase, $processedObjects);
+            } 
+
             catch (CIUnit_Framework_Exception_ComparissonFailure $e) {
                 throw new CIUnit_Framework_Exception_ComparissonFailure(
-                        $expected,
-                        $actual,
+                        $expected, $actual, 
                         // replace "Array" with "ClassName object"
-                        substr_replace($e->getExpectedAsString(), get_class($expected) . ' Object', 0, 5),
-                        substr_replace($e->getActualAsString(), get_class($actual) . ' Object', 0, 5),
-                        'Failed asserting that two objects are equal.'
-                );
+                        substr_replace($e->getExpectedAsString(), 
+                                get_class($expected) . ' Object', 0, 5), 
+                        substr_replace($e->getActualAsString(), 
+                                get_class($actual) . ' Object', 0, 5), 
+                        'Failed asserting that two objects are equal.');
             }
-        } 
+        }
     }
-    
+
     /**
      * Converts an object in to an array
-     * @param object $object
+     * 
+     * @param object $object            
      * @return array
      */
-    protected function toArray($object)
+    protected function toArray ($object)
     {
         return CIUnit_Util_Type::toArray($object);
     }

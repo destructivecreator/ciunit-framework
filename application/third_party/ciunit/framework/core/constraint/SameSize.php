@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -43,26 +44,30 @@
  */
 
 /**
- * Constraint that asserts that the value it is evaluated for is has a certain size.
+ * Constraint that asserts that the value it is evaluated for is has a certain
+ * size.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_SameSize extends CIUnit_Framework_ConstraintAbstract_Count {
-	
+class CIUnit_Framework_ConstraintAbstract_SameSize extends CIUnit_Framework_ConstraintAbstract_Count
+{
+
     /**
+     *
      * @var double
      */
     protected $expectedCount;
 
-	public function __construct($expected)
+    public function __construct ($expected)
     {
         $this->expectedCount = $this->getActualCount($expected);
-    }  
+    }
 }
 
 ?>

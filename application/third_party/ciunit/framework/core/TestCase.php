@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,65 +46,75 @@
 /**
  * Base class for creating test cases.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Core
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-abstract class CIUnit_Framework_TestCaseAbstract extends CIUnit_Framework_AssertAbstract implements CIUnit_Framework_TestInterface
+abstract class CIUnit_Framework_TestCaseAbstract extends CIUnit_Framework_AssertAbstract implements 
+        CIUnit_Framework_TestInterface
 {
+
     /**
      * Instance of CodeIgniter to use withing the TestCases
+     * 
      * @var mixed
      */
     protected $ci = NULL;
+
     private $result;
+
     private $name = null;
+
     private $class = null;
-    
+
     private $numberOfAssertions = 0;
-    
+
     private $status;
+
     private $statusMessage;
-    
+
     private $expectedException = NULL;
+
     private $expectedExceptionMessage = NULL;
+
     private $expectedExceptionCode = NULL;
-    
+
     /**
-     * @param string $name
+     *
+     * @param string $name            
      */
-    public function __construct($name = NULL)
+    public function __construct ($name = NULL)
     {
-        //TODO initialize codeigniter here
-        if( NULL !== $name)
-        {
+        // TODO initialize codeigniter here
+        if (NULL !== $name) {
             $this->name = $name;
-        } 
+        }
         
-        $ci =& get_instance();
+        $ci = & get_instance();
     }
 
     /**
      * Runs the test case and collects the results in a TestResult object.
      * If no TestResult object is passed a new one will be created.
-     * 
+     *
      * @see CIUnit_Framework_Test::run()
      */
-    public function run(CIUnit_Framework_TestResult $result = NULL)
+    public function run (CIUnit_Framework_TestResult $result = NULL)
     {
         // Check for existing result object and create new if current is NULL
-        if(NULL == $result) {
+        if (NULL == $result) {
             $result = $this->createResult();
         }
         
-        if (!$this instanceof CIUnit_Framework_TestWarning) {
-           $this->result = $result;
+        if (! $this instanceof CIUnit_Framework_TestWarning) {
+            $this->result = $result;
         }
         
-        //check for any dependencies ???
+        // check for any dependencies ???
         
         $result->run($this);
         
@@ -111,246 +122,233 @@ abstract class CIUnit_Framework_TestCaseAbstract extends CIUnit_Framework_Assert
         
         return $result;
     }
-    
+
     /**
      * Runs a test sequence
+     * 
      * @throws Exception
      * @since version 1.0.0
      */
-    public function runTestSequence()
+    public function runTestSequence ()
     {
         $this->numberOfAssertions = 0;
         
-        try{
+        try {
             // Run setup
             $this->setUp();
             
             // Run test
-            $this->result = $this->runtest();            
+            $this->result = $this->runtest();
             
-            $this->status = 0;//Passed
-        }
-        // Catch for incomplete test
+            $this->status = 0; // Passed
+        }        // Catch for incomplete test
         catch (CIUnit_Framework_Exception_IncompleteTest $e) {
-            $this->status = 2; //Incomplete
+            $this->status = 2; // Incomplete
             $this->statusMessage = $e->getMessage();
-        }
-        
+        }        
+
         // Catch for skipped test
         catch (CIUnit_Framework_Exception_SkippedTest $e) {
-            $this->status = 1;// Skipped
+            $this->status = 1; // Skipped
             $this->statusMessage = $e->getMessage();
-        }
-        
+        }        
+
         // Catch for Assertion Failure
         catch (CIUnit_Framework_Exception_AssertionFailed $e) {
-            $this->status = 3;// Failure
+            $this->status = 3; // Failure
             $this->statusMessage = $e->getMessage();
-        }
-        // Catch for Error
+        }        // Catch for Error
         catch (Exception $e) {
-            $this->status = 4;// Error
+            $this->status = 4; // Error
             $this->statusMessage = $e->getMessage();
         }
         
         // revert fictures
         try {
             $this->tearDown();
-        }
-        //catch any errors
+        }        // catch any errors
         catch (Exception $error) {
-            if( !isset($e))
+            if (! isset($e))
                 $e = $error;
         }
         
         // If there is exception caught throw it
-        if(isset($e))
+        if (isset($e))
             throw $e;
-        
     }
-    
+
     /**
      * Override to run the test and assert its state.
-     * 
+     *
      * @since version 1.0.0
      */
-    protected function runTest()
+    protected function runTest ()
     {
-         
-        // Check if test case has name, if not throw CIUnit_Framework_Exception_CIUnitException
-        if(NULL === $this->name) {
-            throw new CIUnit_Framework_Exception_CIUnitException('name must not be null');
+        
+        // Check if test case has name, if not throw
+        // CIUnit_Framework_Exception_CIUnitException
+        if (NULL === $this->name) {
+            throw new CIUnit_Framework_Exception_CIUnitException(
+                    'name must not be null');
         }
         
         // Try to create new refection of this class and assign method
         try {
             
-            $class  = new ReflectionClass($this); 
+            $class = new ReflectionClass($this);
             $method = $class->getMethod($this->name->getName());
-             
-        }
-        catch (ReflectionException $e) {
+        } catch (ReflectionException $e) {
             $this->fail($e->getMessage());
         }
         
-        //invoke method through reflection invokeArgs
+        // invoke method through reflection invokeArgs
         $testResult = NULL;
-        try { 
+        try {
             $testResult = $method->invokeArgs($this, array());
-            //$this->AddAssertionCount(CIUnit_Framework_AssertAbstract::getAssertionCount());
-        }
-        // catch exception if thrown
-        catch (Exception $e) { 
+            // $this->AddAssertionCount(CIUnit_Framework_AssertAbstract::getAssertionCount());
+        }        // catch exception if thrown
+        catch (Exception $e) {
             $check = FALSE;
             
-            if(is_string($this->expectedException)) {
+            if (is_string($this->expectedException)) {
                 $check = TRUE;
                 
-                if($e instanceof CIUnit_Framework_Exception_CIUnitException) {
+                if ($e instanceof CIUnit_Framework_Exception_CIUnitException) {
                     $check = FALSE;
                 }
                 
-                $exceptionReflector = new ReflectionClass($this->expectedException);
-                if($exceptionReflector->isSubclassOf('CIUnit_Framework_Exception_CIUnitException') || $this->expectedException == 'CIUnit_Framework_Exception_CIUnitException') {
+                $exceptionReflector = new ReflectionClass(
+                        $this->expectedException);
+                if ($exceptionReflector->isSubclassOf(
+                        'CIUnit_Framework_Exception_CIUnitException') ||
+                         $this->expectedException ==
+                         'CIUnit_Framework_Exception_CIUnitException') {
                     $check = TRUE;
                 }
             }
             
-            if(TRUE == $check) {
+            if (TRUE == $check) {
                 
-                $constraint = new CIUnit_Framework_ConstraintAbstract_Exception($this->expectedException);
+                $constraint = new CIUnit_Framework_ConstraintAbstract_Exception(
+                        $this->expectedException);
                 $this->assertThat($e, $constraint);
                 
+                // TODO Assertion for message
                 
-                //TODO Assertion for message
-                
-                //TODO Assertion for code
-            }
-            else {
+                // TODO Assertion for code
+            } else {
                 throw $e;
             }
-            
         }
-               
-        //return test result
+        
+        // return test result
         
         return $testResult;
     }
-    
-    private function createResult()
+
+    private function createResult ()
     {
         return new CIUnit_Framework_TestResult();
     }
-    
-    public function getName()
+
+    public function getName ()
     {
-        if($this->name instanceof ReflectionMethod) {
+        if ($this->name instanceof ReflectionMethod) {
             return $this->name->getName();
         }
         
         return $this->name;
     }
-    
-    public function setName($name)
+
+    public function setName ($name)
     {
         $this->name = $name;
     }
-    
-    
-    public function setClass($class)
+
+    public function setClass ($class)
     {
-    	$this->class = $class;
+        $this->class = $class;
     }
-    
-    public function getClass()
+
+    public function getClass ()
     {
-    	return $this->class;
+        return $this->class;
     }
- 
-    public function count()
+
+    public function count ()
     {
         return 1;
     }
-    
-    public function AddAssertionCount($count)
+
+    public function AddAssertionCount ($count)
     {
         $this->numberOfAssertions += $count;
     }
-    
-    public function getNumberOfAssertions()
+
+    public function getNumberOfAssertions ()
     {
         return $this->numberOfAssertions;
     }
-    
+
     /**
+     *
      * @return string
      * @since version 1.0.0
      */
-    public function  getExpectedException()
+    public function getExpectedException ()
     {
         return $this->expectedException;
     }
-    
-    
+
     /**
-     * @param mixed $name
-     * @param string $message
-     * @param integer $code
+     *
+     * @param mixed $name            
+     * @param string $message            
+     * @param integer $code            
      * @since version 1.0.0
      */
-    public function setExpectedException($name, $message = '', $code = NULL)
+    public function setExpectedException ($name, $message = '', $code = NULL)
     {
         $this->expectedException = $name;
         $this->expectedExceptionMessage = $message;
-        $this->expectedExceptionCode = $code; 
+        $this->expectedExceptionCode = $code;
     }
-    
-    public function getResult()
+
+    public function getResult ()
     {
         return $this->result;
     }
-    
-    public function toString()
+
+    public function toString ()
     {
         $class = new ReflectionClass($this);
-    
-        $buffer = sprintf(
-                '%s::%s',
-    
-                $class->name,
-                $this->getName()
-        );
-    
+        
+        $buffer = sprintf('%s::%s', 
+
+        $class->name, $this->getName());
+        
         return $buffer;
     }
-    
+
     /**
      * This method is called before each test method
-     * 
+     *
      * @since version 1.0.0
      */
-    protected function setUp()
-    {
-        
-    }
-    
-    public static function setUpBeforeClass()
-    {
-        
-    }
-    
+    protected function setUp ()
+    {}
+
+    public static function setUpBeforeClass ()
+    {}
+
     /**
      * This method is called after each test method
-     * 
+     *
      * @since version 1.0.0
      */
-    protected function tearDown()
-    {
-        
-    }
-    
-    public static function tearDownAfterClass()
-    {
-        
-    }
+    protected function tearDown ()
+    {}
+
+    public static function tearDownAfterClass ()
+    {}
 }

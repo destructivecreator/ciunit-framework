@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * CIUnit
  *
@@ -45,35 +46,39 @@
 /**
  * Compares two arrays for equality
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage ciunit/core
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstract_Array extends CIUnit_Framework_ComparatorAbstract {
-    
+class CIUnit_Framework_ComparatorAbstract_Array extends CIUnit_Framework_ComparatorAbstract
+{
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract::accepts()
      */
-    public function accepts($expected, $actual)
+    public function accepts ($expected, $actual)
     {
         return (is_array($expected) && is_array($actual));
     }
-    
+
     /**
      * (non-PHPdoc)
+     * 
      * @see CIUnit_Framework_ComparatorAbstract::assertEquals()
      */
-    public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
+    public function assertEquals ($expected, $actual, $delta = 0, 
+            $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())
     {
-        if($canonicalize) {
+        if ($canonicalize) {
             sort($expected);
             sort($actual);
         }
-         
         
         $expectedAsString = "Array (\n";
         $actualAsString = "Array (\n";
@@ -81,85 +86,83 @@ class CIUnit_Framework_ComparatorAbstract_Array extends CIUnit_Framework_Compara
         $remaining = $actual;
         $areEqual = TRUE;
         
-        // Loop through all keys in the expected array and compare them with the keys in the actual
+        // Loop through all keys in the expected array and compare them with the
+        // keys in the actual
         foreach ($expected as $key => $value) {
             unset($remaining[$key]);
             
             // If there is no corresponding key in actual, they are not equal
-            if(!array_key_exists($key, $actual)) {
+            if (! array_key_exists($key, $actual)) {
                 $areEqual = FALSE;
                 
-                $expectedAsString .= sprintf(
-                  "   %s => %s\n",
-                  CIUnit_Util_Type::export($key),
-                  CIUnit_Util_Type::export($value)
-                );
+                $expectedAsString .= sprintf("   %s => %s\n", 
+                        CIUnit_Util_Type::export($key), 
+                        CIUnit_Util_Type::export($value));
                 
-                continue;// Continue executing the loop, but skip the code below for this iteration
+                continue; // Continue executing the loop, but skip the code
+                          // below for this iteration
             }
             
-            // Try to compare array values in both arrays using the in-house comparisson mechanism
-            try{
-                $comparator = $this->factory->getComparator($value, $actual[$key]);
-                $comparator->assertEquals($value, $actual[$key], $delta, $canonicalize, $ignoreCase, $processedObjects);
+            // Try to compare array values in both arrays using the in-house
+            // comparisson mechanism
+            try {
+                $comparator = $this->factory->getComparator($value, 
+                        $actual[$key]);
+                $comparator->assertEquals($value, $actual[$key], $delta, 
+                        $canonicalize, $ignoreCase, $processedObjects);
                 
-            
-                $expectedAsString .= sprintf(
-                        "   %s => %s\n",
+                $expectedAsString .= sprintf("   %s => %s\n", 
+                        
+                        CIUnit_Util_Type::export($key), 
+                        CIUnit_Util_Type::export($value));
                 
-                        CIUnit_Util_Type::export($key),
-                        CIUnit_Util_Type::export($value)
-                );
+                $actualAsString .= sprintf("   %s => %s\n", 
+                        
+                        CIUnit_Util_Type::export($key), 
+                        CIUnit_Util_Type::export($actual[$key]));
+            } catch (CIUnit_Framework_Exception_ComparissonFailure $e) {
+                // Add $actual[$key] and $value to expectedAsString and
+                // actualAsString from the exception
                 
-                $actualAsString .= sprintf(
-                        "   %s => %s\n",
+                $expectedAsString .= sprintf("   %s => %s\n", 
+                        
+                        CIUnit_Util_Type::export($key), 
+                        $e->getExpectedAsString() ? $this->indent(
+                                $e->getExpectedAsString()) : CIUnit_Util_Type::export(
+                                $e->getExpected()));
                 
-                        CIUnit_Util_Type::export($key),
-                        CIUnit_Util_Type::export($actual[$key])
-                );
-            }
-            catch(CIUnit_Framework_Exception_ComparissonFailure $e) {
-                // Add $actual[$key] and $value to expectedAsString and actualAsString from the exception
-                
-                $expectedAsString .= sprintf(
-                        "   %s => %s\n",
-                
-                        CIUnit_Util_Type::export($key),
-                        $e->getExpectedAsString() ? $this->indent($e->getExpectedAsString()) : CIUnit_Util_Type::export($e->getExpected())
-                );
-                
-                $actualAsString .= sprintf(
-                        "   %s => %s\n",
-                
-                        CIUnit_Util_Type::export($key),
-                        $e->getExpectedAsString() ? $this->indent($e->getActualAsString()) : CIUnit_Util_Type::export($e->getActual())
-                );
+                $actualAsString .= sprintf("   %s => %s\n", 
+                        
+                        CIUnit_Util_Type::export($key), 
+                        $e->getExpectedAsString() ? $this->indent(
+                                $e->getActualAsString()) : CIUnit_Util_Type::export(
+                                $e->getActual()));
                 
                 $areEqual = FALSE;
-            } 
-        } 
-            
+            }
+        }
+        
         // Add all from remaining to actualAsStirng
         foreach ($remaining as $key => $value) {
-            $actualAsString .= sprintf(
-              "   %s => %s\n",
-
-                  CIUnit_Util_Type::export($key),
-                  CIUnit_Util_Type::export($value)
-             );
+            $actualAsString .= sprintf("   %s => %s\n", 
+                    
+                    CIUnit_Util_Type::export($key), 
+                    CIUnit_Util_Type::export($value));
             
             $areEqual = FALSE;
         }
         
         $expectedAsString .= ")";
         $actualAsString .= ")";
-           
-        if (!$areEqual) {             
-            throw new CIUnit_Framework_Exception_ComparissonFailure($expected, $actual, $expectedAsString, $actualAsString,  'Failed asserting that two arrays are equal.');
+        
+        if (! $areEqual) {
+            throw new CIUnit_Framework_Exception_ComparissonFailure($expected, 
+                    $actual, $expectedAsString, $actualAsString, 
+                    'Failed asserting that two arrays are equal.');
         }
     }
-    
-    protected function indent($lines)
+
+    protected function indent ($lines)
     {
         return trim(str_replace("\n", "\n    ", $lines));
     }

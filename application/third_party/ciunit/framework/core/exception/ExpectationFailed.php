@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,38 +46,43 @@
 /**
  * Exception for expectations which failed their check.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Exception
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 class CIUnit_Framework_Exception_ExpectationFailed extends CIUnit_Framework_Exception_AssertionFailed
 {
+
     /**
+     *
      * @var string
      */
     protected $comparisonFailure;
-    
+
     /**
-     * 
-     * @param string $message
-     * @param CIUnit_Framework_Exception_ComparissonFailure $comparisonFailure
-     * @param Exception $previous
+     *
+     * @param string $message            
+     * @param CIUnit_Framework_Exception_ComparissonFailure $comparisonFailure            
+     * @param Exception $previous            
      */
-    public function __construct($message, CIUnit_Framework_Exception_ComparissonFailure $comparisonFailure = NULL, Exception $previous = NULL)
+    public function __construct ($message, 
+            CIUnit_Framework_Exception_ComparissonFailure $comparisonFailure = NULL, 
+            Exception $previous = NULL)
     {
         $this->comparisonFailure = $comparisonFailure;
-    
+        
         parent::__construct($message, 0, $previous);
     }
- 
+
     /**
-     * 
+     *
      * @return string
      */
-    public function getComparisonFailure()
+    public function getComparisonFailure ()
     {
         return $this->comparisonFailure;
     }

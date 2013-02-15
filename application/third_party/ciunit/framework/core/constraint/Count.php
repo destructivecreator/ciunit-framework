@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -43,67 +44,73 @@
  */
 
 /**
- * 
- * @package    CIUnit
+ *
+ * @package CIUnit
  * @subpackage Constraint
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_Count extends CIUnit_Framework_ConstraintAbstract {
-	
+class CIUnit_Framework_ConstraintAbstract_Count extends CIUnit_Framework_ConstraintAbstract
+{
+
     /**
+     *
      * @var integer
      */
-	protected $expectedCount = 0;
-	
-	/** 
-	 * @param integer $expected
-	 */
-	public function __construct($expected)
-	{
-		$this->expectedCount = $expected;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ConstraintAbstract::matches()
-	 */
-	protected function matches($value)
-	{
-			return $this->expectedCount === $this->getActualCount($value);
-	}
-	
-	/**
-	 * 
-	 * @param unknown_type $value
-	 * @return number
-	 */
-	protected function getActualCount($value)
-	{
-		if($value instanceof Countable || is_array($value)) {
-			return count($value);
-		}
-		else if($value instanceof Iterator) {
-			return iterator_count($value);
-		}
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
-	 */
-	public function failureDescription($evaluated) 
-	{
-		return sprintf('actual size %d matches expected size %d', $this->getActualCount($evaluated), $this->expectedCount);
-	}
-	
-	public function toString()
-	{
-	    return sprintf('count matches expected %d', $this->expectedCount);
-	}
-	
+    protected $expectedCount = 0;
+
+    /**
+     *
+     * @param integer $expected            
+     */
+    public function __construct ($expected)
+    {
+        $this->expectedCount = $expected;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ConstraintAbstract::matches()
+     */
+    protected function matches ($value)
+    {
+        return $this->expectedCount === $this->getActualCount($value);
+    }
+
+    /**
+     *
+     * @param unknown_type $value            
+     * @return number
+     */
+    protected function getActualCount ($value)
+    {
+        if ($value instanceof Countable || is_array($value)) {
+            return count($value);
+        } else 
+            if ($value instanceof Iterator) {
+                return iterator_count($value);
+            }
+    }
+
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
+     */
+    public function failureDescription ($evaluated)
+    {
+        return sprintf('actual size %d matches expected size %d', 
+                $this->getActualCount($evaluated), $this->expectedCount);
+    }
+
+    public function toString ()
+    {
+        return sprintf('count matches expected %d', $this->expectedCount);
+    }
 }
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CIUnit
  *
@@ -45,22 +46,25 @@
 /**
  * Interface for tests.
  *
- * @package    CIUnit
+ * @package CIUnit
  * @subpackage Core
- * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @author Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
+ *          License
+ * @since File available since Release 1.0.0
  */
 interface CIUnit_Framework_TestInterface extends Countable
 {
+
     /**
-     * This method runs a single test and collects its result in a CIUnit_Framework_TestResult object
-     * 
-     * @param CIUnit_Framework_TestResult $result
+     * This method runs a single test and collects its result in a
+     * CIUnit_Framework_TestResult object
+     *
+     * @param CIUnit_Framework_TestResult $result            
      * @since version 1.0.0
      */
-     public function run(CIUnit_Framework_TestResult $result = NULL);
+    public function run (CIUnit_Framework_TestResult $result = NULL);
 }
 
 ?>
