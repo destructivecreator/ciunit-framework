@@ -45,15 +45,16 @@
 class CIUnit_Util_FileLoader
 {
 
-    public static function checkAndLoad ($filename)
+    public static function checkAndLoad ($fileName)
     {
         $testsAvailable = self::directory_map(TRUE);
         
         if (FALSE === $testsAvailable)
-            throw new CIUnit_Framework_Exception_CIUnitException("CIUnit can't");
+            throw new CIUnit_Framework_Exception_CIUnitException("No tests found");
         
-        foreach ($testsAvailable as $test) { 
-            self::load($test);
+        foreach ($testsAvailable as $test) {
+            if($fileName == basename($test, '.php')) 
+                self::load($test);
         }
     }
 

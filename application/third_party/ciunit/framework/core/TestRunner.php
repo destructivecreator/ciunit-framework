@@ -80,7 +80,6 @@ class CIUnit_Framework_TestRunner
         
         // Collect the results and pass them to the presenter
         $this->presenter = new CIUnit_ResultPresenter($this->resultSet);
-        // $this->presenter = new CIUnit_CLPresenter($this->resultSet);
     }
 
     /**
