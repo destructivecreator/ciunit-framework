@@ -55,10 +55,10 @@ spl_autoload_register(
             if ($classes === NULL) {
                 $classes = array(
                         // core
-                        'ciunit_framework_assertabstract' => '/core/Assert.php',
+                        'ciunit_framework_assert' => '/core/Assert.php',
                         'ciunit_framework_constraintabstract' => '/core/Constraint.php',
                         'ciunit_framework_testinterface' => '/core/Test.php',
-                        'ciunit_framework_testcaseabstract' => '/core/TestCase.php',
+                        'ciunit_framework_testcase' => '/core/TestCase.php',
                         'ciunit_framework_testresult' => '/core/TestResult.php',
                         'ciunit_framework_testsuite' => '/core/TestSuite.php',
                         'ciunit_framework_testfailure' => '/core/TestFailure.php',

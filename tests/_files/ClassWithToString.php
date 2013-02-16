@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 /**
  * CIUnit
  *
@@ -36,69 +35,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package    CIUnit
- * @subpackage ciunit/core
+ * @subpackage Test
  * @author     Agop Seropyan <agopseropyan@gmail.com>
  * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_TestRunner
+
+class ClassWithToString
 {
-
-    private $className;
-
-    private $resultSet;
-
-    private $testSuite;
-
-    private $printer;
-
-    private $presenter;
-
-    public function __construct ($class = '')
+    public function __toString()
     {
-        if ($class == '') {
-            throw new CIUnit_Framework_Exception_InvalidArgument(1, 
-                    'must not be NULL');
-        }
-        
-        // Cheack and load all test cases
-        CIUnit_Util_FileLoader::checkAndLoad($class);
-        
-        $this->className = $class;
-    }
-
-    public function run ()
-    {
-        // Construct test case
-        $this->testSuite = new CIUnit_Framework_TestSuite($this->className);
-        // Create new result set
-        $this->resultSet = new CIUnit_Framework_TestResult();
-        
-        // Pass it to the suite and execute test cases
-        $this->testSuite->run($this->resultSet);
-        
-        // Collect the results and pass them to the presenter
-        $this->presenter = new CIUnit_ResultPresenter($this->resultSet);
-        // $this->presenter = new CIUnit_CLPresenter($this->resultSet);
-    }
-
-    /**
-     * Call the presentResult() method form the presenter class that has to
-     * handle the way to dispaly results from test.
-     * For CLI it would print them,
-     * for web would return them as an array
-     */
-    public function getPresenter ()
-    {
-        return $this->presenter;
-    }
-    
-    public function getClassName()
-    {
-        return $this->className;
-    }
-    
-}
+        return 'string representation';
+    } 
+} 
 
 ?>

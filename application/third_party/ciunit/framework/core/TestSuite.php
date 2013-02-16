@@ -107,7 +107,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
             }
             // Create reflection for class
             $class = new ReflectionClass($class);
-        } else 
+        } else {
             if (is_string($class)) {
                 $this->name = $class;
                 
@@ -116,6 +116,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
                 
                 return;
             }
+        }
         // Throw exception if the class argument is not valid
         if (! $valid) {
             throw new CIUnit_Framework_Exception_CIUnitException(
@@ -123,11 +124,11 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
         }
         
         // Throw exception if the class does not extend
-        // CIUnit_Framework_TestCaseAbstract
-        if (! $class->isSubclassOf('CIUnit_Framework_TestCaseAbstract')) {
+        // CIUnit_Framework_TestCase
+        if (! $class->isSubclassOf('CIUnit_Framework_TestCase')) {
             throw new CIUnit_Framework_Exception_CIUnitException(
                     "Class " . $class->name .
-                             " does not extend CIUnit_Framework_TestCaseAbstract");
+                             " does not extend CIUnit_Framework_TestCase");
         }
         
         // Set the name of the suite
@@ -148,7 +149,6 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
                             "Warning class must have a public constructor"));
         }
         
-        // $this->addTestSuite($class);
         
         // Get all class methods and add them to test
         foreach ($class->getMethods() as $method) {
@@ -179,7 +179,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
 
     /**
      * Add method to test suite
-     * 
+     *
      * @param
      *            CIUnit_Framework_TestInterface$test
      * @since version 1.0.0
@@ -188,66 +188,10 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
     {
         $class = new ReflectionClass($test);
         
-        if (! $class->isAbstract()) {
+        if (! $class->isAbstract()) { 
             $this->testInSuite[] = $test;
             $this->testsCount = - 1;
         }
-    }
-
-    /**
-     * Adds test from a given class to the current suite
-     *
-     * CAUTION!! Not jet fully implemented do NOT use, it woun't work
-     *
-     * @param mixed $testClass            
-     * @throws CIUnit_Framework_Exception_InvalidArgument
-     * @throws CIUnit_Framework_Exception_CIUnitException
-     */
-    public function addTestSuite ($testClass)
-    {
-        if (is_string($testClass) && class_exists($testClass)) {
-            $testClass = new ReflectionClass($testClass);
-        }
-        
-        if (! is_object($testClass)) {
-            throw new CIUnit_Framework_Exception_InvalidArgument(1, 
-                    'class name or object');
-        }
-        
-        if ($testClass instanceof ReflectionClass) {
-            $testSuiteAdded = FALSE;
-            // Check for suite method defined in test case class
-            // Make sure class is not abstract so can instantiate it
-            if (! $testClass->isAbstract()) {
-                // Check if there is a suite method declared
-                if ($testClass->hasMethod('suite')) {
-                    $suiteMethod = $testClass->getMethod('suite');
-                    
-                    // Method suite must be static
-                    if ($suiteMethod->isStatic()) {
-                        // suite method is to return a suite object
-                        // use reflection invoke method to invoke the suite() to
-                        // return a suite object
-                        // pass null as it is static method
-                        $this->addTest(
-                                $suiteMethod->invoke(null, 
-                                        $suiteMethod->getName()));
-                        $testSuiteAdded = TRUE;
-                    }
-                }
-                
-                // If for some reason suite has not been found or added add the
-                // class itself to the suite
-                if (! $testSuiteAdded) {
-                    $this->addTest(new CIUnit_Framework_TestSuite($testClass));
-                }
-            }
-        } else 
-            if ($testClass instanceof CIUnit_Framework_TestSuite) {
-                $this->addTest($testClass);
-            } else {
-                throw new CIUnit_Framework_Exception_CIUnitException();
-            }
     }
 
     /**
@@ -256,7 +200,8 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
      * @param ReflectionClass $class            
      * @param string $method            
      * @throws CIUnit_Framework_Exception_CIUnitException
-     * @return CIUnit_Framework_Exception_CIUnitException CIUnit_Framework_TestCaseAbstract
+     * @return CIUnit_Framework_Exception_CIUnitException
+     *         CIUnit_Framework_TestCase
      */
     public static function createNewTest (ReflectionClass $class, $method)
     {
@@ -287,8 +232,8 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
                     "No valid test provided");
         }
         
-        // Is test instance of CIUnit_Framework_TestCaseAbstract
-        if ($test instanceof CIUnit_Framework_TestCaseAbstract) {
+        // Is test instance of CIUnit_Framework_TestCase
+        if ($test instanceof CIUnit_Framework_TestCase) {
             $test->setName($method);
             $test->setClass($class->getName());
         }
@@ -346,7 +291,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
                 $test->run($result);
             }             // test instanceof testcase
             else 
-                if ($test instanceof CIUnit_Framework_TestCaseAbstract) {
+                if ($test instanceof CIUnit_Framework_TestCase) {
                     // call $this->invoke...($test)
                     $this->invokeTestRunMethod($test, $result);
                 }

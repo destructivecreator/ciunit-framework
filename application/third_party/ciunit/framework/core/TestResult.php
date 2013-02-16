@@ -188,9 +188,9 @@ class CIUnit_Framework_TestResult implements Countable
      */
     public function run (CIUnit_Framework_TestInterface $test)
     {
-        // Reset the number of assertions in CIUnit_Framework_AssertAbstract
+        // Reset the number of assertions in CIUnit_Framework_Assert
         // class
-        CIUnit_Framework_AssertAbstract::resetAssertionCount();
+        CIUnit_Framework_Assert::resetAssertionCount();
         
         // Create local flags for error, skipped incomplete and failure = FALSE
         $error = FALSE;
@@ -227,7 +227,7 @@ class CIUnit_Framework_TestResult implements Countable
         // Add the current Asset class assertion count to TestCase assertions
         // count
         $test->addAssertionCount(
-                CIUnit_Framework_AssertAbstract::getAssertionCount());
+                CIUnit_Framework_Assert::getAssertionCount());
         
         $this->totalNuberOfTestsToRun += $test->count();
         $this->assertionsCount += $test->getNumberOfAssertions();

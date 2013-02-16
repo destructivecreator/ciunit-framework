@@ -42,7 +42,7 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnit_Framework_TestWarning extends CIUnit_Framework_TestCaseAbstract
+class CIUnit_Framework_TestWarning extends CIUnit_Framework_TestCase
 {
 
     protected $message;
@@ -62,7 +62,7 @@ class CIUnit_Framework_TestWarning extends CIUnit_Framework_TestCaseAbstract
     /**
      * Overrite to make the test fail with appropriate message
      * 
-     * @see CIUnit_Framework_TestCaseAbstract::runTest()
+     * @see CIUnit_Framework_TestCase::runTest()
      */
     protected function runTest ()
     {

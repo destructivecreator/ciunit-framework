@@ -54,7 +54,7 @@
  *          License
  * @since File available since Release 1.0.0
  */
-abstract class CIUnit_Framework_AssertAbstract
+abstract class CIUnit_Framework_Assert
 {
 
     /**

@@ -54,7 +54,7 @@
  *          License
  * @since File available since Release 1.0.0
  */
-abstract class CIUnit_Framework_TestCaseAbstract extends CIUnit_Framework_AssertAbstract implements 
+abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert implements 
         CIUnit_Framework_TestInterface
 {
 
@@ -205,7 +205,7 @@ abstract class CIUnit_Framework_TestCaseAbstract extends CIUnit_Framework_Assert
         $testResult = NULL;
         try {
             $testResult = $method->invokeArgs($this, array());
-            // $this->AddAssertionCount(CIUnit_Framework_AssertAbstract::getAssertionCount());
+            // $this->AddAssertionCount(CIUnit_Framework_Assert::getAssertionCount());
         }        // catch exception if thrown
         catch (Exception $e) {
             $check = FALSE;

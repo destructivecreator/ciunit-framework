@@ -52,7 +52,7 @@ class CIUnit_Util_FileLoader
         if (FALSE === $testsAvailable)
             throw new CIUnit_Framework_Exception_CIUnitException("CIUnit can't");
         
-        foreach ($testsAvailable as $test) {
+        foreach ($testsAvailable as $test) { 
             self::load($test);
         }
     }

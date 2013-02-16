@@ -1,6 +1,6 @@
 <?php
 
-class TestUserModel extends \CIUnit_Framework_TestCaseAbstract
+class TestUserModel extends \CIUnit_Framework_TestCase
 {
 
     /**
@@ -322,7 +322,7 @@ class TestUserModel extends \CIUnit_Framework_TestCaseAbstract
      */
     public function testAssertThatIsInstanceOf ()
     {
-        $this->assertInstanceOf('CIUnit_Framework_AssertAbstract', new Exception());
+        $this->assertInstanceOf('CIUnit_Framework_Assert', new Exception());
     }
 
     /**
