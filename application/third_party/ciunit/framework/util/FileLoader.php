@@ -83,7 +83,9 @@ class CIUnit_Util_FileLoader
                     sprintf("CIUnit can't open or read your %s folder", $source));
         
         if ($fp = @opendir($source_dir)) {
-            $filedata = array();
+            
+            $testFiles = array();
+            
             $new_depth = $directory_depth - 1;
             $source_dir = rtrim($source_dir, DIRECTORY_SEPARATOR) .
                      DIRECTORY_SEPARATOR;
@@ -96,15 +98,15 @@ class CIUnit_Util_FileLoader
                 
                 if (substr(strrchr($file, '.'), 1) == 'php') {
                     if ($fullPath) {
-                        $filedata[] = $source_dir . $file;
+                        $testFiles[] = $source_dir . $file;
                     } else {
-                        $filedata[] = substr($file, 0, strrpos($file, '.'));
+                        $testFiles[] = substr($file, 0, strrpos($file, '.'));
                     }
                 }
             }
             
             closedir($fp);
-            return $filedata;
+            return $testFiles;
         }
         
         return FALSE;

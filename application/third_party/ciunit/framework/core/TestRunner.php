@@ -54,6 +54,8 @@ class CIUnit_Framework_TestRunner
     private $printer;
 
     private $presenter;
+    
+    private $loader;
 
     public function __construct ($class = '')
     {
@@ -72,7 +74,14 @@ class CIUnit_Framework_TestRunner
     {
         // Construct test case
         $this->testSuite = new CIUnit_Framework_TestSuite($this->className);
-        // Create new result set
+       
+        // Check class for suite method if present add suite to current suite
+        $class = new ReflectionClass($this->className);
+        if($class->hasMethod('suite')) { 
+             $this->testSuite->addTestSuite($class);
+        }
+         
+        // Create new result object
         $this->resultSet = new CIUnit_Framework_TestResult();
         
         // Pass it to the suite and execute test cases

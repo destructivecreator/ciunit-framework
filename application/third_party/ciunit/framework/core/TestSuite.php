@@ -71,7 +71,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
      *
      * @var array
      */
-    protected $testInSuite = array();
+    public $testInSuite = array();
 
     /**
      *
@@ -154,8 +154,9 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
         foreach ($class->getMethods() as $method) {
             $this->addTestMethod($class, $method);
         }
+        
         // Check if there are any test in the class
-        if (empty($this->testInSuite)) {
+        if (empty($this->testInSuite) && !$class->hasMethod('suite')) {
             // Add warning class has no methods
             $this->addTest(
                     new CIUnit_Framework_TestWarning(
@@ -193,6 +194,59 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
             $this->testsCount = - 1;
         }
     }
+    
+    /**
+     * Adds test from a given class to the current suite
+     *
+     * CAUTION!! Not jet fully implemented do NOT use, it woun't work
+     *
+     * @param mixed $testClass
+     * @throws CIUnit_Framework_Exception_InvalidArgument
+     * @throws CIUnit_Framework_Exception_CIUnitException
+     */
+    public function addTestSuite($testClass)
+    {
+        if(is_string($testClass) && class_exists($testClass)) {
+            $testClass = new ReflectionClass($testClass);
+        }
+    
+        if(!is_object($testClass)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'class name or object');
+        }
+    
+        if($testClass instanceof ReflectionClass) {
+            $testSuiteAdded = FALSE;
+            // Check for suite method defined in test case class
+            // Make sure class is not abstract so can instantiate it
+            if(!$testClass->isAbstract()) {
+                // Check if there is a suite method declared
+                if($testClass->hasMethod('suite')) {
+                    $suiteMethod = $testClass->getMethod('suite');
+    
+                    // Method suite must be static
+                    if($suiteMethod->isStatic()) {
+                        // suite method is to return a suite object
+                        // use reflection invoke method to invoke the suite() to return a suite object
+                        // pass null as it is static method
+                        $this->addTest($suiteMethod->invoke(null, $suiteMethod->getName()));
+                        $testSuiteAdded = TRUE;
+                    }
+                }
+    
+                // If for some reason suite has not been found or added add the class itself to the suite
+                if(!$testSuiteAdded) {
+                    $this->addTest(new CIUnit_Framework_TestSuite($testClass));
+                }
+            }
+        }
+        else if ($testClass instanceof CIUnit_Framework_TestSuite) {
+            $this->addTest($testClass);
+        }
+        else {
+            throw new CIUnit_Framework_Exception_CIUnitException;
+        }
+    }
+    
 
     /**
      * Creates new instance of the test class requested
