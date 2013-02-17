@@ -195,9 +195,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
     }
     
     /**
-     * Adds test from a given class to the current suite
-     *
-     * CAUTION!! Not jet fully implemented do NOT use, it woun't work
+     * Adds test from a given class to the current suite 
      *
      * @param mixed $testClass
      * @throws CIUnit_Framework_Exception_InvalidArgument
