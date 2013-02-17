@@ -54,13 +54,13 @@
  *          License
  * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstract_Exception extends CIUnit_Framework_ComparatorAbstract_Object
+class CIUnit_Framework_Comparator_Exception extends CIUnit_Framework_Comparator_Object
 {
 
     /**
      * (non-PHPdoc)
      * 
-     * @see CIUnit_Framework_ComparatorAbstract_Object::accepts()
+     * @see CIUnit_Framework_Comparator_Object::accepts()
      */
     public function accepts ($expected, $actual)
     {
@@ -70,7 +70,7 @@ class CIUnit_Framework_ComparatorAbstract_Exception extends CIUnit_Framework_Com
     /**
      * (non-PHPdoc)
      * 
-     * @see CIUnit_Framework_ComparatorAbstract_Object::toArray()
+     * @see CIUnit_Framework_Comparator_Object::toArray()
      */
     protected function toArray ($object)
     {

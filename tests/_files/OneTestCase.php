@@ -1,5 +1,5 @@
 <?php
-class OneTestCase extends CIUnit_TestCase
+class OneTestCase extends CIUnit_Framework_TestCase
 {
     public function noTestCase()
     {

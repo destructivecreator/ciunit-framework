@@ -53,7 +53,7 @@
  *          License
  * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_Count extends CIUnit_Framework_ConstraintAbstract
+class CIUnit_Framework_Constraint_Count extends CIUnit_Framework_ConstraintAbstract
 {
 
     /**

@@ -77,7 +77,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
      *
      * @var integer
      */
-    protected $testsCount = - 1;
+    protected $testsCount = 0;
 
     /**
      *
@@ -159,8 +159,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
         if (empty($this->testInSuite) && !$class->hasMethod('suite')) {
             // Add warning class has no methods
             $this->addTest(
-                    new CIUnit_Framework_TestWarning(
-                            "Warning class has no test methods"));
+                    new CIUnit_Framework_TestWarning(sprintf("Warning class %s has no test methods", $class->getName())));
         }
         
         $this->validTestCase = TRUE;
@@ -191,7 +190,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
         
         if (! $class->isAbstract()) { 
             $this->testInSuite[] = $test;
-            $this->testsCount = - 1;
+            $this->testsCount = 0;
         }
     }
     
@@ -312,7 +311,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
      * @param string $method            
      * @return boolean
      */
-    public static function isPublicTestMethod ($method)
+    public static function isPublicTestMethod (ReflectionMethod $method)
     {
         return self::isTestMethod($method) && $method->isPublic();
     }

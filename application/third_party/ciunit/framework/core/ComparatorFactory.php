@@ -71,14 +71,14 @@ class CIUnit_Framework_ComparatorAbstractFactory
 
     public function __construct ()
     {
-        $this->register(new CIUnit_Framework_ComparatorAbstract_Type());
-        $this->register(new CIUnit_Framework_ComparatorAbstract_Scalar());
-        $this->register(new CIUnit_Framework_ComparatorAbstract_Numeric());
-        $this->register(new CIUnit_Framework_ComparatorAbstract_Double());
-        $this->register(new CIUnit_Framework_ComparatorAbstract_Array());
-        $this->register(new CIUnit_Framework_ComparatorAbstract_Resource());
-        $this->register(new CIUnit_Framework_ComparatorAbstract_Object());
-        $this->register(new CIUnit_Framework_ComparatorAbstract_Exception());
+        $this->register(new CIUnit_Framework_Comparator_Type());
+        $this->register(new CIUnit_Framework_Comparator_Scalar());
+        $this->register(new CIUnit_Framework_Comparator_Numeric());
+        $this->register(new CIUnit_Framework_Comparator_Double());
+        $this->register(new CIUnit_Framework_Comparator_Array());
+        $this->register(new CIUnit_Framework_Comparator_Resource());
+        $this->register(new CIUnit_Framework_Comparator_Object());
+        $this->register(new CIUnit_Framework_Comparator_Exception());
     }
 
     /**

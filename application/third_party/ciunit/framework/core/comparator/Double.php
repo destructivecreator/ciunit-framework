@@ -54,7 +54,7 @@
  *          License
  * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstract_Double extends CIUnit_Framework_ComparatorAbstract_Numeric
+class CIUnit_Framework_Comparator_Double extends CIUnit_Framework_Comparator_Numeric
 {
 
     /**
@@ -67,7 +67,7 @@ class CIUnit_Framework_ComparatorAbstract_Double extends CIUnit_Framework_Compar
     /**
      * (non-PHPdoc)
      * 
-     * @see CIUnit_Framework_ComparatorAbstract_Numeric::accepts()
+     * @see CIUnit_Framework_Comparator_Numeric::accepts()
      */
     public function accepts ($expected, $actual)
     {
@@ -78,7 +78,7 @@ class CIUnit_Framework_ComparatorAbstract_Double extends CIUnit_Framework_Compar
     /**
      * (non-PHPdoc)
      * 
-     * @see CIUnit_Framework_ComparatorAbstract_Numeric::assertEquals()
+     * @see CIUnit_Framework_Comparator_Numeric::assertEquals()
      */
     public function assertEquals ($expected, $actual, $delta = 0, 
             $canonicalize = FALSE, $ignoreCase = FALSE, array &$processedObjects = array())

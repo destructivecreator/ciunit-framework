@@ -54,7 +54,7 @@
  *          License
  * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ComparatorAbstract_Type extends CIUnit_Framework_ComparatorAbstract
+class CIUnit_Framework_Comparator_Type extends CIUnit_Framework_ComparatorAbstract
 {
 
     /**

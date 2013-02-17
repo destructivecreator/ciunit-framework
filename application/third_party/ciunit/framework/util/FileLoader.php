@@ -47,14 +47,16 @@ class CIUnit_Util_FileLoader
 
     public static function checkAndLoad ($fileName)
     {
-        $testsAvailable = self::directory_map(TRUE);
+        $testsAvailable = self::collectTests(TRUE);
         
         if (FALSE === $testsAvailable)
             throw new CIUnit_Framework_Exception_CIUnitException("No tests found");
         
         foreach ($testsAvailable as $test) {
-            if($fileName == basename($test, '.php')) 
+            if($fileName == basename($test, '.php')) {
                 self::load($test);
+                break;
+            }
         }
     }
 
@@ -69,8 +71,7 @@ class CIUnit_Util_FileLoader
         return $filePath;
     }
 
-    public static function directory_map ($fullPath = FALSE, $directory_depth = 0, 
-            $hidden = FALSE)
+    public static function collectTests ($fullPath = FALSE, $hidden = FALSE)
     {
         $ci = & get_instance();
         $ci->load->add_package_path(APPPATH . 'third_party/ciunit', FALSE);
@@ -82,13 +83,11 @@ class CIUnit_Util_FileLoader
             throw new CIUnit_Framework_Exception_CIUnitException(
                     sprintf("CIUnit can't open or read your %s folder", $source));
         
-        if ($fp = @opendir($source_dir)) {
+        if (@$fp = @opendir($source_dir)) {
             
-            $testFiles = array();
-            
-            $new_depth = $directory_depth - 1;
-            $source_dir = rtrim($source_dir, DIRECTORY_SEPARATOR) .
-                     DIRECTORY_SEPARATOR;
+            $testFiles = array(); 
+                        
+            $source_dir = rtrim($source_dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             
             while (FALSE !== ($file = readdir($fp))) {
                 // Remove '.', '..', and hidden files [optional]

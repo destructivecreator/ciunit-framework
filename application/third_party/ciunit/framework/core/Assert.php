@@ -85,7 +85,7 @@ abstract class CIUnit_Framework_Assert
                     'array or arrayAccess');
         }
         
-        $constraint = new CIUnit_Framework_ConstraintAbstract_ArrayHasKey($key);
+        $constraint = new CIUnit_Framework_Constraint_ArrayHasKey($key);
         self::assertThat($array, $constraint, $message);
     }
 
@@ -110,8 +110,8 @@ abstract class CIUnit_Framework_Assert
                     'array or ArrayAccess');
         }
         
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
-                new CIUnit_Framework_ConstraintAbstract_ArrayHasKey($key));
+        $constraint = new CIUnit_Framework_Constraint_Not(
+                new CIUnit_Framework_Constraint_ArrayHasKey($key));
         self::assertThat($array, $constraint, $message);
     }
 
@@ -135,7 +135,7 @@ abstract class CIUnit_Framework_Assert
                     'array or ArrayAccess');
         }
         
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Count(
+        $constraint = new CIUnit_Framework_Constraint_Count(
                 $expectedCount);
         self::assertThat($haystack, $constraint, $message);
     }
@@ -148,7 +148,7 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertEmpty ($actual, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_IsEmpty($actual);
+        $constraint = new CIUnit_Framework_Constraint_IsEmpty($actual);
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -160,8 +160,8 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertNotEmpty ($actual, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
-                new CIUnit_Framework_ConstraintAbstract_IsEmpty());
+        $constraint = new CIUnit_Framework_Constraint_Not(
+                new CIUnit_Framework_Constraint_IsEmpty());
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -173,7 +173,7 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertTrue ($expected, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_IsTrue();
+        $constraint = new CIUnit_Framework_Constraint_IsTrue();
         self::assertThat($expected, $constraint, $message);
     }
 
@@ -185,7 +185,7 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertFalse ($expected, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_IsFalse();
+        $constraint = new CIUnit_Framework_Constraint_IsFalse();
         self::assertThat($expected, $constraint, $message);
     }
 
@@ -198,7 +198,7 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertInstanceOf ($expected, $actual, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_IsInstanceOf(
+        $constraint = new CIUnit_Framework_Constraint_IsInstanceOf(
                 $expected);
         self::assertThat($actual, $constraint, $message);
     }
@@ -213,8 +213,8 @@ abstract class CIUnit_Framework_Assert
     public static function assertNotInstanceOf ($expected, $actual, 
             $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
-                new CIUnit_Framework_ConstraintAbstract_IsInstanceOf($expected));
+        $constraint = new CIUnit_Framework_Constraint_Not(
+                new CIUnit_Framework_Constraint_IsInstanceOf($expected));
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -226,7 +226,7 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertNull ($actual, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_isNull();
+        $constraint = new CIUnit_Framework_Constraint_isNull();
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -238,8 +238,8 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertNotNull ($actual, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
-                new CIUnit_Framework_ConstraintAbstract_isNull());
+        $constraint = new CIUnit_Framework_Constraint_Not(
+                new CIUnit_Framework_Constraint_isNull());
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -252,7 +252,7 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertInternalType ($expected, $actual, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_IsType($expected);
+        $constraint = new CIUnit_Framework_Constraint_IsType($expected);
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -266,8 +266,8 @@ abstract class CIUnit_Framework_Assert
     public static function assertNotInternalType ($expected, $actual, 
             $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
-                new CIUnit_Framework_ConstraintAbstract_IsType($expected));
+        $constraint = new CIUnit_Framework_Constraint_Not(
+                new CIUnit_Framework_Constraint_IsType($expected));
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -292,7 +292,7 @@ abstract class CIUnit_Framework_Assert
             throw new CIUnit_Framework_Exception_InvalidArgument(2, 'countable');
         }
         
-        $constraint = new CIUnit_Framework_ConstraintAbstract_SameSize($expected);
+        $constraint = new CIUnit_Framework_Constraint_SameSize($expected);
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -317,8 +317,8 @@ abstract class CIUnit_Framework_Assert
             throw new CIUnit_Framework_Exception_InvalidArgument(2, 'countable');
         }
         
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
-                new CIUnit_Framework_ConstraintAbstract_SameSize($expected));
+        $constraint = new CIUnit_Framework_Constraint_Not(
+                new CIUnit_Framework_Constraint_SameSize($expected));
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -335,7 +335,7 @@ abstract class CIUnit_Framework_Assert
     public static function assertEquals ($expected, $actual, $delta = 0, 
             $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_IsEqual($expected, 
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected, 
                 $delta, $canonicalize, $ignoreCase);
         self::assertThat($actual, $constraint, $message);
     }
@@ -353,8 +353,8 @@ abstract class CIUnit_Framework_Assert
     public static function assertNotEquals ($expected, $actual, $delta = 0, 
             $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
     {
-        $constraint = new CIUnit_Framework_ConstraintAbstract_Not(
-                new CIUnit_Framework_ConstraintAbstract_IsEqual($expected, 
+        $constraint = new CIUnit_Framework_Constraint_Not(
+                new CIUnit_Framework_Constraint_IsEqual($expected, 
                         $delta, $canonicalize, $ignoreCase));
         self::assertThat($actual, $constraint, $message);
     }

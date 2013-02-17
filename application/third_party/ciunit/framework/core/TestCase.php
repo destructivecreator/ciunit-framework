@@ -63,7 +63,7 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
      * 
      * @var mixed
      */
-    protected $ci = NULL;
+    private $ci = NULL;
 
     private $result;
 
@@ -93,8 +93,10 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
         if (NULL !== $name) {
             $this->name = $name;
         }
-        
-        $ci = & get_instance();
+         
+        // Check if CI is available used for phpunit testing
+        if(function_exists('get_instance'))
+            $ci = & get_instance();
     }
 
     /**
@@ -229,7 +231,7 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
             
             if (TRUE == $check) {
                 
-                $constraint = new CIUnit_Framework_ConstraintAbstract_Exception(
+                $constraint = new CIUnit_Framework_Constraint_Exception(
                         $this->expectedException);
                 $this->assertThat($e, $constraint);
                 

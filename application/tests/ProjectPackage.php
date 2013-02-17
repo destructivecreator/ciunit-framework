@@ -17,7 +17,7 @@ class ProjectPackage extends CIUnit_Framework_TestCase
         $suite->addTestSuite('TestUserModel');   
         
         return $suite;
-    }
+    } 
     
 }
 

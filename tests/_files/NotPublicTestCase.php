@@ -1,6 +1,5 @@
-<?php 
-
-class GreenTest extends CIUnit_Framework_TestCase
+<?php
+class NotPublicTestCase extends CIUnit_Framework_TestCase
 {
     public function testPublic()
     {
@@ -10,5 +9,3 @@ class GreenTest extends CIUnit_Framework_TestCase
     {
     }
 }
-
-?>

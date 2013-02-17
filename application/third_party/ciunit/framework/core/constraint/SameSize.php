@@ -55,7 +55,7 @@
  *          License
  * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_SameSize extends CIUnit_Framework_ConstraintAbstract_Count
+class CIUnit_Framework_Constraint_SameSize extends CIUnit_Framework_Constraint_Count
 {
 
     /**

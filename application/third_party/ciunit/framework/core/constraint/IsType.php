@@ -55,7 +55,7 @@
  *          License
  * @since File available since Release 1.0.0
  */
-class CIUnit_Framework_ConstraintAbstract_IsType extends CIUnit_Framework_ConstraintAbstract
+class CIUnit_Framework_Constraint_IsType extends CIUnit_Framework_ConstraintAbstract
 {
     
     // Define the supported types

@@ -1,25 +1,25 @@
 <?php
 
-require_once '/home/agop/CIUnit/workspace/ciunit/ciunit/class_loader.php';
+require_once '/home/agop/public_html/ciunit-framework/application/third_party/ciunit/framework/autoload.php';
 require_once 'PHPUnit/Framework/TestCase.php';
  
 /**
- * CIUnit_Assert test case.
+ * CIUnit_Framework_Assert test case.
  */
 class AssertTest extends PHPUnit_Framework_TestCase
 {
 
 	
     /**
-     * @covers CIUnit_Assert::assetArrayHasKey()
+     * @covers CIUnit_Framework_Assert::assetArrayHasKey()
      */
     public function testAssertArrayHasIntegerKey ()
     { 
-        CIUnit_Assert::assertArrayHasKey(0, array('foo'));
+        CIUnit_Framework_Assert::assertArrayHasKey(0, array('foo'));
         
         try {
-            CIUnit_Assert::assertArrayHasKey(1, array('foo'));
-        } catch (CIUnit_AssertionFailedException $e) {
+            CIUnit_Framework_Assert::assertArrayHasKey(1, array('foo'));
+        } catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
         
@@ -28,15 +28,15 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers CIUnit_Assert::assetArrayHasKey()
+     * @covers CIUnit_Framework_Assert::assetArrayHasKey()
      */
     public function testAssertArrayHasStringKey ()
     {
-        CIUnit_Assert::assertArrayHasKey('foo', array('foo' => 'bar'));
+        CIUnit_Framework_Assert::assertArrayHasKey('foo', array('foo' => 'bar'));
         
         try {
-            CIUnit_Assert::assertArrayHasKey('bar', array('foo' => 'bar'));
-        } catch (CIUnit_AssertionFailedException $e) {
+            CIUnit_Framework_Assert::assertArrayHasKey('bar', array('foo' => 'bar'));
+        } catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
         
@@ -44,48 +44,48 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers CIUnit_Assert::assetArrayHasKey()
+     * @covers CIUnit_Framework_Assert::assetArrayHasKey()
      */
     public function testAssertArrayHasKeyAcceptsArrayAccessValue ()
     {
         $array = new ArrayObject();
         $array['foo'] = 'bar';
  
-        CIUnit_Assert::assertArrayHasKey('foo', $array);
+        CIUnit_Framework_Assert::assertArrayHasKey('foo', $array);
     }
 
     /**
-     * @covers CIUnit_Assert::assetArrayHasKey()
-     * @expectedException CIUnit_AssertionFailedException
+     * @covers CIUnit_Framework_Assert::assetArrayHasKey()
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function testAssertArrayHasKeyProperlyFailsWithArrayAccessValue ()
     {
         $array = new ArrayObject();
         $array['foo'] = 'bar';
          
-        CIUnit_Assert::assertArrayHasKey('bar', $array);
+        CIUnit_Framework_Assert::assertArrayHasKey('bar', $array);
     }
 
     /**
-     * @covers CIUnit_Assert::assetArrayHasKey()
-     * @expectedException CIUnit_AssertionFailedException
+     * @covers CIUnit_Framework_Assert::assetArrayHasKey()
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function tetsAssertArrayHasKeyThrowsException ()
     {
-         CIUnit_Assert::assertArrayHasKey(null, array());
+         CIUnit_Framework_Assert::assertArrayHasKey(null, array());
     }
 
     /**
-     * @covers Tests CIUnit_Assert::assetArrayNotHasKey()
+     * @covers Tests CIUnit_Framework_Assert::assetArrayNotHasKey()
      */
     public function testAssertArrayNotHasIntegerKey ()
     {
-        CIUnit_Assert::assertArrayNotHasKey( 1, array('foo'));
+        CIUnit_Framework_Assert::assertArrayNotHasKey( 1, array('foo'));
         
         try{
-            CIUnit_Assert::assertArrayNotHasKey( 0, array('foo'));
+            CIUnit_Framework_Assert::assertArrayNotHasKey( 0, array('foo'));
         }
-        catch(CIUnit_AssertionFailedException $e){
+        catch(CIUnit_Framework_Exception_AssertionFailed $e){
             return;
         }
         
@@ -93,16 +93,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Tests CIUnit_Assert::assetArrayNotHasKey()
+     * @covers Tests CIUnit_Framework_Assert::assetArrayNotHasKey()
      */
     public function testAssertArrayNotHasStringKey ()
     {
-        CIUnit_Assert::assertArrayNotHasKey('foo', array(1 => 'bar'));
+        CIUnit_Framework_Assert::assertArrayNotHasKey('foo', array(1 => 'bar'));
         
         try{
-            CIUnit_Assert::assertArrayNotHasKey('foo', array('foo' => 'bar'));
+            CIUnit_Framework_Assert::assertArrayNotHasKey('foo', array('foo' => 'bar'));
         }
-        catch(CIUnit_AssertionFailedException $e) {
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
         
@@ -110,49 +110,49 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Tests CIUnit_Assert::assetArrayNotHasKey()
+     * @covers Tests CIUnit_Framework_Assert::assetArrayNotHasKey()
      */
     public function testAssertArrayNotHasKeyAcceptsArrayAccessValue ()
     {
         $array = new ArrayObject();
         $array['foo'] = 'bar';
         
-        CIUnit_Assert::assertArrayNotHasKey(1, $array);
+        CIUnit_Framework_Assert::assertArrayNotHasKey(1, $array);
     }
 
     /**
-     * @covers CIUnit_Assert::assetArrayNotHasKey()
-     * @expectedException CIUnit_AssertionFailedException
+     * @covers CIUnit_Framework_Assert::assetArrayNotHasKey()
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function testAssertArrayNotHasKeyProperlyFailsWithArrayAccessValue ()
     {
         $array = new ArrayObject();
         $array['foo'] = 'bar';
         
-        CIUnit_Assert::assertArrayNotHasKey('foo', $array);
+        CIUnit_Framework_Assert::assertArrayNotHasKey('foo', $array);
     }
 
     /**
-     * @covers CIUnit_Assert::assetArrayNotHasKey()
-     * @expectedException CIUnit_AssertionFailedException
+     * @covers CIUnit_Framework_Assert::assetArrayNotHasKey()
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
      */
     public function tetsAssertArrayNotHasKeyThrowsException ()
     {
-        CIUnit_Assert::assertArrayNotHasKey('foo', array('foo' => 'bar'));
+        CIUnit_Framework_Assert::assertArrayNotHasKey('foo', array('foo' => 'bar'));
     }
 
     
     /**
-     * @covers Tests CIUnit_Assert::assetCount()
+     * @covers Tests CIUnit_Framework_Assert::assetCount()
      */
     public function testAssertCount()
     {
-    	CIUnit_Assert::assertCount(0, array());
+    	CIUnit_Framework_Assert::assertCount(0, array());
     	
     	try {
-    		CIUnit_Assert::assertCount(0, array('one', 'two'));
+    		CIUnit_Framework_Assert::assertCount(0, array('one', 'two'));
     	}
-    	catch (CIUnit_AssertionFailedException $e) {
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	
@@ -160,34 +160,34 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assetCount()
-     * @expectedException CIUnit_InvalidArgumentException
+     * @covers CIUnit_Framework_Assert::assetCount()
+     * @expectedException CIUnit_Framework_Exception_InvalidArgument
      */
     public function testAssertCountThrowsExceptionIfNotCountable()
     {
-        CIUnit_Assert::assertCount(2, new stdClass());
+        CIUnit_Framework_Assert::assertCount(2, new stdClass());
     }
     
     /**
-     * @covers CIUnit_Assert::assetCount()
-     * @expectedException CIUnit_InvalidArgumentException
+     * @covers CIUnit_Framework_Assert::assetCount()
+     * @expectedException CIUnit_Framework_Exception_InvalidArgument
      */
     public function testAssertCountThrowsExceptionIfExpectedNotInteger()
     {
-        CIUnit_Assert::assertCount('dd', array());
+        CIUnit_Framework_Assert::assertCount('dd', array());
     }
     
     /**
-     * @covers CIUnit_Assert::assertEmpty() 
+     * @covers CIUnit_Framework_Assert::assertEmpty() 
      */
     public function testAssertEmpty()
     {
-    	CIUnit_Assert::assertEmpty(array());
+    	CIUnit_Framework_Assert::assertEmpty(array());
     	
     	try {
-    		CIUnit_Assert::assertEmpty('String');
+    		CIUnit_Framework_Assert::assertEmpty('String');
     	}
-    	catch (CIUnit_AssertionFailedException $e)
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e)
     	{
     		return;
     	}
@@ -196,16 +196,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertNotEmpty()
+     * @covers CIUnit_Framework_Assert::assertNotEmpty()
      */
     public function testAssertNotEmpty()
     {
-        CIUnit_Assert::assertNotEmpty('String');
+        CIUnit_Framework_Assert::assertNotEmpty('String');
     	
     	try {
-    		CIUnit_Assert::assertNotEmpty(array());
+    		CIUnit_Framework_Assert::assertNotEmpty(array());
     	}
-    	catch (CIUnit_AssertionFailedException $e)
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e)
     	{
     		return;
     	}
@@ -214,16 +214,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertFalse()
+     * @covers CIUnit_Framework_Assert::assertFalse()
      */
     public function testAssertFalse()
     {
-    	CIUnit_Assert::assertFalse(FALSE);
+    	CIUnit_Framework_Assert::assertFalse(FALSE);
     	 
     	try {
-    		CIUnit_Assert::assertFalse(TRUE);
+    		CIUnit_Framework_Assert::assertFalse(TRUE);
     	}
-    	catch (CIUnit_AssertionFailedException $e) {
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	 
@@ -231,16 +231,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertTrue()
+     * @covers CIUnit_Framework_Assert::assertTrue()
      */
     public function testAssertTrue()
     {
-    	CIUnit_Assert::assertTrue(TRUE);
+    	CIUnit_Framework_Assert::assertTrue(TRUE);
     	
     	try {
-    		CIUnit_Assert::assertTrue(FALSE);
+    		CIUnit_Framework_Assert::assertTrue(FALSE);
     	}
-    	catch (CIUnit_AssertionFailedException $e) {
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	
@@ -248,16 +248,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertEquals()
+     * @covers CIUnit_Framework_Assert::assertEquals()
      */
     public function testAssertEqualsForIntegers()
     {
-         CIUnit_Assert::assertEquals(1, 1); 
+         CIUnit_Framework_Assert::assertEquals(1, 1); 
          
          try {
-             CIUnit_Assert::assertEquals(1, 3); 
+             CIUnit_Framework_Assert::assertEquals(1, 3); 
          }
-         catch (CIUnit_AssertionFailedException $e) {
+         catch (CIUnit_Framework_Exception_AssertionFailed $e) {
              return;
          }
 		 
@@ -265,16 +265,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertEquals()
+     * @covers CIUnit_Framework_Assert::assertEquals()
      */
     public function testAssertEqualsForIntegersWithDelta()
     {
-        CIUnit_Assert::assertEquals(1, 3, 5);
+        CIUnit_Framework_Assert::assertEquals(1, 3, 5);
          
         try {
-            CIUnit_Assert::assertEquals(21, 3, 7);
+            CIUnit_Framework_Assert::assertEquals(21, 3, 7);
         }
-        catch (CIUnit_AssertionFailedException $e) {
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
         	
@@ -282,16 +282,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertEquals()
+     * @covers CIUnit_Framework_Assert::assertEquals()
      */
     public function testAssertEqualsForDoubles()
     {
-        CIUnit_Assert::assertEquals(1.24, 1.24);
+        CIUnit_Framework_Assert::assertEquals(1.24, 1.24);
          
         try { 
-            CIUnit_Assert::assertEquals(1.22, 1.223);
+            CIUnit_Framework_Assert::assertEquals(1.22, 1.223);
         }
-        catch (CIUnit_AssertionFailedException $e) {
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
         	
@@ -299,16 +299,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertEquals()
+     * @covers CIUnit_Framework_Assert::assertEquals()
      */
     public function testAssertEqualsForDoublesWithDelta()
     {
-        CIUnit_Assert::assertEquals(1.24, 4.24, 3.001);
+        CIUnit_Framework_Assert::assertEquals(1.24, 4.24, 3.001);
          
         try {
-            CIUnit_Assert::assertEquals(1.22, 8.223, 0.123);
+            CIUnit_Framework_Assert::assertEquals(1.22, 8.223, 0.123);
         }
-        catch (CIUnit_AssertionFailedException $e) {
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
          
@@ -316,21 +316,21 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertEquals()
+     * @covers CIUnit_Framework_Assert::assertEquals()
      */
     public function testAssertEqualsForArrays()
     {
         $actual = array('a', 'b', 'c');
         $expected = array('a', 'b', 'c');
         
-        CIUnit_Assert::assertEquals($actual, $expected); 
+        CIUnit_Framework_Assert::assertEquals($actual, $expected); 
          
         try {
             $expected = array('a', 'b', 'd');
             
-            CIUnit_Assert::assertEquals($actual, $expected);
+            CIUnit_Framework_Assert::assertEquals($actual, $expected);
         }
-        catch (CIUnit_AssertionFailedException $e) {
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
         	
@@ -338,7 +338,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertEquals()
+     * @covers CIUnit_Framework_Assert::assertEquals()
      */
     public function testAssertEqualsForObjects()
     {
@@ -352,14 +352,14 @@ class AssertTest extends PHPUnit_Framework_TestCase
        $actual->age = 11;  
     
     
-        $this->assertEquals($actual, $expected);
+        CIUnit_Framework_Assert::assertEquals($actual, $expected);
          
         try {
             $expected->age = '19';
     
-            CIUnit_Assert::assertEquals($actual, $expected);
+            CIUnit_Framework_Assert::assertEquals($actual, $expected);
         }
-        catch (CIUnit_AssertionFailedException $e) {
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
          
@@ -368,14 +368,14 @@ class AssertTest extends PHPUnit_Framework_TestCase
     
     
     /**
-     * @covers CIUnit_Assert::assertEquals()
+     * @covers CIUnit_Framework_Assert::assertEquals()
      */
     public function testAssertEqualsWithDifferentTypes()
     {    
         try { 
-            CIUnit_Assert::assertEquals(1, 'ss');
+            CIUnit_Framework_Assert::assertEquals(1, 'ss');
         }
-        catch (CIUnit_AssertionFailedException $e) {
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
          
@@ -383,16 +383,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertEquals()
+     * @covers CIUnit_Framework_Assert::assertEquals()
      */
     public function testAssertEqualsForExceptions()
     {     
-        $this->assertEquals(new Exception(), new Exception());
+        CIUnit_Framework_Assert::assertEquals(new Exception(), new Exception());
          
         try {  
-            $this->assertEquals(new stdClass(), new Exception());
+            CIUnit_Framework_Assert::assertEquals(new stdClass(), new Exception());
         }
-        catch (CIUnit_AssertionFailedException $e) {
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
          
@@ -401,16 +401,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     
     
     /**
-     * @covers CIUnit_Assert::assertInstanceOf()
+     * @covers CIUnit_Framework_Assert::assertInstanceOf()
      */
     public function testAssertThatIsInstanceOf()
     {
-    	CIUnit_Assert::assertInstanceOf('RuntimeException', new RuntimeException());
+    	CIUnit_Framework_Assert::assertInstanceOf('RuntimeException', new RuntimeException());
     	
     	try {
-    		CIUnit_Assert::assertInstanceOf('CIUnit_Assert', new Exception());
+    		CIUnit_Framework_Assert::assertInstanceOf('CIUnit_Framework_Assert', new Exception());
     	}
-    	catch (CIUnit_AssertionFailedException $e) {
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	
@@ -418,16 +418,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertNotInstanceOf()
+     * @covers CIUnit_Framework_Assert::assertNotInstanceOf()
      */
     public function testAssertThatIsNotInstanceOf()
     {
-        CIUnit_Assert::assertNotInstanceOf('RuntimeException', new Exception());
+        CIUnit_Framework_Assert::assertNotInstanceOf('RuntimeException', new Exception());
     	
     	try {
-    		CIUnit_Assert::assertNotInstanceOf('Exception', new Exception());
+    		CIUnit_Framework_Assert::assertNotInstanceOf('Exception', new Exception());
     	}
-    	catch (CIUnit_AssertionFailedException $e) {
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	
@@ -435,16 +435,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertNull()
+     * @covers CIUnit_Framework_Assert::assertNull()
      */
     public function testAssertNull()
     {
-    	CIUnit_Assert::assertNull(null);
+    	CIUnit_Framework_Assert::assertNull(null);
     	
     	try {
-    		CIUnit_Assert::assertNull('string');
+    		CIUnit_Framework_Assert::assertNull('string');
     	}
-    	catch (CIUnit_AssertionFailedException $e) {
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	
@@ -452,16 +452,16 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Assert::assertNotNull()
+     * @covers CIUnit_Framework_Assert::assertNotNull()
      */
     public function testAssertNotNull()
     {
-        CIUnit_Assert::assertNotNull(123);
+        CIUnit_Framework_Assert::assertNotNull(123);
     	
     	try {
-    		CIUnit_Assert::assertNotNull(null);
+    		CIUnit_Framework_Assert::assertNotNull(null);
     	}
-    	catch (CIUnit_AssertionFailedException $e) {
+    	catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	
@@ -474,8 +474,8 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	$this->assertInternalType('integer', 1);
     	
     	try {
-    		CIUnit_Assert::assertInternalType('string', 111);
-    	} catch (CIUnit_AssertionFailedException $e) {
+    		CIUnit_Framework_Assert::assertInternalType('string', 111);
+    	} catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	$this->fail();
@@ -483,11 +483,11 @@ class AssertTest extends PHPUnit_Framework_TestCase
     
     public function testAssertNotInternalType()
     {
-    	CIUnit_Assert::assertNotInternalType('integer', 'ww');
+    	CIUnit_Framework_Assert::assertNotInternalType('integer', 'ww');
     	 
     	try {
-    		CIUnit_Assert::assertNotInternalType('string', 'sasa');
-    	} catch (CIUnit_AssertionFailedException $e) {
+    		CIUnit_Framework_Assert::assertNotInternalType('string', 'sasa');
+    	} catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	$this->fail();
@@ -495,11 +495,11 @@ class AssertTest extends PHPUnit_Framework_TestCase
     
     public function testAssertSameSize()
     {
-    	CIUnit_Assert::assertSameSize(array('one'), array(1));
+    	CIUnit_Framework_Assert::assertSameSize(array('one'), array(1));
     	
     	try {
-    		CIUnit_Assert::assertSameSize(array('one'), array());
-    	} catch (CIUnit_AssertionFailedException $e) {
+    		CIUnit_Framework_Assert::assertSameSize(array('one'), array());
+    	} catch (CIUnit_Framework_Exception_AssertionFailed $e) {
     		return;
     	}
     	

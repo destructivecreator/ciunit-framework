@@ -29,7 +29,7 @@ class Ciunit
 
     public function buildTestTree ()
     {
-        return CIUnit_Util_FileLoader::directory_map();
+        return CIUnit_Util_FileLoader::collectTests();
     }
 
     public function getRunFailure ()
