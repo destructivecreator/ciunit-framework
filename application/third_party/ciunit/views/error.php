@@ -43,7 +43,9 @@
 					
 					<li class="nav-header"><i class="icon-folder-open"></i>Tests</li> 
                        <?php
-                    
+                           
+                           sort($test_tree);
+                       
                             foreach ($test_tree as $branch => $leaf) {
                                 print 
                                         "<li " . (($this->uri->segment(2) == $leaf) ? "class=\"active\"" : '') . ">" . anchor('ciunit/' . $leaf, $leaf) . "</li>";

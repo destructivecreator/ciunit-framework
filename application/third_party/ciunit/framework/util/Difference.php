@@ -151,7 +151,7 @@ class CIUnit_Util_Difference
         
         // Add all identical items from the beginning into an array of
         // difference
-        // Follow the pattern array(elements, 0);
+        // Follow the pattern array(element, 0);
         foreach ($beginning as $element) {
             array_push($diff, array(
                     $element,

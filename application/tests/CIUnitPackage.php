@@ -56,12 +56,12 @@ require_once 'SuiteTest.php';
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class ProjectPackage extends CIUnit_Framework_TestCase
+class CIUnitPackage extends CIUnit_Framework_TestCase
 {
 
     public static function suite()
     {
-        $suite = new CIUnit_Framework_TestSuite('ProjectPackage'); 
+        $suite = new CIUnit_Framework_TestSuite('CIUnitPackage'); 
         $suite->addTestSuite('AssertTest');  
         $suite->addTestSuite('ConstraintTest');  
         $suite->addTestSuite('SuiteTest');

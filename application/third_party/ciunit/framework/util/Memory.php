@@ -65,7 +65,7 @@ class CIUnit_Util_Memory
      */
     public static function getUsedMemory ($format = TRUE)
     {
-        $memory = function_exists('memory_get_usage') ? memory_get_usage() : 0;
+        $memory = function_exists('memory_get_peak_usage') ? memory_get_peak_usage(TRUE) : 0;
         
         if ($format === TRUE) {
             return self::formatSizeUnits($memory);

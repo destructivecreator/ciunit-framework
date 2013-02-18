@@ -311,7 +311,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
      */
     public static function isPublicTestMethod (ReflectionMethod $method)
     {
-        return self::isTestMethod($method) && $method->isPublic();
+        return self::isTestMethod($method) && ($method->isPublic() || $method->isProtected());
     }
 
     public function getIterator ()
