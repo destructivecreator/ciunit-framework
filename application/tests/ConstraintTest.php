@@ -302,253 +302,476 @@ require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARA
     
         $this->fail();
     }
-    
-//     /**
-//      * Data provider for running test sequence on IsEqual Constraint
-//      * 
-//      * @return array
-//      */
-//     public function isEqualProvider()
-//     {
-//         // Declare attributes
-//         $objA = new stdClass();
-//         $objA->foo = 'bar';
-        
-//         $objB = new stdClass();
-        
-//         $objC = new stdClass;
-//         $objC->foo = 'bar';
-//         $objC->int = 1;
-//         $objC->array = array(0, array(1), array(2), 3);
-//         $objC->related = new stdClass;
-//         $objC->self = $objC;
-//         $objC->c = $objC;
-        
-//         $objD = new stdClass;
-//         $objD->foo = 'bar';
-//         $objD->int = 2;
-//         $objD->array = array(0, array(4), array(2), 3);
-//         $objD->related = new stdClass;
-//         $objD->self = $objD;
-//         $objD->c = $objC;
-        
-//         return array(
-//                 // Integers
-//                 array(1, 0, <<<EOF
-// Failed asserting that 0 matches expected 1.
-// EOF
-//                 ),
-                
-//                 // Integer and Double
-//                 array(1.1, 0, <<<EOF
-// Failed asserting that 0 matches expected 1.1.
-// EOF
-//                 ),
-                
-//                 // Chars
-//                 array('a', 'b', <<<EOF
-// Failed asserting that two strings are equal.
-
-// - Expected 
-// + Actual 
-
-// -'a'
-// +'b'
-// EOF
-//                 ), 
-                        
-//                 // Integer and Array
-//                 array(1, array(0), <<<EOF
-// Array (...) does not match expected type "integer".
-// EOF
-//                 ),
-                
-//                 // Array and Integer
-//                 array(array(0), 1, <<<EOF
-// 1 does not match expected type "array".
-// EOF
-//                 ),
-                
-//                 // Array and Array
-//                 array(array(0), array(1), <<<EOF
-// Failed asserting that two arrays are equal.
-
-// - Expected 
-// + Actual 
-
-//  Array (
-// -   0 => 0
-// +   0 => 1
-//  )
-// EOF
-//                 ),
-                
-//                 // Boolean and boolean as string
-//                 array(array(TRUE), array('true'), <<<EOF
-// Failed asserting that two arrays are equal.
-
-// - Expected 
-// + Actual 
-
-//  Array (
-// -   0 => true
-// +   0 => 'true'
-//  )
-// EOF
-//                 ),
-                
-//                 // Nested arrays
-//                 array(array(0, array(1), array(2), 3), array(0, array(4), array(2), 3), <<<EOF
-// Failed asserting that two arrays are equal.
-
-// - Expected 
-// + Actual 
-
-//  Array (
-//     0 => 0
-//     1 => Array (
-// -       0 => 1
-// +       0 => 4
-//      )
-//     2 => Array (
-//          0 => 2
-//      )
-//     3 => 3
-//  )
-// EOF
-//              ),
-             
-                        
-//              // Object and Array
-//              array($objA, array(23),  <<<EOF
-// Array (...) does not match expected type "object".
-// EOF
-//              ),          
-
-//              // Array and Object
-//              array(array(23), $objA,  <<<EOF
-// stdClass Object (...) does not match expected type "array".
-// EOF
-//              ),  
-          
-//              // Object and Object
-//              array($objA, $objB, <<<EOF
-// Failed asserting that two objects are equal.
-
-// - Expected 
-// + Actual 
-
-//  stdClass Object (
-// -   'foo' => 'bar'
-//  )
-// EOF
-//             ),
-                
-//             // Complex objects
-//             array($objC, $objD, <<<EOF
-// Failed asserting that two objects are equal.
-
-// - Expected 
-// + Actual 
-
-//  stdClass Object (
-//     'foo' => 'bar'
-// -   'int' => 1
-// +   'int' => 2
-//     'array' => Array (
-//         0 => 0
-//         1 => Array (
-// -           0 => 1
-// +           0 => 4
-//          )
-//         2 => Array (
-//              0 => 2
-//          )
-//         3 => 3
-//      )
-//     'related' => stdClass Object ()
-//     'self' => stdClass Object (
-//          'foo' => 'bar'
-// -        'int' => 1
-// +        'int' => 2
-//          'array' => Array (
-//              0 => 0
-//              1 => Array (
-// -                0 => 1
-// +                0 => 4
-//              )
-//              2 => Array (
-//                  0 => 2
-//              )
-//              3 => 3
-//          )
-//          'related' => stdClass Object ()
-//          'self' => stdClass Object (*RECURSION*)
-// -        'c' => stdClass Object (*RECURSION*)
-// +        'c' => stdClass Object (
-// +            'foo' => 'bar'
-// +            'int' => 1
-// +            'array' => Array (
-// +                0 => 0
-// +                1 => Array (
-// +                    0 => 1
-// +                )
-// +                2 => Array (
-// +                    0 => 2
-// +                )
-// +                3 => 3
-// +            )
-// +            'related' => stdClass Object ()
-// +            'self' => stdClass Object (*RECURSION*)
-// +            'c' => stdClass Object (*RECURSION*)
-// +        )
-//      )
-//     'c' => stdClass Object (
-//          'foo' => 'bar'
-//          'int' => 1
-//          'array' => Array (
-//              0 => 0
-//              1 => Array (
-//                  0 => 1
-//              )
-//              2 => Array (
-//                  0 => 2
-//              )
-//              3 => 3
-//          )
-//          'related' => stdClass Object ()
-//          'self' => stdClass Object (*RECURSION*)
-//          'c' => stdClass Object (*RECURSION*)
-//      )
-//  )
-// EOF
-                                     
-//             ),
-//         );
-//     } 
  
-//     /**
-//      * @dataProvider isEqualProvider
-//      * @covers CIUnit_Framework_Constraint_IsEqual 
-//      * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
-//      */
-//     public function testConstraintIsEqualWithDataProviderAndCustomMessage($expected, $actual, $message)
-//     {
-//         $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
-        
-//         try {
-//             $constraint->evaluate($actual, '');
-//         }
-//         catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
-        
-//             $this->assertEquals($message, $e->__toString());
-            
-//             return;
-//         }
-        
-//         $this->fail();
-//     }
+ 
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForIntegersWithCustomMessage()
+    {
+        $expected = 1;
+        $actual = 0;
+        $message = <<<EOF
+Failed asserting that 0 matches expected 1.
+EOF;
     
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+        
+        try {
+             $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+        
+             $this->assertEquals($message, $e->__toString());
+        
+             return;
+        }
+        
+        $this->fail();        
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForIntegerAndDoubleWithCustomMessage()
+    {
+        $expected = 1.1;
+        $actual = 0;
+        $message = <<<EOF
+Failed asserting that 0 matches expected 1.1.
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForStringsWithCustomMessage()
+    {
+        $expected ='a';
+        $actual = 'b';
+        $message = <<<EOF
+Failed asserting that two strings are equal.
+
+- Expected 
++ Actual 
+
+-'a'
++'b'
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForIntegerAndArrayWithCustomMessage()
+    {
+        $expected =1;
+        $actual = array(0);
+        $message = <<<EOF
+Array (...) does not match expected type "integer".
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForArrayAndIntegerWithCustomMessage()
+    {
+        $expected = array(0);
+        $actual = 1;
+        $message = <<<EOF
+1 does not match expected type "array".
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForArraysWithCustomMessage()
+    {
+        $expected = array(0);
+        $actual = array(1);
+        $message = <<<EOF
+Failed asserting that two arrays are equal.
+
+- Expected 
++ Actual 
+
+ Array (
+-   0 => 0
++   0 => 1
+ )
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForBooleanAndStringWithCustomMessage()
+    {
+        $expected = array(TRUE);
+        $actual = array('true');
+        $message = <<<EOF
+Failed asserting that two arrays are equal.
+
+- Expected 
++ Actual 
+
+ Array (
+-   0 => true
++   0 => 'true'
+ )
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForNestedArraysWithCustomMessage()
+    {
+        $expected = array(0, array(1), array(2), 3);
+        $actual = array(0, array(4), array(2), 3);
+        $message = <<<EOF
+Failed asserting that two arrays are equal.
+
+- Expected 
++ Actual 
+
+ Array (
+    0 => 0
+    1 => Array (
+-       0 => 1
++       0 => 4
+     )
+    2 => Array (
+         0 => 2
+     )
+    3 => 3
+ )
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForObjectAndArrayWithCustomMessage()
+    {
+        $objA = new stdClass();
+        $objA->foo = 'bar';
+
+        $expected = $objA;
+        $actual = array(23);
+        $message =  <<<EOF
+Array (...) does not match expected type "object".
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForArrayAndObjectWithCustomMessage()
+    {
+        $objA = new stdClass();
+        $objA->foo = 'bar';
+    
+        $expected = array(23);
+        $actual =  $objA;
+        $message =   <<<EOF
+stdClass Object (...) does not match expected type "array".
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForObjectsWithCustomMessage()
+    {
+        $objA = new stdClass();
+        $objA->foo = 'bar';
+        $objB = new stdClass();
+        
+        $expected = $objA;
+        $actual =  $objB;
+        $message =   <<<EOF
+Failed asserting that two objects are equal.
+
+- Expected 
++ Actual 
+
+ stdClass Object (
+-   'foo' => 'bar'
+ )
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_IsEqual
+     * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
+     */
+    public function testConstraintEqualsForComplexObjectsWithCustomMessage()
+    {
+        $objC = new stdClass;
+        $objC->foo = 'bar';
+        $objC->int = 1;
+        $objC->array = array(0, array(1), array(2), 3);
+        $objC->related = new stdClass;
+        $objC->self = $objC;
+        $objC->c = $objC;
+        
+        $objD = new stdClass;
+        $objD->foo = 'bar';
+        $objD->int = 2;
+        $objD->array = array(0, array(4), array(2), 3);
+        $objD->related = new stdClass;
+        $objD->self = $objD;
+        $objD->c = $objC;
+    
+        $expected = $objC;
+        $actual =  $objD;
+        $message =   <<<EOF
+Failed asserting that two objects are equal.
+
+- Expected 
++ Actual 
+
+ stdClass Object (
+    'foo' => 'bar'
+-   'int' => 1
++   'int' => 2
+    'array' => Array (
+        0 => 0
+        1 => Array (
+-           0 => 1
++           0 => 4
+         )
+        2 => Array (
+             0 => 2
+         )
+        3 => 3
+     )
+    'related' => stdClass Object ()
+    'self' => stdClass Object (
+         'foo' => 'bar'
+-        'int' => 1
++        'int' => 2
+         'array' => Array (
+             0 => 0
+             1 => Array (
+-                0 => 1
++                0 => 4
+             )
+             2 => Array (
+                 0 => 2
+             )
+             3 => 3
+         )
+         'related' => stdClass Object ()
+         'self' => stdClass Object (*RECURSION*)
+-        'c' => stdClass Object (*RECURSION*)
++        'c' => stdClass Object (
++            'foo' => 'bar'
++            'int' => 1
++            'array' => Array (
++                0 => 0
++                1 => Array (
++                    0 => 1
++                )
++                2 => Array (
++                    0 => 2
++                )
++                3 => 3
++            )
++            'related' => stdClass Object ()
++            'self' => stdClass Object (*RECURSION*)
++            'c' => stdClass Object (*RECURSION*)
++        )
+     )
+    'c' => stdClass Object (
+         'foo' => 'bar'
+         'int' => 1
+         'array' => Array (
+             0 => 0
+             1 => Array (
+                 0 => 1
+             )
+             2 => Array (
+                 0 => 2
+             )
+             3 => 3
+         )
+         'related' => stdClass Object ()
+         'self' => stdClass Object (*RECURSION*)
+         'c' => stdClass Object (*RECURSION*)
+     )
+ )
+EOF;
+    
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected);
+    
+        try {
+            $constraint->evaluate($actual, '');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+    
+            $this->assertEquals($message, $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
     
     /**
      * @covers CIUnit_Framework_Constraint_IsEqual 
@@ -557,7 +780,7 @@ require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARA
      * @covers CIUnit_Framework_Constraint_IsEqual::toString
      * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
      */
-    public function testConstraintIsNotEqial()
+    public function testConstraintIsNotEqual()
     {
         $constraint = new CIUnit_Framework_Constraint_IsEqual(1);
         $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
@@ -584,7 +807,7 @@ require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARA
      * @covers CIUnit_Framework_Constraint_Not 
      * @covers CIUnit_Framework_Exception_ExpectationFailed::toString
      */
-    public function testConstraintIsNotEqialWithCustomMessage()
+    public function testConstraintIsNotEqualWithCustomMessage()
     {
         $constraint = new CIUnit_Framework_Constraint_IsEqual(1);
         $notConstraint = new CIUnit_Framework_Constraint_Not($constraint); 
