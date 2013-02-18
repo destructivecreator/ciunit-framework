@@ -3,11 +3,18 @@
 
 class CIUnit_Controller extends CI_Controller
 {
+    
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function index ($testCase = '')
     {   
         // Add ciunit package to codeigniter path
         $this->load->add_package_path(APPPATH.'third_party/ciunit', FALSE);
+        $this->load->config('config');
+        $data['resources_path'] = $this->config->item('resources_path');
         
         // Check against environment 
         if(ENVIRONMENT != 'production') { 
@@ -15,8 +22,7 @@ class CIUnit_Controller extends CI_Controller
             // Load library
             $this->load->library('ciunit'); 
             
-
-            $data['testcases'] = $this->ciunit->buildTestTree();
+            $data['test_tree'] = $this->ciunit->getTestCollection();
             if($testCase != '') {
                 $this->ciunit->run($testCase);
                 

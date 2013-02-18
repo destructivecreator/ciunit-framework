@@ -27,7 +27,7 @@ class Ciunit
         return $this->runner;
     }
 
-    public function buildTestTree ()
+    public function getTestCollection ()
     {
         return CIUnit_Util_FileLoader::collectTests();
     }

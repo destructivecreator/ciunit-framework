@@ -8,12 +8,8 @@
 <meta name="author" content="">
 
 <!-- Le styles -->
-<link
-	href="<?php print base_url() . APPPATH;?>third_party/ciunit/resources/css/bootstrap.css"
-	rel="stylesheet">
-<link
-	href="<?php print base_url() . APPPATH;?>third_party/ciunit/resources/css/bootstrap-responsive.css"
-	rel="stylesheet">
+<link href="<?php print base_url() . $resources_path . "css/bootstrap.css" ; ?>"  rel="stylesheet">
+<link href="<?php print base_url() . $resources_path . "css/bootstrap-responsive.css" ; ?>" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -41,7 +37,24 @@
 
 
 		<div class="row-fluid">
-			<div class="span12">
+		
+		<div class="span3">
+				<ul class="nav nav-list"> 
+					
+					<li class="nav-header"><i class="icon-folder-open"></i>Tests</li> 
+                       <?php
+                    
+                            foreach ($test_tree as $branch => $leaf) {
+                                print 
+                                        "<li " . (($this->uri->segment(2) == $leaf) ? "class=\"active\"" : '') . ">" . anchor('ciunit/' . $leaf, $leaf) . "</li>";
+                            }
+                    
+                        ?> 
+                        
+                         
+          </ul>
+			</div>
+			<div class="span9">
 				<h1><?php print $run_failure; ?></h1>
 
 			</div>

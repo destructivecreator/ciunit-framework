@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 /**
  * CIUnit
  *
@@ -36,71 +35,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package    CIUnit
- * @subpackage Constraint
+ * @subpackage Test
  * @author     Agop Seropyan <agopseropyan@gmail.com>
  * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
 
-/**
- * Constraint that asserts that the array it is evaluated for has a given key.
- *
- * @package CIUnit
- * @subpackage Constraint
- * @author Agop Seropyan <agopseropyan@gmail.com>
- * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
- *          License
- * @since File available since Release 1.0.0
- */
-class CIUnit_Framework_Constraint_ArrayHasKey extends CIUnit_Framework_ConstraintAbstract
+class ClassWithToString
 {
-
-    /**
-     *
-     * @var mixed
-     */
-    protected $key;
-
-    /**
-     *
-     * @param mixed $key            
-     */
-    public function __construct ($key)
-    { 
-        $this->key = $key;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * 
-     * @see CIUnit_Framework_ConstraintAbstract::matches()
-     */
-    protected function matches ($value)
+    public function __toString()
     {
-        return array_key_exists($this->key, $value);
-    }
-
-    /**
-     * (non-PHPdoc)
-     * 
-     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
-     */
-    public function failureDescription ($evaluated)
-    {
-        return sprintf('an array %s', $this->toString());
-    }
-
-    /**
-     * Returns a string representation of the constraint
-     *
-     * @return string
-     */
-    public function toString ()
-    {
-        return sprintf('has the key %s', $this->key);
-    }
-}
+        return 'string representation';
+    } 
+} 
 
 ?>

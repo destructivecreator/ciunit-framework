@@ -73,31 +73,34 @@ class CIUnit_Util_FileLoader
 
     public static function collectTests ($fullPath = FALSE, $hidden = FALSE)
     {
+        
+        //Obtain test_path from config file
         $ci = & get_instance();
         $ci->load->add_package_path(APPPATH . 'third_party/ciunit', FALSE);
         $ci->config->load('config');
-        $source = $ci->config->item('test_dir');
-        $source_dir = APPPATH . $source;
+        $tests_path = $ci->config->item('tests_path');
         
-        if (! file_exists($source_dir) || ! is_readable($source_dir))
+          
+        if (! file_exists($tests_path) || ! is_readable($tests_path))
             throw new CIUnit_Framework_Exception_CIUnitException(
-                    sprintf("CIUnit can't open or read your %s folder", $source));
+                    sprintf("CIUnit can't open or read your %s folder", $tests_path));
         
-        if (@$fp = @opendir($source_dir)) {
+        if (@$fp = @opendir($tests_path)) {
             
             $testFiles = array(); 
                         
-            $source_dir = rtrim($source_dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+            $tests_path = rtrim($tests_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             
             while (FALSE !== ($file = readdir($fp))) {
-                // Remove '.', '..', and hidden files [optional]
+                
+                // Remove '.', '..', and hidden files
                 if (! trim($file, '.') or ($hidden == FALSE && $file[0] == '.')) {
                     continue;
                 }
                 
                 if (substr(strrchr($file, '.'), 1) == 'php') {
                     if ($fullPath) {
-                        $testFiles[] = $source_dir . $file;
+                        $testFiles[] = $tests_path . $file;
                     } else {
                         $testFiles[] = substr($file, 0, strrpos($file, '.'));
                     }
