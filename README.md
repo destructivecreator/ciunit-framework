@@ -145,10 +145,50 @@ Failed asserting that true is false.
 ```
 
 ### assertInstanceOf
+Method sserts that a variable is of a given type
+
+assertInstanceOf(object $expected, object $actual, string $message = '')<br/>
+Reports an error identified by $message if $expected is not an instance of $actual. <br/>
+assertNotInstanceOf() is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class InstanceOfTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertInstanceOf('RunTimeException', new Exception());
+    }
+}
+```
+Failure description
+```
+Failed asserting that Exception Object (...) is an instance of RunTimeException. 
+```
+
 ### assertInternalType
 ### assertNull
 ### assertSameSize
+
 ### assertTrue 
+Method asserts that a condition is true
+
+assertTrue(bool $condition, string $message = '')<br/>
+Reports an error identified by $message if $condition is FALSE. 
+
+```php
+<?php
+class TrueTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertTrue(FALSE);
+    }
+}
+```
+Failure description
+```
+Failed asserting that false is true.  
+```
 
 Issues
 ------
