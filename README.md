@@ -57,8 +57,8 @@ CIUnit API
 ### assertArrayHasKey
 Method asserts that array has a specified key
 
-assertArrayHasKey(mixed $needle, array $haystack, string $message = '')
-Reports an error identified by $message if $array does not contain the specified $key.
+assertArrayHasKey(mixed $needle, array $haystack, string $message = '') <br/>
+Reports an error identified by $message if $array does not contain the specified $key. <br/>
 assertArrayNotHasKey() is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
@@ -78,8 +78,8 @@ Failed asserting that an array has the key "bar".
 ### assertCount
 Method asserts the number of elements of an array, Countable or Iterator
 
-assertCount($expectedCount, array $haystack, string $messge = '')
-Reports an error identified by $message if the number of elements in $haystack is not equal to $expectedCount.
+assertCount($expectedCount, array $haystack, string $messge = '')<br/>
+Reports an error identified by $message if the number of elements in $haystack is not equal to $expectedCount.<br/>
 assertNotCount() is the inverse of this assertion and takes the same arguments.
 
 ```php
@@ -100,8 +100,8 @@ Failed asserting that actual size 1 matches expected size 0.
 ### assertEmpty
 Method asserts that a variable is empty
 
-assertEmpty(mixed $actual, string $message = '')
-Reports an error identified by $message if $actual is not empty.
+assertEmpty(mixed $actual, string $message = '')<br/>
+Reports an error identified by $message if $actual is not empty.<br/>
 assertNotEmpty() is the inverse of this assertion and takes the same arguments.
 
 ```php
@@ -126,7 +126,7 @@ Failed asserting that an array is empty.
 ### assertFalse
 Method asserts that a condition is false
 
-assertFalse(bool $condition, string $message = '')
+assertFalse(bool $condition, string $message = '')<br/>
 Reports an error identified by $message if $condition is TRUE. 
 
 ```php
