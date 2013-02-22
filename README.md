@@ -1,20 +1,34 @@
-CIUnit is an open source PHPUnit/JUnit like unit testing framework for testing ication developed using CodeIgniter Framework.
-
 Getting Started
 ---------------
+CIUnit is an open source PHPUnit/JUnit like unit testing framework for testing ication developed using CodeIgniter Framework.
 
+Table of contents
+-----------------
+* [Features][features]
+* [Writing Tests for CIUnit][writing-tests-for-ciunit]
+ * [Testing Exceptions][testing-exceptions]
+ * [Testiong PHP Errors][testing-php-errors]  
+* [Fixtures][fixtures]
+* [Organizing Tests][organizing-tests]
+* [CIUnit API][ciunit-api]
+ * [AssertArrayHasKey][assertarrayhaskey]
+ * [AssertCount][assertcount]
+ * [AssertEmpty][assertempty]
+ * [AssertFalse][assertfalse]
+ * [AssertinstanceOf][assertinstanceof]
+ * [AssertinternalType][assertinternaltype]
+ * [AssertNull][assertnull]
+ * [AssertSameSize][assertsamesize]
+ * [AssertTrue][asserttrue]
 
+Getting Started
+---------------------
 
 Features
 --------
 
 * A
 * B
-
-
-CodeIgniter Integration
----------------------
-
 
 Writing Tests for CIUnit
 ------------------------
@@ -120,8 +134,124 @@ Failed asserting that an array is empty.
 ```
 
 ### assertEquals
+Method asserts that two variables are equal
 
+assertEquals(mixed $expected, mixed $actual, string $message = '')<br/>
+Reports an error identified by $message if $expected is not equal to $actual.<br/>
+assertNotEquals() is the inverse of this assertion and takes the same arguments.
 
+```php
+<?php
+class EqualsTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertEquals(12, 13);
+    }
+    
+    public function testFailure2()
+    {
+        $this->assertEquals('Integer', 'String');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 12 matches expected 13. 
+
+Failed asserting that two strings are equal.
+
+- Expected 
++ Actual 
+
+-'Integer'
++'String'
+```
+
+assertEquals(float $expected, float $actual, float $delta = 0, string $message = '') 
+
+Reports an error identified by $message if the two floats $expected and $actual are not within $delta of each other.
+```php
+<?php
+class EqualsTest extends CIUnit_Framework_TestCase
+{
+    public function testSuccess()
+    {
+        $this->assertEquals(12.0, 12.1, 0.2, '');
+    }
+    
+    public function testFailure()
+    {
+        $this->assertEquals(12.0, 12.1);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 12.1 matches expected 12.0. 
+```
+assertEquals(array $expected, array $actual, string $message = '') 
+```php
+<?php
+class EqualsTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $actual = array('a', 'b', 'c');
+        
+        $expected = array('a', 'b', 'd');
+        
+        $this->assertEquals($actual, $expected);
+    }
+}
+```
+Failure description
+```
+Failed asserting that two arrays are equal.
+
+- Expected 
++ Actual 
+
+ Array (
+    0 => 'a'
+    1 => 'b'
+-   2 => 'c'
++   2 => 'd'
+ )  
+```
+
+assertEquals(object $expected, object $actual, string $message = '') 
+```php
+<?php
+class EqualsTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $expected = new stdClass();
+        $expected->name = "John";
+        $expected->age = 11;
+        
+        $actual = new stdClass();
+        $actual->name = "John";
+        $actual->age = 19; 
+        
+        $this->assertEquals($actual, $expected);
+    }
+}
+```
+Failure description
+```
+Failed asserting that two objects are equal.
+
+- Expected 
++ Actual 
+
+ stdClass Object (
+    'name' => 'John'
+-   'age' => 11
++   'age' => '19'
+ )  
+```
 
 ### assertFalse
 Method asserts that a condition is false
@@ -264,3 +394,23 @@ License
 Copyright 2013 Agop Seropyan
 
 Licensed under the Apache/BSD License
+
+<!-- deep links -->
+[features]: #features 
+[writing-tests-for-ciunit]: #writing-tests-for-ciunit
+[testing-exceptions]: #testing-exceptions
+[testing-php-errors]: #testing-php-errors
+[fixtures]: #fixtures
+[organizing-tests]: #organizing-tests
+[ciunit-api]: #ciunit-api
+[assertarrayhaskey]: #assertarrayhaskey
+[assertcount]: #assertcount
+[assertempty]: #assertempty
+[assertfalse]: #assertfalse
+[assertinstanceof]: #assertinstanceof
+[assertinternaltype]: #assertinternaltype
+[assertnull]: #assertnull
+[assertsamesize]: #assertsamesize
+[asserttrue]: #asserttrue
+
+
