@@ -57,7 +57,7 @@ CIUnit API
 ### assertArrayHasKey
 Method asserts that array has a specified key
 
-assertArrayHasKey(mixed $key, array $array, string $message = '')
+assertArrayHasKey(mixed $needle, array $haystack, string $message = '')
 Reports an error identified by $message if $array does not contain the specified $key.
 assertArrayNotHasKey() is the inverse of this assertion and takes the same arguments.
 ```php
@@ -75,12 +75,12 @@ Failure description
 Failed asserting that an array has the key "bar". 
 ```
 
-### assertEmpty
-Method asserts that a variable is empty
+### assertCount
+Method asserts the number of elements of an array, Countable or Iterator
 
-assertEmpty(mixed $actual, string $message = '')
-Reports an error identified by $message if $actual is not empty.
-assertNotEmpty() is the inverse of this assertion and takes the same arguments.
+assertCount($expectedCount, array $haystack, string $messge = '')
+Reports an error identified by $message if the number of elements in $haystack is not equal to $expectedCount.
+assertNotCount() is the inverse of this assertion and takes the same arguments.
 
 ```php
 <?php
@@ -94,16 +94,38 @@ class EmptyTest extends CIUnit_Framework_TestCase
 ```
 Failure description
 ```
-Failed asserting that an array has the key "bar". 
+Failed asserting that an array is empty. 
 ```
+
+### assertEmpty
+Method asserts that a variable is empty
+
+assertEmpty(mixed $actual, string $message = '')
+Reports an error identified by $message if $actual is not empty.
+assertNotEmpty() is the inverse of this assertion and takes the same arguments.
+
+```php
+<?php
+class CountTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertCount(0, array('foo'));
+    }
+}
+```
+Failure description
+```
+Failed asserting that actual size 1 matches expected size 0.  
+```
+
 ### assertEquals
 ### assertFalse
 ### assertInstanceOf
 ### assertInternalType
 ### assertNull
 ### assertSameSize
-### assertTrue
-### assertNot
+### assertTrue 
 
 Issues
 ------
