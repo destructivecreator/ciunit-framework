@@ -84,28 +84,6 @@ assertNotCount() is the inverse of this assertion and takes the same arguments.
 
 ```php
 <?php
-class EmptyTest extends CIUnit_Framework_TestCase
-{
-    public function testFailure()
-    {
-        $this->assertEmpty(array('foo'));
-    }
-}
-```
-Failure description
-```
-Failed asserting that an array is empty. 
-```
-
-### assertEmpty
-Method asserts that a variable is empty
-
-assertEmpty(mixed $actual, string $message = '')
-Reports an error identified by $message if $actual is not empty.
-assertNotEmpty() is the inverse of this assertion and takes the same arguments.
-
-```php
-<?php
 class CountTest extends CIUnit_Framework_TestCase
 {
     public function testFailure()
@@ -119,8 +97,53 @@ Failure description
 Failed asserting that actual size 1 matches expected size 0.  
 ```
 
+### assertEmpty
+Method asserts that a variable is empty
+
+assertEmpty(mixed $actual, string $message = '')
+Reports an error identified by $message if $actual is not empty.
+assertNotEmpty() is the inverse of this assertion and takes the same arguments.
+
+```php
+<?php
+class EmptyTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertEmpty(array('foo'));
+    }
+}
+```
+Failure description
+```
+Failed asserting that an array is empty. 
+```
+
 ### assertEquals
+
+
+
 ### assertFalse
+Method asserts that a condition is false
+
+assertFalse(bool $condition, string $message = '')
+Reports an error identified by $message if $condition is TRUE. 
+
+```php
+<?php
+class FalseTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertFalse(TRUE);
+    }
+}
+```
+Failure description
+```
+Failed asserting that true is false.  
+```
+
 ### assertInstanceOf
 ### assertInternalType
 ### assertNull
