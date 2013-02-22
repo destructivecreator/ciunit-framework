@@ -1,3 +1,6 @@
+CIUnit Goals
+------------
+
 Table of contents
 -----------------
 * [Getting Started][getting-started]
