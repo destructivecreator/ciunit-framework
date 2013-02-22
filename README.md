@@ -1,9 +1,6 @@
-Getting Started
----------------
-CIUnit is an open source PHPUnit/JUnit like unit testing framework for testing ication developed using CodeIgniter Framework.
-
 Table of contents
 -----------------
+* [Getting Started][getting-started]
 * [Features][features]
 * [Writing Tests for CIUnit][writing-tests-for-ciunit]
  * [Testing Exceptions][testing-exceptions]
@@ -396,6 +393,7 @@ Copyright 2013 Agop Seropyan
 Licensed under the Apache/BSD License
 
 <!-- deep links -->
+[getting-started]: #getting-started
 [features]: #features 
 [writing-tests-for-ciunit]: #writing-tests-for-ciunit
 [testing-exceptions]: #testing-exceptions
