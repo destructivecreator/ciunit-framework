@@ -21,14 +21,14 @@ Table of contents
  * [AssertSameSize][assertsamesize]
  * [AssertTrue][asserttrue]
 
-Getting Started
----------------------
+Screenshots
+-----------
+### Failure
+ ![Screenshot of CIUnit, displaying a failure in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
+ 
+### Success
+![Screenshot of CIUnit, displaying a success in results.](https://lh6.googleusercontent.com/-koR9udOOSXU/USkkZO2VLLI/AAAAAAAAFoY/0oY7BRYUijg/s799/success.png "CIUnit Test Results")
 
-Features
---------
-
-* A
-* B
 
 Writing Tests for CIUnit
 ------------------------
