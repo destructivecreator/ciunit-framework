@@ -77,13 +77,65 @@ Alternative approach to testing exceptions
 ```php
 <?php
 
-class ExceptionTest ex
+class ExceptionTest extends CIUnit_Framework_TestCase
+{
+    public function testException()
+    {
+        try {
+            // Throw exception code here...
+        }
+        catch(Exception $e) {
+            return;
+        }
+        
+        $this->fail('No exception has been raised');
+    }
+}
 ```
-
-### Testing PHP Errors
 
 Fixtures
 --------
+TODO
+- what are fixtures and how they work
+
+The setUp() and tearDown() template methods are run once for each test method of the test case class.
+```php
+<?php
+
+class FixtureTest extends CIUnit_Framework_TestCase
+{
+    protected function setUp()
+    {
+        print __METHOD__ . "\n";
+    }
+    
+    public function testOne()
+    {
+        print __METHOD__ . "\n";
+        $this->assertTrue(TRUE);
+    }
+    
+    public function testTwo()
+    {
+        print __METHOD__ . "\n";
+        $this->assertTrue(TRUE);
+    }
+    
+    protected function tearDown()
+    {
+        print __METHOD__ . "\n";
+    }
+}
+```
+The result from running the code will be
+```
+AssertFailureTest::setUp
+AssertFailureTest::testOne 
+AssertFailureTest::tearDown 
+AssertFailureTest::setUp 
+AssertFailureTest::testTwo 
+AssertFailureTest::tearDown
+```
 
 Organizing Tests
 ----------------
