@@ -58,6 +58,28 @@ class StackTest extends CIUnit_Framework_TestCase
 ```
 
 ### Testing Exceptions
+
+The example introduces the basic steps for testing expected exceptions
+```php
+<?php
+
+class ExceptionTest extends CIUnit_Framework_TestCase
+{
+    public function testException()
+    {
+        $this->setExpectedException('RunTimeException'); 
+    }
+}
+```
+
+Alternative approach to testing exceptions
+
+```php
+<?php
+
+class ExceptionTest ex
+```
+
 ### Testing PHP Errors
 
 Fixtures
