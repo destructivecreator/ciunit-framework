@@ -1,13 +1,17 @@
-CIUnit Goals
-------------
+CIUnit 1.0 Beta
+---------------
+CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runns on top
+of CodeIgniter and provides a web interface for test execution. CIUnit is not as advanced as PHPUnit is, but is a good alternative
+for small projects where the full potential of PHPUnit is not used as well as for unit testing newbies.
 
-Table of contents
+We are still in Beta version, so if you notice any bugs please report them [here][bug-list]
+
+
+Table of Contents
 -----------------
 * [Getting Started][getting-started]
-* [Features][features]
 * [Writing Tests for CIUnit][writing-tests-for-ciunit]
  * [Testing Exceptions][testing-exceptions]
- * [Testiong PHP Errors][testing-php-errors]  
 * [Fixtures][fixtures]
 * [Organizing Tests][organizing-tests]
 * [CIUnit API][ciunit-api]
@@ -20,13 +24,21 @@ Table of contents
  * [AssertNull][assertnull]
  * [AssertSameSize][assertsamesize]
  * [AssertTrue][asserttrue]
+* [Issues][issues]
+* [License][license]
 
-Screenshots
------------
-### Failure
+Getting Started
+---------------
+### Requirements
+CIUnit requires CodeIgniter >= 2.0
+
+### How to install
+
+### Sreenshots
+#### Failure
  ![Screenshot of CIUnit, displaying a failure in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
  
-### Success
+#### Success
 ![Screenshot of CIUnit, displaying a success in results.](https://lh6.googleusercontent.com/-koR9udOOSXU/USkkZO2VLLI/AAAAAAAAFoY/0oY7BRYUijg/s799/success.png "CIUnit Test Results")
 
 
@@ -95,8 +107,7 @@ class ExceptionTest extends CIUnit_Framework_TestCase
 
 Fixtures
 --------
-TODO
-- what are fixtures and how they work
+I assume we all know what fixtures are and how they work.
 
 The setUp() and tearDown() template methods are run once for each test method of the test case class.
 ```php
@@ -460,14 +471,12 @@ Have a bug? Please create an issue here on GitHub!
 
 https://github.com/agop/ciunit-framework/issues
 
-
-
 License
 -------
 
-Copyright 2013 Agop Seropyan
+Copyright &copy; 2013
 
-Licensed under the Apache/BSD License
+Licensed under the The BSD 3-Clause License
 
 <!-- deep links -->
 [getting-started]: #getting-started
@@ -487,5 +496,9 @@ Licensed under the Apache/BSD License
 [assertnull]: #assertnull
 [assertsamesize]: #assertsamesize
 [asserttrue]: #asserttrue
+[issues]: #issues
+[license]: #license
+
+[bug-list]: https://github.com/agop/ciunit-framework/issues
 
 
