@@ -1,10 +1,10 @@
 CIUnit 1.0 Beta
 ---------------
 CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runns on top
-of CodeIgniter and provides a web interface for test execution. CIUnit is not as advanced as PHPUnit is, but is a good alternative
-for small projects where the full potential of PHPUnit is not used as well as for unit testing newbies.
+of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
+for small projects where the full potential of PHPUnit is not used and a good start for unit testing newbies.
 
-We are still in Beta version, so if you notice any bugs please report them [here][bug-list]
+We are still in Beta version, so if you notice any bugs please report them [here][bug-list].
 
 
 Table of Contents
@@ -34,6 +34,37 @@ CIUnit requires CodeIgniter >= 2.0
 
 ### How to install
 
+* Download CIUnit Framework from [here][download-master-zip]
+* Place the ```resources``` folder in the root of your application
+* Place the ```controllers/ciunit_controller.php``` to your ```controllers``` folder
+* Place the ```ciunit``` folder to your ```third_party``` folder
+* Create folder ```tests``` inside your ```application``` folder
+* Add the following routes to your ```routes.php```
+
+```php
+$route['ciunit'] = "ciunit_controller/index";
+$route['ciunit/(:any)'] = "ciunit_controller/index/$1";
+```
+* CIUnit makes use of the ```base_url()``` feature in CodeIgniter. Please, make sure it is properly configured inside your ```config/config.php```
+
+```php
+$config['base_url'] = 'http://example.com/';
+```
+* Now you must be good to go.
+ - http://example.com/index.php/ciunit or
+ - http://example.com/ciunit
+
+PS. If you have any issues installing the CIUnit, please feel free to contact me.
+
+
+#### Customization
+
+CIUnit allows you to configure the location of resources and tests. The CIUnit config file is located under ```ciunit/config/config.php```
+Default configuration is as follows
+```php
+$config['tests_path'] = APPPATH .'tests/';
+$config['resources_path'] = 'resources/';
+```
 ### Sreenshots
 #### Failure
  ![Screenshot of CIUnit, displaying a failure in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
@@ -109,7 +140,7 @@ Fixtures
 --------
 I assume we all know what fixtures are and how they work.
 
-The setUp() and tearDown() template methods are run once for each test method of the test case class.
+The ```setUp()``` and ```tearDown()``` template methods are run once for each test method of the test case class.
 ```php
 <?php
 
@@ -150,7 +181,7 @@ FixtureTest::tearDown
 
 Organizing Tests
 ----------------
-The CIUnit framework allows us to organize tests into a hierarchy of test suite objects using the suite() method. 
+The CIUnit framework allows us to organize tests into a hierarchy of test suite objects using the ```suite()``` method. 
 Here is a basic examplе how to organize your test suites into one test suite.
 ```php
 <?php
@@ -186,9 +217,9 @@ CIUnit API
 ### assertArrayHasKey
 Method asserts that array has a specified key
 
-assertArrayHasKey(mixed $needle, array $haystack, string $message = '') <br/>
-Reports an error identified by $message if $array does not contain the specified $key. <br/>
-assertArrayNotHasKey() is the inverse of this assertion and takes the same arguments.
+```assertArrayHasKey(mixed $needle, array $haystack, string $message = '')``` <br/>
+Reports an error identified by ```$message``` if ```$array``` does not contain the specified ```$key```. <br/>
+```assertArrayNotHasKey()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
 class ArrayHasKeyTest extends CIUnit_Framework_TestCase
@@ -207,9 +238,9 @@ Failed asserting that an array has the key "bar".
 ### assertCount
 Method asserts the number of elements of an array, Countable or Iterator
 
-assertCount($expectedCount, array $haystack, string $messge = '')<br/>
-Reports an error identified by $message if the number of elements in $haystack is not equal to $expectedCount.<br/>
-assertNotCount() is the inverse of this assertion and takes the same arguments.
+```assertCount($expectedCount, array $haystack, string $messge = '')```<br/>
+Reports an error identified by ```$message``` if the number of elements in ```$haystack``` is not equal to ```$expectedCount```.<br/>
+```assertNotCount()``` is the inverse of this assertion and takes the same arguments.
 
 ```php
 <?php
@@ -229,9 +260,9 @@ Failed asserting that actual size 1 matches expected size 0.
 ### assertEmpty
 Method asserts that a variable is empty
 
-assertEmpty(mixed $actual, string $message = '')<br/>
-Reports an error identified by $message if $actual is not empty.<br/>
-assertNotEmpty() is the inverse of this assertion and takes the same arguments.
+```assertEmpty(mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$actual``` is not empty.<br/>
+```assertNotEmpty()``` is the inverse of this assertion and takes the same arguments.
 
 ```php
 <?php
@@ -251,9 +282,9 @@ Failed asserting that an array is empty.
 ### assertEquals
 Method asserts that two variables are equal
 
-assertEquals(mixed $expected, mixed $actual, string $message = '')<br/>
-Reports an error identified by $message if $expected is not equal to $actual.<br/>
-assertNotEquals() is the inverse of this assertion and takes the same arguments.
+```assertEquals(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not equal to ```$actual```.<br/>
+```assertNotEquals()``` is the inverse of this assertion and takes the same arguments.
 
 ```php
 <?php
@@ -283,9 +314,9 @@ Failed asserting that two strings are equal.
 +'String'
 ```
 
-assertEquals(float $expected, float $actual, float $delta = 0, string $message = '') 
+```assertEquals(float $expected, float $actual, float $delta = 0, string $message = '')``` 
 
-Reports an error identified by $message if the two floats $expected and $actual are not within $delta of each other.
+Reports an error identified by ```$message``` if the two floats ```$expected``` and ```$actual``` are not within ```$delta``` of each other.
 ```php
 <?php
 class EqualsTest extends CIUnit_Framework_TestCase
@@ -305,7 +336,7 @@ Failure description
 ```
 Failed asserting that 12.1 matches expected 12.0. 
 ```
-assertEquals(array $expected, array $actual, string $message = '') 
+```assertEquals(array $expected, array $actual, string $message = '') ```
 ```php
 <?php
 class EqualsTest extends CIUnit_Framework_TestCase
@@ -335,7 +366,7 @@ Failed asserting that two arrays are equal.
  )  
 ```
 
-assertEquals(object $expected, object $actual, string $message = '') 
+```assertEquals(object $expected, object $actual, string $message = '') ```
 ```php
 <?php
 class EqualsTest extends CIUnit_Framework_TestCase
@@ -371,8 +402,8 @@ Failed asserting that two objects are equal.
 ### assertFalse
 Method asserts that a condition is false
 
-assertFalse(bool $condition, string $message = '')<br/>
-Reports an error identified by $message if $condition is TRUE. 
+```assertFalse(bool $condition, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$condition``` is ```TRUE```. 
 
 ```php
 <?php
@@ -392,9 +423,9 @@ Failed asserting that true is false.
 ### assertInstanceOf
 Method asserts that a variable is of a given type
 
-assertInstanceOf(object $expected, object $actual, string $message = '')<br/>
-Reports an error identified by $message if $expected is not an instance of $actual. <br/>
-assertNotInstanceOf() is the inverse of this assertion and takes the same arguments.
+```assertInstanceOf(object $expected, object $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not an instance of ```$actual```. <br/>
+```assertNotInstanceOf()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
 class InstanceOfTest extends CIUnit_Framework_TestCase
@@ -413,9 +444,9 @@ Failed asserting that Exception Object (...) is an instance of RunTimeException.
 ### assertInternalType
 Method assert that variable is of a given type
 
-assertInternalType(object $expected, object $actual, string $message = '')<br/>
-Reports an error identified by $message if $expected is not of type $actual. <br/>
-assertNotInternalType() is the inverse of this assertion and takes the same arguments.
+```assertInternalType(object $expected, object $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not of type ```$actual```. <br/>
+```assertNotInternalType()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
 class InternalTypefTest extends CIUnit_Framework_TestCase
@@ -432,11 +463,11 @@ Failed asserting that 1 is of type "string".
 ```
 
 ### assertNull
-Method asserts that a variable is NULL
+Method asserts that a variable is ```NULL```
 
-assertNull(mixed $var, string $message = '')<br/>
-Reports an error identified by $message if $var is not NULL. <br/>
-assertNotNull() is the inverse of this assertion and takes the same arguments.
+```assertNull(mixed $var, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$var``` is not ```NULL```. <br/>
+```assertNotNull()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
 class NullTest extends CIUnit_Framework_TestCase
@@ -455,9 +486,9 @@ Failed asserting that 'string' is null.
 ### assertSameSize
 Method assert that the size of two arrays (or `Countable` or `Iterator` objects) is the same
 
-assertSameSize(mixed $expected, mixed $actual string $message = '')<br/>
-Reports an error identified by $message if the number of elements in $expected is not the same as in $actual. <br/>
-assertNotSameSize() is the inverse of this assertion and takes the same arguments.
+```assertSameSize(mixed $expected, mixed $actual string $message = '')```<br/>
+Reports an error identified by ```$message``` if the number of elements in ```$expected``` is not the same as in ```$actual```. <br/>
+```assertNotSameSize()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
 class SameSizeTest extends CIUnit_Framework_TestCase
@@ -476,8 +507,8 @@ Failed asserting that actual size 0 matches expected size 2.
 ### assertTrue 
 Method asserts that a condition is true
 
-assertTrue(bool $condition, string $message = '')<br/>
-Reports an error identified by $message if $condition is FALSE. 
+```assertTrue(bool $condition, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$condition``` is ```FALSE```. 
 
 ```php
 <?php
@@ -530,5 +561,6 @@ Licensed under the The BSD 3-Clause License
 [license]: #license
 
 [bug-list]: https://github.com/agop/ciunit-framework/issues
+[download-master-zip]: https://github.com/agop/ciunit-framework/archive/master.zip
 
 
