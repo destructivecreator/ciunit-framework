@@ -198,7 +198,7 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
         try {
             
             $class = new ReflectionClass($this);
-            $method = $class->getMethod($this->name->getName());
+            $method = $class->getMethod($this->getName());
         } catch (ReflectionException $e) {
             $this->fail($e->getMessage());
         }

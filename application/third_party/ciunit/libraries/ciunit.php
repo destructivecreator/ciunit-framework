@@ -2,6 +2,8 @@
 
 require_once APPPATH . "third_party/ciunit/framework/autoload.php";
 
+define('CIUNIT_VER', '1.0.0');
+
 class Ciunit
 {
 

@@ -14,15 +14,41 @@ class CIUnit_Controller extends CI_Controller
         // Add ciunit package to codeigniter path
         $this->load->add_package_path(APPPATH.'third_party/ciunit', FALSE);
         $this->load->config('config');
+        
+
+        // Load library
+        $this->load->library('ciunit');
+        
+        $data['test_tree'] = $this->ciunit->getTestCollection();
+        
         $data['resources_path'] = $this->config->item('resources_path');
+        $data['run_failure'] = '';
+        
+        // Version 2.0.0 has no ENVIRONMENT support
+        if(!defined('ENVIRONMENT')) {
+            // Apply hack by defining ENVIRONMENT and set it to undefined
+            define('ENVIRONMENT', 'testing');
+            $data['ciunit_warning'] = "Your version of CodeIgniter does not support environments. Simulating testing environment !";
+        }
+        
+        // Check CI version 
+         if(!defined('CI_VERSION')) {
+              $data['run_failure'] = "CIUnit can't detect the version of your CodeIgniter application.";
+              $this->load->view('error', $data);
+              
+              return;
+         }
+            
+         // Check versions 
+         if(substr(CI_VERSION, 0, 3) == '2.0') { 
+             // Apply fix for versions >= 2.0.0 && < 2.1.0
+             $orig_view_path = $this->load->_ci_view_path;
+             $this->load->_ci_view_path = APPPATH.'third_party/ciunit/views/';
+         }
         
         // Check against environment 
-        if(ENVIRONMENT != 'production') { 
+        if(ENVIRONMENT == 'testing' || ENVIRONMENT == 'development') { 
             
-            // Load library
-            $this->load->library('ciunit'); 
-            
-            $data['test_tree'] = $this->ciunit->getTestCollection();
             if($testCase != '') {
                 $this->ciunit->run($testCase);
                 
@@ -38,16 +64,23 @@ class CIUnit_Controller extends CI_Controller
                 return;
             }  
             
-            $data['run_failure'] = sprintf("Error: %s", $this->ciunit->getRunFailure());
-            $this->load->view('error', $data);
+             $data['run_failure'] = printf("Error: %s", $this->ciunit->getRunFailure()); 
             
             return;
-        }  
-        
-        $data['run_failure'] = "Unit Testing is not available in production environment!";
+        } 
+        else if(ENVIRONMENT == 'production') {  
+             $data['run_failure'] = "Unit Testing is not available in production environment!";
+        } 
+         
+         
         $this->load->view('error', $data);
         
-        // Restore path
+        // Restore view path for versions < 2.1.0
+        if(substr(CI_VERSION, 0, 1) == '2.0') {
+            $this->load->_ci_view_path = $orig_view_path;
+        }
+        
+        // Restore paths
         $this->load->remove_package_path(APPPATH.'third_party/ciunit');
     }
 }

@@ -38,25 +38,9 @@
 
 		<div class="row-fluid">
 		
-		<div class="span3">
-				<ul class="nav nav-list"> 
-					
-					<li class="nav-header"><i class="icon-folder-open"></i>Tests</li> 
-                       <?php
-                           
-                           sort($test_tree);
-                       
-                            foreach ($test_tree as $branch => $leaf) {
-                                print 
-                                        "<li " . (($this->uri->segment(2) == $leaf) ? "class=\"active\"" : '') . ">" . anchor('ciunit/' . $leaf, $leaf) . "</li>";
-                            }
-                    
-                        ?> 
-                        
-                         
-          </ul>
-			</div>
-			<div class="span9">
+		 
+			<div class="span12">
+			 
 				<h1><?php print $run_failure; ?></h1>
 
 			</div>
@@ -73,23 +57,5 @@
 
 	</div>
 	<!-- /.container -->
-
-
-
-	<!-- Le javascript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-
-	<!--     <script src="../assets/js/bootstrap-transition.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-alert.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-modal.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-dropdown.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-scrollspy.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-tab.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-tooltip.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-popover.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-button.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-carousel.js"></script> -->
-	<!--     <script src="../assets/js/bootstrap-typeahead.js"></script> -->
 </body>
 </html>
