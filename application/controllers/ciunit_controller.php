@@ -18,6 +18,7 @@ class CIUnit_Controller extends CI_Controller
 
         // Load library
         $this->load->library('ciunit');
+        $this->load->helper('url');
         
         $data['test_tree'] = $this->ciunit->getTestCollection();
         
