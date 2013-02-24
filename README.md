@@ -140,16 +140,46 @@ class FixtureTest extends CIUnit_Framework_TestCase
 ```
 The result from running the code will be
 ```
-AssertFailureTest::setUp
-AssertFailureTest::testOne 
-AssertFailureTest::tearDown 
-AssertFailureTest::setUp 
-AssertFailureTest::testTwo 
-AssertFailureTest::tearDown
+FixtureTest::setUp
+FixtureTest::testOne 
+FixtureTest::tearDown 
+FixtureTest::setUp 
+FixtureTest::testTwo 
+FixtureTest::tearDown
 ```
 
 Organizing Tests
 ----------------
+The CIUnit framework allows us to organize tests into a hierarchy of test suite objects using the suite() method. 
+Here is a basic examplе how to organize your test suites into one test suite.
+```php
+<?php
+
+require_once 'MyTestOne.php';
+require_once 'MyTestTwo.php';
+
+class ProjectSuite extends CIUnit_Framework_TestCase
+{
+    public static function suite()
+    {
+        $suite = new CIUnit_Framework_TestSuite('ProjectSuite');
+        $suite->addTestSuite('MyTestOne');
+        $suite->addTestSuite('MyTestTwo');
+        
+        return $suite;
+    }
+}
+```
+Output
+```
+MyTestOne::setUp
+MyTestOne::testOne 
+MyTestOne::tearDown 
+MyTestTwo::setUp 
+MyTestTwo::testTwo 
+MyTestTwo::tearDown
+```
+
 
 CIUnit API
 --------------
