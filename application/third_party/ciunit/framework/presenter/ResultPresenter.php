@@ -3,7 +3,7 @@
 /**
  * CIUnit
  *
- * Copyright (c) 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * Copyright (c) 2013, Agop Seropyan <agopseropyan@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,6 +57,10 @@ class CIUnit_ResultPresenter
         $this->result = $result;
     }
 
+    /**
+     * Function creates the header of the presenter
+     * @return string
+     */
     public function getHeader ()
     {
         return sprintf(
@@ -70,27 +74,26 @@ class CIUnit_ResultPresenter
                 CIUnit_Util_Memory::getUsedMemory());
     }
 
+    /**
+     * Function creates the footer of the presenter
+     */
     public function getFooter ()
     {}
 
+    /**
+     * @see CIUnit_Framework_TestResult::wasSuccessful()
+     */
     public function wasSuccessful ()
     {
         return $this->result->wasSuccessful();
     }
     
+    /**
+     * @see CIUnit_Framework_TestResult::hasWarnings()
+     */
     public function hasWarnings()
     {
         return $this->result->hasWarnings();
-    }
-
-    public function hasErrors ()
-    {
-        return $this->result->getErrorCount() != 0;
-    }
-
-    public function hasFailures ()
-    {
-        return $this->result->getFailureCount() != 0;
     }
 
     /**
@@ -171,6 +174,7 @@ class CIUnit_ResultPresenter
         
         $eTrace = $e->getTrace();
         
+        //TODO debug trace is not accurate for some test 
         $filePath = $eTrace[2]['file'];
         $line = $eTrace[2]['line'];
         

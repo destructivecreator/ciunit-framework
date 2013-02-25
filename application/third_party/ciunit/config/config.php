@@ -12,14 +12,14 @@ if (! defined('BASEPATH'))
  |
  |	$config['CIUnit_Framework_Tests']	= 'tests/';  
  |
- | By default CIUnit would look for a folder named "tests" inside the | application folder.
+ | By default CIUnit will look for a folder "tests" under the application folder.
  */
 
 $config['tests_path'] = APPPATH .'tests/';
 
 /*
  |--------------------------------------------------------------------------
- | Resources Directory
+ | CIUnit Framework Resources Directory
  |--------------------------------------------------------------------------
  |
  | Typically this will be a folder named resources located in the root of your project, 

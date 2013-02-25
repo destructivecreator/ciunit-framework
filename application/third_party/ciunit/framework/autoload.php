@@ -2,7 +2,7 @@
 /**
  * CIUnit
  *
- * Copyright (c) 2012, Agop Seropyan <agopseropyan@gmail.com>
+ * Copyright (c) 2013, Agop Seropyan <agopseropyan@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -109,8 +109,7 @@ spl_autoload_register(
                         'ciunit_util_fileloader' => '/util/FileLoader.php',
                         
                         // printer
-                        'ciunit_resultpresenter' => '/presenter/ResultPresenter.php',
-                        'ciunit_clpresenter' => '/presenter/CLPresenter.php'
+                        'ciunit_resultpresenter' => '/presenter/ResultPresenter.php'
                 );
                 
                 $path = dirname(__FILE__);

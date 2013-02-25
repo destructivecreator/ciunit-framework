@@ -1,6 +1,11 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
   
-
+/**
+ * CodeIgniter controller for displaying the web interface of CIUnit
+ *
+ * @author     Agop Seropyan <agopseropyan@gmail.com>
+ * @since      File available since Release 1.0.0
+ */
 class CIUnit_Controller extends CI_Controller
 {
     
@@ -85,4 +90,6 @@ class CIUnit_Controller extends CI_Controller
     }
 }
 
-?>
+
+/* End of file ciunit_controller.php */
+/* Location: ./application/controllers/ciunit_controller.php */
