@@ -77,6 +77,11 @@ class CIUnit_ResultPresenter
     {
         return $this->result->wasSuccessful();
     }
+    
+    public function hasWarnings()
+    {
+        return $this->result->hasWarnings();
+    }
 
     public function hasErrors ()
     {

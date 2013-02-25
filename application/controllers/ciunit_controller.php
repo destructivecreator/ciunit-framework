@@ -65,9 +65,8 @@ class CIUnit_Controller extends CI_Controller
                 return;
             }  
             
-             $data['run_failure'] = printf("Error: %s", $this->ciunit->getRunFailure()); 
-            
-            return;
+             $data['run_failure'] = sprintf("Error: %s", $this->ciunit->getRunFailure());
+   
         } 
         else if(ENVIRONMENT == 'production') {  
              $data['run_failure'] = "Unit Testing is not available in production environment!";
@@ -77,7 +76,7 @@ class CIUnit_Controller extends CI_Controller
         $this->load->view('error', $data);
         
         // Restore view path for versions < 2.1.0
-        if(substr(CI_VERSION, 0, 1) == '2.0') {
+        if(substr(CI_VERSION, 0, 3) == '2.0') {
             $this->load->_ci_view_path = $orig_view_path;
         }
         

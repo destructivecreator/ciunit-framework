@@ -399,7 +399,7 @@ class CIUnit_Framework_TestResult implements Countable
 
     public function hasWarnings ()
     {
-        return (! empty($this->notImplemented));
+        return (!empty($this->notImplemented) || !empty($this->skipped));
     }
 }
 

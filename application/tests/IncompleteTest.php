@@ -3,13 +3,13 @@
 /**
  * CIUnit_Framework_Assert test case.
  */
-class AssertFailureTest extends CIUnit_Framework_TestCase
+class IncompleteTest extends CIUnit_Framework_TestCase
 {
-    
     public function testCIInstance()
     {
-        $this->assertNotNull($this->get_instance(), 'It doesn\'t work here....');
+       // $this->assertNotNull($this->get_instance(), 'It doesn\'t work here....');
     }
+    
 
 //     /**
 //      * @covers $this->assetArrayHasKey()
@@ -240,31 +240,31 @@ class AssertFailureTest extends CIUnit_Framework_TestCase
 //         $this->assertEquals($actual, $expected);
 //     }
 
-    /**
-     * @covers $this->assertEquals()
-     */
-    public function testAssertEqualsForObjects ()
-    {
-        $expected = new stdClass();
-        $expected->name = "John";
-        $expected->age = 11;
+//     /**
+//      * @covers $this->assertEquals()
+//      */
+//     public function testAssertEqualsForObjects ()
+//     {
+//         $expected = new stdClass();
+//         $expected->name = "John";
+//         $expected->age = 11;
         
-        $actual = new stdClass();
-        $actual->name = "John";
-        $actual->age = 11;
+//         $actual = new stdClass();
+//         $actual->name = "John";
+//         $actual->age = 11;
         
-        $expected->age = '19';
+//         $expected->age = '19';
         
-        $this->assertEquals($actual, $expected);
-    }
+//         $this->assertEquals($actual, $expected);
+//     }
 
-    /**
-     * @covers $this->assertEquals()
-     */
-    public function testAssertEqualsWithDifferentTypes ()
-    {
-        $this->assertEquals(1, 'ss');
-    }
+//     /**
+//      * @covers $this->assertEquals()
+//      */
+//     public function testAssertEqualsWithDifferentTypes ()
+//     {
+//         $this->assertEquals(1, 'ss');
+//     }
 
     
 

@@ -85,7 +85,7 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
         // TODO initialize codeigniter here
         if (NULL !== $name) {
             $this->name = $name;
-        } 
+        }  
     }
 
     public function get_instance()

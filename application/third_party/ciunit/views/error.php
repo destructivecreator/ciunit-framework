@@ -8,8 +8,12 @@
 <meta name="author" content="">
 
 <!-- Le styles -->
-<link href="<?php print base_url() . $resources_path . "css/bootstrap.css" ; ?>"  rel="stylesheet">
-<link href="<?php print base_url() . $resources_path . "css/bootstrap-responsive.css" ; ?>" rel="stylesheet">
+<link
+	href="<?php print base_url() . $resources_path . "css/bootstrap.css" ; ?>"
+	rel="stylesheet">
+<link
+	href="<?php print base_url() . $resources_path . "css/bootstrap-responsive.css" ; ?>"
+	rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,9 +25,8 @@
 
 	<!-- NAVBAR -->
 	<div class="navbar-wrapper">
-
 		<div class="navbar navbar-inverse">
-			<div class="navbar-inner">
+			<div class="navbar-inner"> 
 				<?php echo anchor('ciunit', 'CIUnit Framework 1.0', array('class' => 'brand')); ?>
 			</div>
 			<!-- /.navbar-inner -->
@@ -31,18 +34,11 @@
 		<!-- /.navbar -->
 
 	</div>
-	<!-- /.container -->
 
 	<div class="container">
-
-
 		<div class="row-fluid">
-		
-		 
 			<div class="span12">
-			 
-				<h1><?php print $run_failure; ?></h1>
-
+			<h1><?php echo $run_failure; ?></h1>
 			</div>
 		</div>
 
