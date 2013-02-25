@@ -108,7 +108,7 @@ class StackTest extends CIUnit_Framework_TestCase
 ```
 
 ### Accessing CodeIgniter Features from Test classes
-The ```CIUnit_Framework_TestCase``` class holds an instance to CodeIgniter that can be accessed from your test class using ```$this->ci```
+The ```CIUnit_Framework_TestCase``` class holds an instance to CodeIgniter that can be accessed from your test class using ```$this->get_instance()```
 Example test class performing operations with a CodeIgniter module class.
 ```php
 <?php
@@ -118,7 +118,7 @@ class CITest extends CIUnit_Framework_TestCase
 
     public function testAccessCIModel()
     {
-        $model = $this->ci->model_name->get_all();
+        $model = $this->get_instance()->model_name->get_all();
         $this->assertEquals(10, count($model));
     }
 }
