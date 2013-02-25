@@ -11,6 +11,7 @@ Table of Contents
 -----------------
 * [Getting Started][getting-started]
 * [Writing Tests for CIUnit][writing-tests-for-ciunit]
+ * [Accessing CodeIgniter Features from Test Classes][accessing-codeigniter-features-from-test-classes]
  * [Testing Exceptions][testing-exceptions]
 * [Fixtures][fixtures]
 * [Organizing Tests][organizing-tests]
@@ -35,9 +36,9 @@ CIUnit requires CodeIgniter >= 2.0
 ### How to install
 
 * Download CIUnit Framework from [here][download-master-zip]
-* Place the ```resources``` folder in the root of your application
+* Add the ```resources``` folder in the root of your application
 * Place the ```controllers/ciunit_controller.php``` to your ```controllers``` folder
-* Place the ```ciunit``` folder to your ```third_party``` folder
+* Add the ```third_party/ciunit``` folder to your ```third_party``` folder
 * Create folder ```tests``` inside your ```application``` folder
 * Add the following routes to your ```routes.php```
 
@@ -54,7 +55,7 @@ $config['base_url'] = 'http://example.com/';
  - http://example.com/index.php/ciunit or
  - http://example.com/ciunit
 
-PS. If you have any issues installing the CIUnit, please feel free to contact me.
+NB! If you have any issues installing CIUnit, please feel free to contact me.
 
 
 #### Customization
@@ -72,11 +73,15 @@ $config['resources_path'] = 'resources/';
 #### Success
 ![Screenshot of CIUnit, displaying a success in results.](https://lh6.googleusercontent.com/-koR9udOOSXU/USkkZO2VLLI/AAAAAAAAFoY/0oY7BRYUijg/s799/success.png "CIUnit Test Results")
 
-
 Writing Tests for CIUnit
 ------------------------
 
-The example introduces the basic conventions and steps for writing tests with CIUnit:
+The example introduces the basic conventions and steps for writing tests with CIUnit<br/>
+1. The tests for the class ```User``` go into a class ```UserTest``` <br/>
+2. ```UserTest``` inherits from ```CIUnit_Framework_TestCase``` <br/>
+3. Tests are public methods whose name starts with ```test*``` <br/>
+4. Inside your test methods you would use assertions like ```$this->assertTrue(TRUE)``` <br/>
+5. Your test classes go under ```application/tests``` by default. Nested folders are not supported in this release!
 
 ```php
 <?php
@@ -100,9 +105,26 @@ class StackTest extends CIUnit_Framework_TestCase
 
 ```
 
+### Accessing CodeIgniter Features from Test classes
+The ```CIUnit_Framework_TestCase``` class holds an instance to CodeIgniter that can be accessed from your test class using ```$this->ci```
+Example test class performing operations with a CodeIgniter module class.
+```php
+<?php
+
+class CITest extends CIUnit_Framework_TestCase
+{   
+
+    public function testAccessCIModel()
+    {
+        $model = $this->ci->model_name->get_all();
+        $this->assertEquals(10, count($model));
+    }
+}
+```
+
 ### Testing Exceptions
 
-The example introduces the basic steps for testing expected exceptions
+The example introduces the basic steps for testing for expected exception
 ```php
 <?php
 
@@ -125,7 +147,7 @@ class ExceptionTest extends CIUnit_Framework_TestCase
     public function testException()
     {
         try {
-            // Throw exception code here...
+            // Code throwing exception goes here...
         }
         catch(Exception $e) {
             return;
@@ -543,6 +565,7 @@ Licensed under the The BSD 3-Clause License
 [getting-started]: #getting-started
 [features]: #features 
 [writing-tests-for-ciunit]: #writing-tests-for-ciunit
+[accessing-codeigniter-features-from-test-classes]: #accessing-codeigniter-features-from-test-classes
 [testing-exceptions]: #testing-exceptions
 [testing-php-errors]: #testing-php-errors
 [fixtures]: #fixtures
