@@ -60,7 +60,7 @@ NB! If you have any issues installing CIUnit, please feel free to contact me.
 
 #### Customization
 
-CIUnit allows you to configure the location of resources and tests. The CIUnit config file is located under ```ciunit/config/config.php```
+CIUnit allows you to change location for resources and tests. The CIUnit config file is located under ```ciunit/config/config.php```
 Default configuration is as follows
 ```php
 $config['tests_path'] = APPPATH .'tests/';
