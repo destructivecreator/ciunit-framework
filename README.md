@@ -68,10 +68,12 @@ $config['resources_path'] = 'resources/';
 ```
 ### Sreenshots
 #### Failure
- ![Screenshot of CIUnit, displaying a failure in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
+ ![Screenshot of CIUnit, displaying failures in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
  
 #### Success
-![Screenshot of CIUnit, displaying a success in results.](https://lh6.googleusercontent.com/-koR9udOOSXU/USkkZO2VLLI/AAAAAAAAFoY/0oY7BRYUijg/s799/success.png "CIUnit Test Results")
+![Screenshot of CIUnit, displaying success in results.](https://lh6.googleusercontent.com/-koR9udOOSXU/USkkZO2VLLI/AAAAAAAAFoY/0oY7BRYUijg/s799/success.png "CIUnit Test Results")
+#### Success with Warnings
+![Screenshot of CIUnit, displaying warnings in results.](https://lh6.googleusercontent.com/-grfQ9P5IfXw/USub-AZ4WcI/AAAAAAAAFpA/YpT9kWRZuLg/s804/warning.png "CIUnit Test Results")
 
 Writing Tests for CIUnit
 ------------------------
