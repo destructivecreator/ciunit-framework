@@ -56,14 +56,7 @@
  */
 abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert implements 
         CIUnit_Framework_TestInterface
-{
-
-    /**
-     * Instance of CodeIgniter to use withing the TestCases
-     * 
-     * @var mixed
-     */
-    private $ci = NULL;
+{ 
 
     private $result;
 
@@ -92,13 +85,13 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
         // TODO initialize codeigniter here
         if (NULL !== $name) {
             $this->name = $name;
-        }
-         
-        // Check if CI is available used for phpunit testing
-        if(function_exists('get_instance'))
-            $ci = & get_instance();
+        } 
     }
 
+    public function get_instance()
+    {
+        return $ci =& get_instance();
+    }
     /**
      * Runs the test case and collects the results in a TestResult object.
      * If no TestResult object is passed a new one will be created.
@@ -314,7 +307,7 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
         $this->expectedException = $name;
         $this->expectedExceptionMessage = $message;
         $this->expectedExceptionCode = $code;
-    }
+    } 
 
     public function getResult ()
     {

@@ -5,6 +5,11 @@
  */
 class AssertFailureTest extends CIUnit_Framework_TestCase
 {
+    
+    public function testCIInstance()
+    {
+        $this->assertNotNull($this->get_instance(), 'It doesn\'t work here....');
+    }
 
 //     /**
 //      * @covers $this->assetArrayHasKey()
