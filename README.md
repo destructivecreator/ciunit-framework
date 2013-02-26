@@ -112,6 +112,8 @@ class StackTest extends CIUnit_Framework_TestCase
 ### Accessing CodeIgniter Features from Test classes
 The ```CIUnit_Framework_TestCase``` class holds an instance to CodeIgniter that can be accessed from your test class using ```$this->get_instance()```
 Example test class performing operations with a CodeIgniter module class.
+
+CITest.php
 ```php
 <?php
 
@@ -129,6 +131,8 @@ class CITest extends CIUnit_Framework_TestCase
 ### Testing Exceptions
 
 The example introduces the basic steps for testing for expected exception
+
+ExceptionTest.php
 ```php
 <?php
 
@@ -167,6 +171,8 @@ Fixtures
 I assume we all know what fixtures are and how they work.
 
 The ```setUp()``` and ```tearDown()``` template methods are run once for each test method of the test case class.
+
+FixtureTest.php
 ```php
 <?php
 
@@ -210,6 +216,8 @@ Organizing Tests
 The CIUnit framework allows us to organize tests into a hierarchy of test suite objects. Suites are created by extending the ```CIUnit_Framework_TestSuite``` class and using the ```suite()``` method.
 The ```CIUnit_Framework_TestSuite``` class class offers two template methods, ```setUp()``` and ```tearDown()```, that are called before the first test of the test suite and after the last test of the test suite, respectively.
 Here is a basic examplе how to organize your test suites into one test suite.
+
+MySuite.php
 ```php
 <?php
 
@@ -295,6 +303,7 @@ Method asserts that array has a specified key
 ```assertArrayHasKey(mixed $needle, array $haystack, string $message = '')``` <br/>
 Reports an error identified by ```$message``` if ```$array``` does not contain the specified ```$key```. <br/>
 ```assertArrayNotHasKey()``` is the inverse of this assertion and takes the same arguments.
+
 ```php
 <?php
 class ArrayHasKeyTest extends CIUnit_Framework_TestCase
