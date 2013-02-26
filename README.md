@@ -11,7 +11,7 @@ Table of Contents
 -----------------
 * [Getting Started][getting-started]
 * [Writing Tests for CIUnit][writing-tests-for-ciunit]
- * [Accessing CodeIgniter Features from Test Classes][accessing-codeigniter-features-from-test-classes]
+ * [Testing CodeIgniter][testing-codeigniter]
  * [Testing Exceptions][testing-exceptions]
 * [Fixtures][fixtures]
 * [Organizing Tests][organizing-tests]
