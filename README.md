@@ -627,7 +627,7 @@ Licensed under the The BSD 3-Clause License
 [getting-started]: #getting-started
 [features]: #features 
 [writing-tests-for-ciunit]: #writing-tests-for-ciunit
-[accessing-codeigniter-features-from-test-classes]: #accessing-codeigniter-features-from-test-classes
+[testing-codeigniter]: #testing-codeigniter
 [testing-exceptions]: #testing-exceptions
 [testing-php-errors]: #testing-php-errors
 [fixtures]: #fixtures
