@@ -36,10 +36,10 @@ CIUnit requires CodeIgniter >= 2.0
 ### How to install
 
 * Download CIUnit Framework from [here][download-master-zip]
-* Add the ```resources``` folder in the root of your application
-* Place the ```controllers/ciunit_controller.php``` to your ```controllers``` folder
-* Add the ```third_party/ciunit``` folder to your ```third_party``` folder
-* Create folder ```tests``` inside your ```application``` folder
+* Add the ```resources/``` folder in the root of your application
+* Place the ```controllers/ciunit_controller.php``` to your ```controllers/``` folder
+* Add the ```third_party/ciunit/``` folder to your ```third_party/``` folder
+* Create folder ```tests/``` inside your ```application/``` folder
 * Add the following routes to your ```routes.php```
 
 ```php
