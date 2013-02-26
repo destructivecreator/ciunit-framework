@@ -76,9 +76,9 @@ class CIUnit_Util_Difference
      * @param array $actual            
      * @return string
      */
-    public static function getDifference ($expected, $actual)
+    public static function getVisualDifference ($expected, $actual)
     {
-        $buffer = "\n\n- Expected \n+ Actual \n\n";
+        $visual = "\n\n- Expected \n+ Actual \n\n";
         $diff = self::makeDifferenceToArray($expected, $actual);
         
         // print_r($diff);
@@ -88,19 +88,19 @@ class CIUnit_Util_Difference
         for ($i = 0; $i < $diffLength; $i ++) {
             // Add unchanged to buffer
             if ($diff[$i][1] === self::UNCHANGED) {
-                $buffer .= self::UNCHANGED_CHAR . $diff[$i][0] . "\n";
+                $visual .= self::UNCHANGED_CHAR . $diff[$i][0] . "\n";
             }             // Add added to buffer
             else 
                 if ($diff[$i][1] === self::ADDED) {
-                    $buffer .= self::ADDED_CHAR . $diff[$i][0] . "\n";
+                    $visual .= self::ADDED_CHAR . $diff[$i][0] . "\n";
                 }                 // Add removed to buffer
                 else 
                     if ($diff[$i][1] === self::REMOVED) {
-                        $buffer .= self::REMOVED_CHAR . $diff[$i][0] . "\n";
+                        $visual .= self::REMOVED_CHAR . $diff[$i][0] . "\n";
                     }
         }
         
-        return $buffer;
+        return $visual;
     }
 
     /**
@@ -112,6 +112,12 @@ class CIUnit_Util_Difference
      */
     public static function makeDifferenceToArray ($expected, $actual)
     {
+        // Remove all line breaks from expected and actual strings
+        // each OS have different ASCII chars for linebreak: 
+        // windows = \r\n 
+        // unix = \n 
+        // mac = \r 
+        
         if (is_string($expected)) {
             $expected = preg_split('(\r\n|\r|\n)', $expected);
         }
@@ -126,6 +132,7 @@ class CIUnit_Util_Difference
         $actLength = count($actual);
         $minLength = min($expLength, $actLength);
         
+        // Collect matching elements starting from the beginning
         for ($i = 0; $i < $minLength; $i ++) {
             if ($expected[$i] === $actual[$i]) {
                 array_push($beginning, $expected[$i]);
@@ -135,8 +142,11 @@ class CIUnit_Util_Difference
             }
         }
         
+        // Different elements have been found 
         $currLength = $minLength - $i;
         
+
+        // Collect matching elements starting from the end
         for ($i = $minLength; $i < $currLength; $i --) {
             if ($expected[$i] === $actual[$i]) {
                 array_push($end, $expected[$i]);

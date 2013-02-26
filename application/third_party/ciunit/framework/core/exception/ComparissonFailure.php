@@ -134,7 +134,7 @@ class CIUnit_Framework_Exception_ComparissonFailure extends CIUnit_Framework_Exc
      */
     public function getDifference ()
     {
-        return $this->actualAsString || $this->expectedAsString ? CIUnit_Util_Difference::getDifference(
+        return $this->actualAsString || $this->expectedAsString ? CIUnit_Util_Difference::getVisualDifference(
                 $this->expectedAsString, $this->actualAsString) : '';
     }
 
