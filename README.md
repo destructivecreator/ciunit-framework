@@ -86,6 +86,7 @@ The example introduces the basic conventions and steps for writing tests with CI
 4. Inside your test methods you would use assertions like ```$this->assertTrue(TRUE)``` <br/>
 5. Your test classes go under ```application/tests``` by default. Nested folders are not supported in this release!
 
+StackTest.php
 ```php
 <?php
 
