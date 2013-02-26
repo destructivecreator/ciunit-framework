@@ -66,8 +66,10 @@ class CIUnit_Controller extends CI_Controller
                 }
             }
             else {
-                $this->load->view('index', $data);
-                return;
+                if($this->ciunit->getRunFailure() == NULL) { 
+                    $this->load->view('index', $data);
+                    return;
+                }
             }  
             
              $data['run_failure'] = sprintf("Error: %s", $this->ciunit->getRunFailure());

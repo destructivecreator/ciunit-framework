@@ -71,6 +71,14 @@ class CIUnit_Util_FileLoader
         return $filePath;
     }
 
+    /**
+     * Scan the directory containing tests and build a directory map
+     * 
+     * @param unknown_type $fullPath
+     * @param unknown_type $hidden
+     * @throws CIUnit_Framework_Exception_CIUnitException
+     * @return multitype:string |boolean
+     */
     public static function collectTests ($fullPath = FALSE, $hidden = FALSE)
     {
         
@@ -83,7 +91,7 @@ class CIUnit_Util_FileLoader
           
         if (! file_exists($tests_path) || ! is_readable($tests_path))
             throw new CIUnit_Framework_Exception_CIUnitException(
-                    sprintf("CIUnit can't open or read your %s folder", $tests_path));
+                    sprintf("CIUnit can't open or read '%s'", $tests_path));
         
         if (@$fp = @opendir($tests_path)) {
             

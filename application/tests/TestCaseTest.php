@@ -114,52 +114,28 @@ class TestCaseTest extends CIUnit_Framework_TestCase
         $this->assertTrue($test->tearDown);
     }
     
-    public function testExceptionInAssertPreConditions()
+    
+    
+    public function testExceptionInTest()
     {
-        $test   = new ExceptionInAssertPreConditionsTest('testSomething');
+        $test   = new ExceptionInTest('testSomething');
         $result = $test->run();
     
-        $this->assertTrue($test->setUp);
-        $this->assertTrue($test->assertPreConditions);
-//         $this->assertFalse($test->testSomething);
-//         $this->assertFalse($test->assertPostConditions);
+        $this->assertTrue($test->setUp); 
+        $this->assertTrue($test->testSomething); 
         $this->assertTrue($test->tearDown);
     }
     
-//     public function testExceptionInTest()
-//     {
-//         $test   = new ExceptionInTest('testSomething');
-//         $result = $test->run();
+ 
     
-//         $this->assertTrue($test->setUp);
-//         $this->assertTrue($test->assertPreConditions);
-//         $this->assertTrue($test->testSomething);
-//         $this->assertFalse($test->assertPostConditions);
-//         $this->assertTrue($test->tearDown);
-//     }
+    public function testExceptionInTearDown()
+    {
+        $test   = new ExceptionInTearDownTest('testSomething');
+        $result = $test->run();
     
-//     public function testExceptionInAssertPostConditions()
-//     {
-//         $test   = new ExceptionInAssertPostConditionsTest('testSomething');
-//         $result = $test->run();
-    
-//         $this->assertTrue($test->setUp);
-//         $this->assertTrue($test->assertPreConditions);
-//         $this->assertTrue($test->testSomething);
-//         $this->assertTrue($test->assertPostConditions);
-//         $this->assertTrue($test->tearDown);
-//     }
-    
-//     public function testExceptionInTearDown()
-//     {
-//         $test   = new ExceptionInTearDownTest('testSomething');
-//         $result = $test->run();
-    
-//         $this->assertTrue($test->setUp);
-//         $this->assertTrue($test->assertPreConditions);
-//         $this->assertTrue($test->testSomething);
-//         $this->assertTrue($test->assertPostConditions);
-//         $this->assertTrue($test->tearDown);
-//     }
+        $this->assertTrue($test->setUp); 
+        $this->assertTrue($test->testSomething); 
+        $this->assertTrue($test->tearDown);
+    }
 }
 

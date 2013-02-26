@@ -101,11 +101,13 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
         }
         
         $ref = new ReflectionClass($this);
-        
+        // Handle if suite instance
         if($ref->isSubclassOf('CIUnit_Framework_TestSuite')) {
             
             $declaredClasses = get_declared_classes();
 
+            // Suites can be made just from one test class using the class constructor,
+            // in that case make sure the name of the suite is not a real class.
             if(!in_array($class, $declaredClasses)) {
                 if($ref->getName() != $class ) {
                     $name = $class;
@@ -343,7 +345,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
             $result = $this->createResult();
         }
         
-        // Try setUpBeforeClass
+        // Try setUp
         try {
             $this->setUp(); 
         }
@@ -374,7 +376,7 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
                 }
             }
         }
-        // do tearDownAfterClass
+        // do tearDownA
         $this->tearDown();
         
         return $result;

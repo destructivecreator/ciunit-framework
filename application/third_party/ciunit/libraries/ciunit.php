@@ -24,7 +24,7 @@ class Ciunit
      * Exception message thrown during run
      * @var String
      */
-    private $runFailure;
+    private $runFailure = NULL;
 
     /**
      * Instantiates a CIUnit_Framework_TestRunner with a testcase class
@@ -32,11 +32,12 @@ class Ciunit
      */
     public function run ($testCase)
     {
-        if ($this->runner == NULL) {
-            $this->runner = new CIUnit_Framework_TestRunner($testCase);
-        }
         
         try {
+            if ($this->runner == NULL) {
+                $this->runner = new CIUnit_Framework_TestRunner($testCase);
+            }
+        
             $this->runner->run();
         } catch (CIUnit_Framework_Exception_CIUnitException $e) {
             $this->runFailure = $e->getMessage();
@@ -58,7 +59,14 @@ class Ciunit
      */
     public function getTestCollection ()
     {
-        return CIUnit_Util_FileLoader::collectTests();
+        try {
+            return CIUnit_Util_FileLoader::collectTests();
+        }
+        catch (CIUnit_Framework_Exception_CIUnitException $e) {
+            $this->runFailure = $e->getMessage();
+        }
+        
+        return array();
     }
 
     /**

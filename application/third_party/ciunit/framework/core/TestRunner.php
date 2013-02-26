@@ -73,7 +73,12 @@ class CIUnit_Framework_TestRunner
     public function run ()
     {  
         // Check class for suite method if present add suite to current suite
-        $class = new ReflectionClass($this->className);
+        try {
+            $class = new ReflectionClass($this->className);
+        }
+        catch (ReflectionException $e) {
+            throw new CIUnit_Framework_Exception_CIUnitException($e->getMessage());
+        }
         
         if($class->isSubclassOf('CIUnit_Framework_TestSuite')) {
             if($class->hasMethod('suite')) { 

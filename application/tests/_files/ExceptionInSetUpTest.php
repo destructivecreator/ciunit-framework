@@ -13,20 +13,14 @@ class ExceptionInSetUpTest extends CIUnit_Framework_TestCase
         throw new Exception;
     }
 
-    protected function assertPreConditions()
-    {
-        $this->assertPreConditions = TRUE;
-    }
+    
 
     public function testSomething()
     {
         $this->testSomething = TRUE;
     }
 
-    protected function assertPostConditions()
-    {
-        $this->assertPostConditions = TRUE;
-    }
+    
 
     protected function tearDown()
     {
