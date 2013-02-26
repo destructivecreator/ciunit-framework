@@ -71,14 +71,22 @@ class CIUnit_Framework_TestRunner
     }
 
     public function run ()
-    {
-        // Construct test case
-        $this->testSuite = new CIUnit_Framework_TestSuite($this->className);
-       
+    {  
         // Check class for suite method if present add suite to current suite
         $class = new ReflectionClass($this->className);
-        if($class->hasMethod('suite')) { 
-             $this->testSuite->addTestSuite($class);
+        
+        if($class->isSubclassOf('CIUnit_Framework_TestSuite')) {
+            if($class->hasMethod('suite')) { 
+                 $suite = $class->getMethod('suite');
+                 if(!$suite->isStatic()) {
+                     throw new CIUnit_Framework_Exception_CIUnitException(sprintf('%s\'s suite method must be static', $class->getName()));
+                 }
+                     
+                 $this->testSuite = $suite->invoke(null, array());
+            }
+        }
+        else {
+            $this->testSuite = new CIUnit_Framework_TestSuite($this->className);
         }
          
         // Create new result object
@@ -104,7 +112,7 @@ class CIUnit_Framework_TestRunner
     
     public function getClassName()
     {
-        return $this->className;
+        return $this->testSuite->getName();
     }
     
 }

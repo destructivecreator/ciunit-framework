@@ -38,7 +38,7 @@
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-			<h1><?php echo $run_failure; ?></h1>
+			<h3><?php echo $run_failure; ?></h3>
 			</div>
 		</div>
 

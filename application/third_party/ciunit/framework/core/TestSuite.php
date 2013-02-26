@@ -100,6 +100,20 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
             $valid = true;
         }
         
+        $ref = new ReflectionClass($this);
+        
+        if($ref->isSubclassOf('CIUnit_Framework_TestSuite')) {
+            
+            $declaredClasses = get_declared_classes();
+
+            if(!in_array($class, $declaredClasses)) {
+                if($ref->getName() != $class ) {
+                    $name = $class;
+                    $class = $ref->getName();
+                }
+            }
+        }
+        
         if (is_string($class) && $class !== '' && class_exists($class, FALSE)) {
             $valid = true;
             if ($name == '') {
@@ -125,10 +139,10 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
         
         // Throw exception if the class does not extend
         // CIUnit_Framework_TestCase
-        if (! $class->isSubclassOf('CIUnit_Framework_TestCase')) {
+        if (! $class->isSubclassOf('CIUnit_Framework_TestCase') && ! $class->isSubclassOf('CIUnit_Framework_TestSuite')) {
             throw new CIUnit_Framework_Exception_CIUnitException(
                     "Class " . $class->name .
-                             " does not extend CIUnit_Framework_TestCase");
+                             " does not extend CIUnit_Framework_TestCase nor CIUnit_Framework_TestSuite");
         }
         
         // Set the name of the suite
@@ -330,6 +344,18 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
         }
         
         // Try setUpBeforeClass
+        try {
+            $this->setUp(); 
+        }
+        catch (Exception $e) {
+            $numTests = count($this);
+            for ($i = 0; $i < $numTests; $i++) {
+                $result->addError($this, $e, 0);
+            }
+        
+            return $result;
+        }
+        
         
         // $test = $this->tests
         $tests = $this->testInSuite;
@@ -341,13 +367,15 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
                 // call $test->run()
                 $test->run($result);
             }             // test instanceof testcase
-            else 
+            else {
                 if ($test instanceof CIUnit_Framework_TestCase) {
                     // call $this->invoke...($test)
                     $this->invokeTestRunMethod($test, $result);
                 }
-            // do tearDownAfterClass
+            }
         }
+        // do tearDownAfterClass
+        $this->tearDown();
         
         return $result;
     }
@@ -391,6 +419,26 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
     protected function createResult ()
     {
         return new CIUnit_Framework_TestResult();
+    }
+    
+    /**
+     * Template Method that is called before the tests
+     * of this test suite are run.
+     *
+     * @since  Method available since Release 1.0.0
+     */
+    protected function setUp()
+    {
+    }
+    
+    /**
+     * Template Method that is called after the tests
+     * of this test suite have finished running.
+     *
+     * @since  Method available since Release 1.0.0
+     */
+    protected function tearDown()
+    {
     }
 }
 

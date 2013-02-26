@@ -53,10 +53,10 @@ class CIUnit_Util_FileLoader
             throw new CIUnit_Framework_Exception_CIUnitException("No tests found");
         
         foreach ($testsAvailable as $test) {
-            if($fileName == basename($test, '.php')) {
+            //if($fileName == basename($test, '.php')) {
                 self::load($test);
-                break;
-            }
+              //  break;
+            //}
         }
     }
 

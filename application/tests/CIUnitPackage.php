@@ -46,6 +46,7 @@ require_once 'AssertTest.php';
 require_once 'ConstraintTest.php';
 require_once 'SuiteTest.php';
 require_once 'TestCaseTest.php';
+require_once 'FailuresTest.php';
 require_once 'IncompleteTest.php';
  
 /**
@@ -58,20 +59,30 @@ require_once 'IncompleteTest.php';
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.0.0
  */
-class CIUnitPackage extends CIUnit_Framework_TestCase
+class CIUnitPackage extends CIUnit_Framework_TestSuite
 {
 
     public static function suite()
     {
-        $suite = new CIUnit_Framework_TestSuite('CIUnitPackage'); 
+        $suite = new CIUnitPackage('Project Suite'); 
         $suite->addTestSuite('AssertTest');  
         $suite->addTestSuite('ConstraintTest');  
         $suite->addTestSuite('SuiteTest');
-        $suite->addTestSuite('TestCaseTest');
         $suite->addTestSuite('IncompleteTest');
+//         $suite->addTestSuite('MyTest');
         
         return $suite;
     } 
+    
+    protected function setUp()
+    {
+    //    print __METHOD__ . "<br/>";
+    }
+    
+    protected function tearDown()
+    {
+    //    print __METHOD__ . "<br/>";
+    }
     
 }
 
