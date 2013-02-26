@@ -205,34 +205,83 @@ FixtureTest::tearDown
 
 Organizing Tests
 ----------------
-The CIUnit framework allows us to organize tests into a hierarchy of test suite objects using the ```suite()``` method. 
+The CIUnit framework allows us to organize tests into a hierarchy of test suite objects. Suites are created by extending the ```CIUnit_Framework_TestSuite``` class and using the ```suite()``` method.
+The ```CIUnit_Framework_TestSuite``` class class offers two template methods, ```setUp()``` and ```tearDown()```, that are called before the first test of the test suite and after the last test of the test suite, respectively.
 Here is a basic examplе how to organize your test suites into one test suite.
 ```php
 <?php
 
-require_once 'MyTestOne.php';
-require_once 'MyTestTwo.php';
+require_once 'MyTest.php';
 
-class ProjectSuite extends CIUnit_Framework_TestCase
+class MySuite extends CIUnit_Framework_TestSuite
 {
     public static function suite()
     {
-        $suite = new CIUnit_Framework_TestSuite('ProjectSuite');
-        $suite->addTestSuite('MyTestOne');
-        $suite->addTestSuite('MyTestTwo');
+        $suite = new CIUnit_Framework_TestSuite('Project Suite');
+        $suite->addTestSuite('MyTest');
         
         return $suite;
     }
+    
+    protected function setUp()
+    {
+        print __METHOD__ . "\n";
+    }
+    
+    protected function tearDown()
+    {
+        print __METHOD__ . "\n";
+    }
 }
 ```
+The implementation for MyTest.php can be found below
+
+```php
+<?php
+ 
+class MyTest extends CIUnit_Framework_TestCase
+{ 
+    protected function setUp()
+    {
+        print __METHOD__ . "\n";
+    }
+    
+    protected function tearDown()
+    {
+        print __METHOD__ . "\n";
+    }
+    
+    public function testOne()
+    {
+         print __METHOD__ . "\n";
+    }
+    
+    public function testTwo()
+    {
+         print __METHOD__ . "\n";
+    }
+    
+    public function testThree()
+    {
+         print __METHOD__ . "\n";
+    }
+}
+
+```
+
 Output
 ```
-MyTestOne::setUp
-MyTestOne::testOne 
-MyTestOne::tearDown 
-MyTestTwo::setUp 
-MyTestTwo::testTwo 
-MyTestTwo::tearDown
+MySuite::setUp
+MyTest::setUp
+MyTest::testOne
+MyTest::tearDown
+MyTest::setUp
+MyTest::testTwo
+MyTest::tearDown
+MyTest::setUp
+MyTest::testThree
+MyTest::tearDown
+MySuite::tearDown
 ```
 
 
