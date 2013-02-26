@@ -36,10 +36,10 @@ CIUnit requires CodeIgniter >= 2.0
 ### How to install
 
 * Download CIUnit Framework from [here][download-master-zip]
-* Add the ```resources``` folder in the root of your application
-* Place the ```controllers/ciunit_controller.php``` to your ```controllers``` folder
-* Add the ```third_party/ciunit``` folder to your ```third_party``` folder
-* Create folder ```tests``` inside your ```application``` folder
+* Unzip the ```resources/``` folder in the root of your application
+* Unzip the ```controllers/ciunit_controller.php``` to your ```controllers/``` folder
+* Unzip the ```third_party/ciunit/``` folder to your ```third_party/``` folder
+* Create folder ```tests/``` inside your ```application/``` folder
 * Add the following routes to your ```routes.php```
 
 ```php
@@ -55,7 +55,7 @@ $config['base_url'] = 'http://example.com/';
  - http://example.com/index.php/ciunit or
  - http://example.com/ciunit
 
-NB! If you have any issues installing CIUnit, please feel free to contact me.
+<b>NB!</b> If you have any issues installing CIUnit, please feel free to contact me.
 
 
 #### Customization
@@ -79,7 +79,8 @@ Writing Tests for CIUnit
 ------------------------
 
 The example introduces the basic conventions and steps for writing tests with CIUnit<br/>
-1. The tests for the class ```User``` go into a class ```UserTest``` <br/>
+1. The tests for the class ```User``` go into a class ```UserTest``` in UserTest.php <br/>
+<b>NB!</b> It is important to follow this naming convention for tests so they can be discovered by CIUnit e.g.``` class MyTest``` -> ```MyTest.php```<br/>
 2. ```UserTest``` inherits from ```CIUnit_Framework_TestCase``` <br/>
 3. Tests are public methods whose name starts with ```test*``` <br/>
 4. Inside your test methods you would use assertions like ```$this->assertTrue(TRUE)``` <br/>
