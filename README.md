@@ -26,7 +26,7 @@ Table of Contents
  * [AssertSameSize][assertsamesize]
  * [AssertTrue][asserttrue]
 * [Issues][issues]
-* [License][license]
+* [Credits][credits]
 
 Getting Started
 ---------------
@@ -616,12 +616,14 @@ Have a bug? Please create an issue here on GitHub!
 
 https://github.com/agop/ciunit-framework/issues
 
-License
+Credits
 -------
 
 Copyright &copy; 2013
 
 Licensed under the The BSD 3-Clause License
+
+I took my inspiration from JUnit and PHPUnit, thank you guys for being there for us.
 
 <!-- deep links -->
 [getting-started]: #getting-started
@@ -643,7 +645,7 @@ Licensed under the The BSD 3-Clause License
 [assertsamesize]: #assertsamesize
 [asserttrue]: #asserttrue
 [issues]: #issues
-[license]: #license
+[credits]: #credits
 
 [bug-list]: https://github.com/agop/ciunit-framework/issues
 [download-master-zip]: https://github.com/agop/ciunit-framework/archive/master.zip
