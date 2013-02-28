@@ -52,8 +52,8 @@ $route['ciunit/(:any)'] = "ciunit_controller/index/$1";
 $config['base_url'] = 'http://example.com/';
 ```
 * Now you must be good to go.
- - http://example.com/index.php/ciunit or
- - http://example.com/ciunit
+ - ```http://example.com/index.php/ciunit``` or
+ - ```http://example.com/ciunit``` depending on your url configuration
 
 <b>NB!</b> If you have any issues installing CIUnit, please feel free to contact me.
 
