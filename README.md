@@ -11,7 +11,7 @@ Table of Contents
 -----------------
 * [Getting Started][getting-started]
 * [Writing Tests for CIUnit][writing-tests-for-ciunit]
- * [Accessing CodeIgniter Features from Test Classes][accessing-codeigniter-features-from-test-classes]
+ * [Testing CodeIgniter][testing-codeigniter]
  * [Testing Exceptions][testing-exceptions]
 * [Fixtures][fixtures]
 * [Organizing Tests][organizing-tests]
@@ -26,7 +26,7 @@ Table of Contents
  * [AssertSameSize][assertsamesize]
  * [AssertTrue][asserttrue]
 * [Issues][issues]
-* [License][license]
+* [Credits][credits]
 
 Getting Started
 ---------------
@@ -109,7 +109,7 @@ class StackTest extends CIUnit_Framework_TestCase
 
 ```
 
-### Accessing CodeIgniter Features from Test classes
+### Testing CodeIgniter
 The ```CIUnit_Framework_TestCase``` class holds an instance to CodeIgniter that can be accessed from your test class using ```$this->get_instance()```
 Example test class performing operations with a CodeIgniter module class.
 
@@ -616,18 +616,22 @@ Have a bug? Please create an issue here on GitHub!
 
 https://github.com/agop/ciunit-framework/issues
 
-License
+Credits
 -------
 
 Copyright &copy; 2013
 
 Licensed under the The BSD 3-Clause License
 
+The front-end is developed using the [Bootstrap framework][twitter-bootstrap] by Twitter.
+
+I took my inspiration from JUnit and PHPUnit, thank you guys for being there for us.
+
 <!-- deep links -->
 [getting-started]: #getting-started
 [features]: #features 
 [writing-tests-for-ciunit]: #writing-tests-for-ciunit
-[accessing-codeigniter-features-from-test-classes]: #accessing-codeigniter-features-from-test-classes
+[testing-codeigniter]: #testing-codeigniter
 [testing-exceptions]: #testing-exceptions
 [testing-php-errors]: #testing-php-errors
 [fixtures]: #fixtures
@@ -643,9 +647,10 @@ Licensed under the The BSD 3-Clause License
 [assertsamesize]: #assertsamesize
 [asserttrue]: #asserttrue
 [issues]: #issues
-[license]: #license
+[credits]: #credits
 
 [bug-list]: https://github.com/agop/ciunit-framework/issues
 [download-master-zip]: https://github.com/agop/ciunit-framework/archive/master.zip
+[twitter-bootstrap]: http://twitter.github.com/bootstrap/
 
 
