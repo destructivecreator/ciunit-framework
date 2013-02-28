@@ -625,7 +625,7 @@ Licensed under the The BSD 3-Clause License
 
 The front-end is developed using the [Bootstrap framework][twitter-bootstrap] by Twitter.
 
-I took my inspiration from JUnit and PHPUnit, thank you guys for being there for us.
+I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys for being there for us.
 
 <!-- deep links -->
 [getting-started]: #getting-started
@@ -652,5 +652,7 @@ I took my inspiration from JUnit and PHPUnit, thank you guys for being there for
 [bug-list]: https://github.com/agop/ciunit-framework/issues
 [download-master-zip]: https://github.com/agop/ciunit-framework/archive/master.zip
 [twitter-bootstrap]: http://twitter.github.com/bootstrap/
+[phpunit]: https://github.com/sebastianbergmann/phpunit
+[junit]: https://github.com/junit-team/junit
 
 
