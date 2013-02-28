@@ -46,8 +46,7 @@ require_once 'AssertTest.php';
 require_once 'ConstraintTest.php';
 require_once 'SuiteTest.php';
 require_once 'TestCaseTest.php';
-require_once 'FailuresTest.php';
-require_once 'IncompleteTest.php';
+require_once 'IncompleteTest.php'; 
  
 /**
  * Testing the CIUnit functionality of creating and running suites of suites

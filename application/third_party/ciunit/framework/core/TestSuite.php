@@ -172,7 +172,8 @@ class CIUnit_Framework_TestSuite implements CIUnit_Framework_TestInterface,
         }
         
         // Check if there are any test in the class
-        if (empty($this->testInSuite) && !$class->hasMethod('suite')) {
+        if (empty($this->testInSuite)) {
+            if(!$class->isSubclassOf('CIUnit_Framework_TestSuite'))
             // Add warning class has no methods
             $this->addTest(
                     new CIUnit_Framework_TestWarning(sprintf("Warning class %s has no test methods", $class->getName())));
