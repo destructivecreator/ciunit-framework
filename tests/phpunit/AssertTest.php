@@ -14,7 +14,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
      * @covers CIUnit_Framework_Assert::assetArrayHasKey()
      */
     public function testAssertArrayHasIntegerKey ()
-    { 
+    {  
         CIUnit_Framework_Assert::assertArrayHasKey(0, array('foo'));
         
         try {
