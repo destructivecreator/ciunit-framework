@@ -4,7 +4,8 @@ CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for 
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
 for small projects where the full potential of PHPUnit is not used and a good start for unit testing newbies.
 
-We are still in Beta version, so if you notice any bugs please report them [here][bug-list].
+We are still in Beta version, so if you notice any bugs please report them [here][bug-list]. <br/>
+Any suggestions on how to improve our code are wellcome :)
 
 
 Table of Contents
@@ -35,7 +36,7 @@ CIUnit requires CodeIgniter >= 2.0
 
 ### How to install
 
-* Download CIUnit Framework from [here][download-master-zip]
+* Download CIUnit Framework from [here][download-master-zip] or just clone the repo```git clone git@github.com:agop/ciunit-framework.git```
 * Unzip the ```resources/``` folder in the root of your application
 * Unzip the ```controllers/ciunit_controller.php``` to your ```controllers/``` folder
 * Unzip the ```third_party/ciunit/``` folder to your ```third_party/``` folder
@@ -52,8 +53,8 @@ $route['ciunit/(:any)'] = "ciunit_controller/index/$1";
 $config['base_url'] = 'http://example.com/';
 ```
 * Now you must be good to go.
- - http://example.com/index.php/ciunit or
- - http://example.com/ciunit
+ - ```http://example.com/index.php/ciunit``` or
+ - ```http://example.com/ciunit``` depending on your url configuration
 
 <b>NB!</b> If you have any issues installing CIUnit, please feel free to contact me.
 
@@ -625,7 +626,7 @@ Licensed under the The BSD 3-Clause License
 
 The front-end is developed using the [Bootstrap framework][twitter-bootstrap] by Twitter.
 
-I took my inspiration from JUnit and PHPUnit, thank you guys for being there for us.
+I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys for being there for us.
 
 <!-- deep links -->
 [getting-started]: #getting-started
@@ -652,5 +653,7 @@ I took my inspiration from JUnit and PHPUnit, thank you guys for being there for
 [bug-list]: https://github.com/agop/ciunit-framework/issues
 [download-master-zip]: https://github.com/agop/ciunit-framework/archive/master.zip
 [twitter-bootstrap]: http://twitter.github.com/bootstrap/
+[phpunit]: https://github.com/sebastianbergmann/phpunit
+[junit]: https://github.com/junit-team/junit
 
 
