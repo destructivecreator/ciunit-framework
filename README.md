@@ -4,7 +4,8 @@ CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for 
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
 for small projects where the full potential of PHPUnit is not used and a good start for unit testing newbies.
 
-We are still in Beta version, so if you notice any bugs please report them [here][bug-list].
+We are still in Beta version, so if you notice any bugs please report them [here][bug-list]. <br/>
+Any suggestions on how to improve our code are wellcome :)
 
 
 Table of Contents
