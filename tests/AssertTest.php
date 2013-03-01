@@ -22,7 +22,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
         } catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
-        
+         
         
         $this->fail();
     }
