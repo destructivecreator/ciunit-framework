@@ -173,13 +173,20 @@ class CIUnit_ResultPresenter
         $e = $defect->getThrownException();
         
         $eTrace = $e->getTrace();
+ 
+        $trace = "";
+        // Iterate over trace stack, depth of 6 should be enough
+        for($i=0; $i<6; $i++) {
+            // Filter the exception trace
+            if(isset($eTrace[$i]['file']) && isset($eTrace[$i]['line'])) {
+                // Exclude all framework files form trace
+                if(!preg_match("/^.*\/ciunit\/framework\/core/", $eTrace[$i]['file'])) {
+                    $trace .= sprintf("\n# %s at line %s", $eTrace[$i]['file'], $eTrace[$i]['line']);
+                }
+            }
+        }
         
-        //TODO debug trace is not accurate for some test 
-        $filePath = $eTrace[2]['file'];
-        $line = $eTrace[2]['line'];
-        
-        return sprintf("%s \n# %s at line %s", $e->getMessage(), $filePath, 
-                $line);
+        return sprintf("%s %s", $e->getMessage(), $trace);
     }
 }
 
