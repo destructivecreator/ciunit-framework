@@ -45,79 +45,81 @@
 /**
  * Used for autoloading CIUnit classes
  */
- 
-spl_autoload_register(
-        function  ($class)
-        {
-            static $classes = NULL;
-            static $path = NULL;
-            
-            if ($classes === NULL) {
-                $classes = array(
-                        // core
-                        'ciunit_framework_assert' => '/core/Assert.php',
-                        'ciunit_framework_constraintabstract' => '/core/Constraint.php',
-                        'ciunit_framework_testinterface' => '/core/Test.php',
-                        'ciunit_framework_testcase' => '/core/TestCase.php',
-                        'ciunit_framework_testresult' => '/core/TestResult.php',
-                        'ciunit_framework_testsuite' => '/core/TestSuite.php',
-                        'ciunit_framework_testfailure' => '/core/TestFailure.php',
-                        'ciunit_framework_testsuccess' => '/core/TestSuccess.php',
-                        'ciunit_framework_testrunner' => '/core/TestRunner.php',
-                        'ciunit_framework_testwarning' => '/core/TestWarning.php',
-                        'ciunit_framework_comparatorabstract' => '/core/Comparator.php',
-                        'ciunit_framework_comparatorabstractfactory' => '/core/ComparatorFactory.php',
-                        
-                        // constraint
-                        'ciunit_framework_constraint_arrayhaskey' => '/core/constraint/ArrayHasKey.php',
-                        'ciunit_framework_constraint_not' => '/core/constraint/Not.php',
-                        'ciunit_framework_constraint_exception' => '/core/constraint/Exception.php',
-                        'ciunit_framework_constraint_count' => '/core/constraint/Count.php',
-                        'ciunit_framework_constraint_isempty' => '/core/constraint/IsEmpty.php',
-                        'ciunit_framework_constraint_istrue' => '/core/constraint/IsTrue.php',
-                        'ciunit_framework_constraint_isfalse' => '/core/constraint/IsFalse.php',
-                        'ciunit_framework_constraint_isinstanceof' => '/core/constraint/IsInstanceOf.php',
-                        'ciunit_framework_constraint_isnull' => '/core/constraint/IsNull.php',
-                        'ciunit_framework_constraint_istype' => '/core/constraint/IsType.php',
-                        'ciunit_framework_constraint_samesize' => '/core/constraint/SameSize.php',
-                        'ciunit_framework_constraint_isequal' => '/core/constraint/IsEqual.php',
-                        
-                        // comparator
-                        'ciunit_framework_comparator_type' => '/core/comparator/Type.php',
-                        'ciunit_framework_comparator_scalar' => '/core/comparator/Scalar.php',
-                        'ciunit_framework_comparator_numeric' => '/core/comparator/Numeric.php',
-                        'ciunit_framework_comparator_double' => '/core/comparator/Double.php',
-                        'ciunit_framework_comparator_array' => '/core/comparator/Array.php',
-                        'ciunit_framework_comparator_resource' => '/core/comparator/Resource.php',
-                        'ciunit_framework_comparator_object' => '/core/comparator/Object.php',
-                        'ciunit_framework_comparator_exception' => '/core/comparator/Exception.php',
-                        
-                        // exception
-                        'ciunit_framework_exception_invalidargument' => '/core/exception/InvalidArgument.php',
-                        'ciunit_framework_exception_assertionfailed' => '/core/exception/AssertionFailed.php',
-                        'ciunit_framework_exception_comparissonfailure' => '/core/exception/ComparissonFailure.php',
-                        'ciunit_framework_exception_ciunitexception' => '/core/exception/Exception.php',
-                        'ciunit_framework_exception_incompletetest' => '/core/exception/IncompleteTest.php',
-                        'ciunit_framework_exception_skippedtest' => '/core/exception/SkippedTest.php',
-                        'ciunit_framework_exception_expectationfailed' => '/core/exception/ExpectationFailed.php',
-                        
-                        // util
-                        'ciunit_util_timer' => '/util/Timer.php',
-                        'ciunit_util_memory' => '/util/Memory.php',
-                        'ciunit_util_type' => '/util/Type.php',
-                        'ciunit_util_difference' => '/util/Difference.php',
-                        'ciunit_util_fileloader' => '/util/FileLoader.php',
-                        
-                        // printer
-                        'ciunit_resultpresenter' => '/presenter/ResultPresenter.php'
-                );
-                
-                $path = dirname(__FILE__);
-            }
-            
-            $cn = strtolower($class);
-            
-            if (isset($classes[$cn])) {
-                require $path . $classes[$cn];
-            }
-        });
+  
+function ciunit_autoloader($class)
+{
+    static $classes = NULL;
+    static $path = NULL;
+
+    if ($classes === NULL) {
+        $classes = array(
+                // core
+                'ciunit_framework_assert' => '/core/Assert.php',
+                'ciunit_framework_constraintabstract' => '/core/Constraint.php',
+                'ciunit_framework_testinterface' => '/core/Test.php',
+                'ciunit_framework_testcase' => '/core/TestCase.php',
+                'ciunit_framework_testresult' => '/core/TestResult.php',
+                'ciunit_framework_testsuite' => '/core/TestSuite.php',
+                'ciunit_framework_testfailure' => '/core/TestFailure.php',
+                'ciunit_framework_testsuccess' => '/core/TestSuccess.php',
+                'ciunit_framework_testrunner' => '/core/TestRunner.php',
+                'ciunit_framework_testwarning' => '/core/TestWarning.php',
+                'ciunit_framework_comparatorabstract' => '/core/Comparator.php',
+                'ciunit_framework_comparatorabstractfactory' => '/core/ComparatorFactory.php',
+
+                // constraint
+                'ciunit_framework_constraint_arrayhaskey' => '/core/constraint/ArrayHasKey.php',
+                'ciunit_framework_constraint_not' => '/core/constraint/Not.php',
+                'ciunit_framework_constraint_exception' => '/core/constraint/Exception.php',
+                'ciunit_framework_constraint_count' => '/core/constraint/Count.php',
+                'ciunit_framework_constraint_isempty' => '/core/constraint/IsEmpty.php',
+                'ciunit_framework_constraint_istrue' => '/core/constraint/IsTrue.php',
+                'ciunit_framework_constraint_isfalse' => '/core/constraint/IsFalse.php',
+                'ciunit_framework_constraint_isinstanceof' => '/core/constraint/IsInstanceOf.php',
+                'ciunit_framework_constraint_isnull' => '/core/constraint/IsNull.php',
+                'ciunit_framework_constraint_istype' => '/core/constraint/IsType.php',
+                'ciunit_framework_constraint_samesize' => '/core/constraint/SameSize.php',
+                'ciunit_framework_constraint_isequal' => '/core/constraint/IsEqual.php',
+
+                // comparator
+                'ciunit_framework_comparator_type' => '/core/comparator/Type.php',
+                'ciunit_framework_comparator_scalar' => '/core/comparator/Scalar.php',
+                'ciunit_framework_comparator_numeric' => '/core/comparator/Numeric.php',
+                'ciunit_framework_comparator_double' => '/core/comparator/Double.php',
+                'ciunit_framework_comparator_array' => '/core/comparator/Array.php',
+                'ciunit_framework_comparator_resource' => '/core/comparator/Resource.php',
+                'ciunit_framework_comparator_object' => '/core/comparator/Object.php',
+                'ciunit_framework_comparator_exception' => '/core/comparator/Exception.php',
+
+                // exception
+                'ciunit_framework_exception_invalidargument' => '/core/exception/InvalidArgument.php',
+                'ciunit_framework_exception_assertionfailed' => '/core/exception/AssertionFailed.php',
+                'ciunit_framework_exception_comparissonfailure' => '/core/exception/ComparissonFailure.php',
+                'ciunit_framework_exception_ciunitexception' => '/core/exception/Exception.php',
+                'ciunit_framework_exception_incompletetest' => '/core/exception/IncompleteTest.php',
+                'ciunit_framework_exception_skippedtest' => '/core/exception/SkippedTest.php',
+                'ciunit_framework_exception_expectationfailed' => '/core/exception/ExpectationFailed.php',
+
+                // util
+                'ciunit_util_timer' => '/util/Timer.php',
+                'ciunit_util_memory' => '/util/Memory.php',
+                'ciunit_util_type' => '/util/Type.php',
+                'ciunit_util_difference' => '/util/Difference.php',
+                'ciunit_util_fileloader' => '/util/FileLoader.php',
+
+                // printer
+                'ciunit_resultpresenter' => '/presenter/ResultPresenter.php'
+        );
+
+        $path = dirname(__FILE__);
+    }
+
+    $cn = strtolower($class);
+
+    if (isset($classes[$cn])) {
+        require $path . $classes[$cn];
+    }
+}
+
+
+spl_autoload_register('ciunit_autoloader');
