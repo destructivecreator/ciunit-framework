@@ -228,7 +228,7 @@ class MySuite extends CIUnit_Framework_TestSuite
 {
     public static function suite()
     {
-        $suite = new CIUnit_Framework_TestSuite('Project Suite');
+        $suite = new MySuite('Project Suite');
         $suite->addTestSuite('MyTest');
         
         return $suite;
