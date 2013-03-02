@@ -1,9 +1,11 @@
 <?php
 
-require_once '/home/agop/public_html/ciunit-framework/application/third_party/ciunit/framework/autoload.php';
+ 
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'application/third_party/ciunit/framework/autoload.php';
+
 require_once 'PHPUnit/Framework/TestCase.php';
 
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'TestIterator.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'TestIterator.php';
  
 /**
  * Constraint test case.
