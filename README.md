@@ -33,6 +33,7 @@ Getting Started
 ---------------
 ### Requirements
 CIUnit requires CodeIgniter >= 2.0
+PHP >= 5.3
 
 ### How to install
 
