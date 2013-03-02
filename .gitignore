@@ -12,7 +12,7 @@ README.md
 license.txt
 index.php
 system/
-tests/
+application/tests
 application/cache
 application/core
 application/errors
