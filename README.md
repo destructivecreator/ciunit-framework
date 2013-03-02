@@ -40,7 +40,7 @@ CIUnit requires CodeIgniter >= 2.0
 * Unzip the ```resources/``` folder in the root of your application
 * Unzip the ```controllers/ciunit_controller.php``` to your ```controllers/``` folder
 * Unzip the ```third_party/ciunit/``` folder to your ```third_party/``` folder
-* Create folder ```tests/``` inside your ```application/``` folder
+* Create folder ```tests/``` under your ```application/``` folder
 * Add the following routes to your ```routes.php```
 
 ```php
@@ -67,7 +67,7 @@ Default configuration is as follows
 $config['tests_path'] = APPPATH .'tests/';
 $config['resources_path'] = 'resources/';
 ```
-### Sreenshots
+### Screenshots
 #### Failure
  ![Screenshot of CIUnit, displaying failures in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
  
