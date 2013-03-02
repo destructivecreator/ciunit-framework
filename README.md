@@ -32,7 +32,7 @@ Table of Contents
 Getting Started
 ---------------
 ### Requirements
-CIUnit requires CodeIgniter >= 2.0
+CIUnit requires CodeIgniter >= 2.0 <br/>
 PHP >= 5.3
 
 ### How to install
