@@ -64,8 +64,8 @@ class CIUnit_ResultPresenter
     public function getHeader ()
     {
         return sprintf(
-                "Assertions: %d, Tests: %d, Failures: %d, Errors: %d, Ignored: %d, Incomplete: %d, Time: %f seconds, Memory: %s \n", 
-                $this->result->getAssertionsCount(), $this->result->count(), 
+                "Tests: %d, Assertions: %d, Failures: %d, Errors: %d, Ignored: %d, Incomplete: %d, Time: %f seconds, Memory: %s \n", 
+                $this->result->count(), $this->result->getAssertionsCount(), 
                 $this->result->getFailureCount(), $this->result->getErrorCount(), 
                 $this->result->getSkippedCount(), 
                 $this->result->getNotImplementedCount(), 
