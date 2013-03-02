@@ -75,7 +75,7 @@ class CIUnit_Framework_Exception_ExpectationFailed extends CIUnit_Framework_Exce
     {
         $this->comparisonFailure = $comparisonFailure;
         
-        parent::__construct($message, 0, $previous);
+        parent::__construct($message, null, $previous);
     }
 
     /**
