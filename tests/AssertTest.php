@@ -1,6 +1,6 @@
 <?php
 
-require_once '/home/agop/public_html/ciunit-framework/application/third_party/ciunit/framework/autoload.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'application/third_party/ciunit/framework/autoload.php';
 require_once 'PHPUnit/Framework/TestCase.php';
  
 /**
