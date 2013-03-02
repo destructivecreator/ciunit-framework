@@ -67,7 +67,7 @@ Default configuration is as follows
 $config['tests_path'] = APPPATH .'tests/';
 $config['resources_path'] = 'resources/';
 ```
-### Sreenshots
+### Screenshots
 #### Failure
  ![Screenshot of CIUnit, displaying failures in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
  
