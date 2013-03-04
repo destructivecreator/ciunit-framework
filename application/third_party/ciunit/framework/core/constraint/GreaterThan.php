@@ -44,18 +44,33 @@
 
 class CIUnit_Framework_Constraint_GreaterThan extends CIUnit_Framework_ConstraintAbstract
 {
+    /**
+     * @var mixed
+     */
     protected  $evaluated;
     
+    /**
+     * Class constructor
+     * @param mixed $evaluated
+     */
     public function __construct($evaluated)
     {
         $this->evaluated = $evaluated;
     }
     
+    /**
+     * (non-PHPdoc)
+     * @see CIUnit_Framework_ConstraintAbstract::matches()
+     */
     protected function matches($value)
     {
         return $value > $this->evaluated;
     } 
     
+    /**
+     * String representation of the constraint
+     * @return string
+     */
     public function toString()
     {
         return sprintf('is greater than %s', CIUnit_Util_Type::export($this->evaluated));
