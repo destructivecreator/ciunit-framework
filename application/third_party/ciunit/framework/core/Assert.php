@@ -358,6 +358,19 @@ abstract class CIUnit_Framework_Assert
                         $delta, $canonicalize, $ignoreCase));
         self::assertThat($actual, $constraint, $message);
     }
+    
+    /**
+     * Asserts that a value is greater than another value
+     * 
+     * @param unknown_type $expected
+     * @param unknown_type $actual
+     * @param string $message
+     */
+    public static function assertGreaterThan($expected, $actual, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_GreaterThan($expected);
+        self::assertThat($actual, $constraint, $message);
+    }
 
     /**
      *

@@ -505,5 +505,21 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	
     	$this->fail();
     }
+    
+    
+    
+    public function testAssertGreaterThan()
+    {
+        CIUnit_Framework_Assert::assertGreaterThan(1, 2);
+        
+        try {
+            CIUnit_Framework_Assert::assertGreaterThan(2, 1);
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
 }
 

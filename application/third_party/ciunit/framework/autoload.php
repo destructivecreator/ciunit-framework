@@ -79,7 +79,8 @@ function ciunit_autoloader($class)
                 'ciunit_framework_constraint_isnull' => '/core/constraint/IsNull.php',
                 'ciunit_framework_constraint_istype' => '/core/constraint/IsType.php',
                 'ciunit_framework_constraint_samesize' => '/core/constraint/SameSize.php',
-                'ciunit_framework_constraint_isequal' => '/core/constraint/IsEqual.php',
+                'ciunit_framework_constraint_isequal'     => '/core/constraint/IsEqual.php',
+                'ciunit_framework_constraint_greaterthan' => '/core/constraint/GreaterThan.php',
 
                 // comparator
                 'ciunit_framework_comparator_type' => '/core/comparator/Type.php',
