@@ -56,8 +56,14 @@ $config['base_url'] = 'http://example.com/';
 * Now you must be good to go.
  - ```http://example.com/index.php/ciunit``` or
  - ```http://example.com/ciunit``` depending on your url configuration
+ 
 
-<b>NB!</b> If you have any issues installing CIUnit, please feel free to contact me.
+<b>NB!</b> CIUnit used CodeIgniter's ```ENVIRONMENT``` constant, and will only works only in ```testing``` or ```development```. Please make sure your are not running in ```production```.
+Change your working environment from your ```index.php```located in the ```root``` of your project.
+
+```php
+ define('ENVIRONMENT', 'testing');
+```
 
 
 #### Customization
@@ -68,6 +74,9 @@ Default configuration is as follows
 $config['tests_path'] = APPPATH .'tests/';
 $config['resources_path'] = 'resources/';
 ```
+
+If you have any issues installing CIUnit, please feel free to contact me.
+
 ### Screenshots
 #### Failure
  ![Screenshot of CIUnit, displaying failures in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
