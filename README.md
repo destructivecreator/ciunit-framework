@@ -1,6 +1,6 @@
-CIUnit 1.0 Beta
+CIUnit 1.0 Beta ![Build Status](https://travis-ci.org/agop/ciunit-framework.png)
 ---------------
-CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runns on top
+CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runs on top
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
 for small projects where the full potential of PHPUnit is not used and a good start for unit testing newbies.
 
@@ -32,7 +32,8 @@ Table of Contents
 Getting Started
 ---------------
 ### Requirements
-CIUnit requires CodeIgniter >= 2.0
+CIUnit requires CodeIgniter >= 2.0 <br/>
+PHP >= 5.3
 
 ### How to install
 
@@ -55,8 +56,14 @@ $config['base_url'] = 'http://example.com/';
 * Now you must be good to go.
  - ```http://example.com/index.php/ciunit``` or
  - ```http://example.com/ciunit``` depending on your url configuration
+ 
 
-<b>NB!</b> If you have any issues installing CIUnit, please feel free to contact me.
+<b>NB!</b> CIUnit used CodeIgniter's ```ENVIRONMENT``` constant, and will only works only in ```testing``` or ```development```. Please make sure your are not running in ```production```.
+Change your working environment from your ```index.php```located in the ```root``` of your project.
+
+```php
+ define('ENVIRONMENT', 'testing');
+```
 
 
 #### Customization
@@ -67,6 +74,9 @@ Default configuration is as follows
 $config['tests_path'] = APPPATH .'tests/';
 $config['resources_path'] = 'resources/';
 ```
+
+If you have any issues installing CIUnit, please feel free to contact me.
+
 ### Screenshots
 #### Failure
  ![Screenshot of CIUnit, displaying failures in results.](https://lh5.googleusercontent.com/-PPF0wZLcCok/USkkZO0qRuI/AAAAAAAAFoc/6X5wucMEscQ/s797/failure.png "CIUnit Test Results")
