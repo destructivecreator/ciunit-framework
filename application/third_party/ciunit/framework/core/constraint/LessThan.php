@@ -43,7 +43,7 @@
  */
 
 /**
- * Class asserts that the value it is evaluated for is greater 
+ * Class asserts that a value is less than 
  *
  * @package    CIUnit
  * @subpackage ciunit/core/constraint
@@ -52,12 +52,12 @@
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @since      File available since Release 1.1.0
  */
-class CIUnit_Framework_Constraint_GreaterThan extends CIUnit_Framework_ConstraintAbstract
+class CIUnit_Framework_Constraint_LessThan extends CIUnit_Framework_ConstraintAbstract
 {
     /**
      * @var mixed
      */
-    protected  $evaluated;
+    protected $evaluated;
     
     /**
      * Class constructor
@@ -74,16 +74,16 @@ class CIUnit_Framework_Constraint_GreaterThan extends CIUnit_Framework_Constrain
      */
     protected function matches($value)
     {
-        return $value > $this->evaluated;
-    } 
-    
+        return $value < $this->evaluated;
+    }
+
     /**
      * String representation of the constraint
      * @return string
      */
     public function toString()
     {
-        return sprintf('is greater than %s', CIUnit_Util_Type::export($this->evaluated));
+        return sprintf('is less than %s', CIUnit_Util_Type::export($this->evaluated));
     }
 }
 

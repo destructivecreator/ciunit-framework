@@ -468,7 +468,9 @@ class AssertTest extends PHPUnit_Framework_TestCase
         $this->fail();
     }
     
-    
+    /**
+     * @covers CIUnit_Framework_Assert::assertInternalType()
+     */
     public function testAssertInternalType()
     {
     	$this->assertInternalType('integer', 1);
@@ -480,7 +482,9 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	}
     	$this->fail();
     }
-    
+    /**
+     * @covers CIUnit_Framework_Assert::assertNotInternalType()
+     */
     public function testAssertNotInternalType()
     {
     	CIUnit_Framework_Assert::assertNotInternalType('integer', 'ww');
@@ -492,7 +496,9 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	}
     	$this->fail();
     }
-    
+    /**
+     * @covers CIUnit_Framework_Assert::assertSameSize()
+     */
     public function testAssertSameSize()
     {
     	CIUnit_Framework_Assert::assertSameSize(array('one'), array(1));
@@ -521,6 +527,59 @@ class AssertTest extends PHPUnit_Framework_TestCase
             return;
         }
         
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertGreaterThanOrEqual()
+     */
+    public function testAssertGreaterThanOrEqual()
+    {
+        CIUnit_Framework_Assert::assertGreaterThanOrEqual(12, 12);
+        CIUnit_Framework_Assert::assertGreaterThanOrEqual(2, 12);
+        
+        try {
+            CIUnit_Framework_Assert::assertGreaterThanOrEqual(2, 1);
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertLessThan()
+     */
+    public function testAssertLessThan()
+    {
+        CIUnit_Framework_Assert::assertLessThan(13, 2);
+    
+        try {
+            CIUnit_Framework_Assert::assertLessThan(2, 11);
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertLessThanOrEqual()
+     */
+    public function testAssertLessThanOrEqual()
+    {
+        CIUnit_Framework_Assert::assertLessThanOrEqual(13, 13);
+        CIUnit_Framework_Assert::assertLessThanOrEqual(13, 3);
+    
+        try {
+            CIUnit_Framework_Assert::assertLessThanOrEqual(1, 11);
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
         $this->fail();
     }
 }

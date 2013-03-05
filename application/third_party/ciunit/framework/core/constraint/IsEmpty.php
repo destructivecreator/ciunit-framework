@@ -44,7 +44,7 @@
  */
 
 /**
- * Constraint that asserts that thevalue it is evaluated for is empty.
+ * Constraint that asserts that the value it is evaluated for is empty.
  *
  * @package CIUnit
  * @subpackage Constraint

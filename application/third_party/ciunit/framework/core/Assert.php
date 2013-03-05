@@ -362,8 +362,8 @@ abstract class CIUnit_Framework_Assert
     /**
      * Asserts that a value is greater than another value
      * 
-     * @param unknown_type $expected
-     * @param unknown_type $actual
+     * @param mixed $expected
+     * @param mixed $actual
      * @param string $message
      */
     public static function assertGreaterThan($expected, $actual, $message = '')
@@ -372,6 +372,45 @@ abstract class CIUnit_Framework_Assert
         self::assertThat($actual, $constraint, $message);
     }
 
+    /**
+     * Asserts that a value is greater than or equal to another value
+     * 
+     * @param mixed $expected
+     * @param mixed $actual
+     * @param string $message
+     */
+    public static function assertGreaterThanOrEqual($expected, $actual, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_GreaterThanOrEqual($expected);
+        self::assertThat($actual, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that a value is less than another value
+     * 
+     * @param mixed $expected
+     * @param mixed $actual
+     * @param string $message
+     */
+    public static function assertLessThan($expected, $actual, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_LessThan($expected);
+        self::assertThat($actual, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that a value is less than or equal to another value
+     *
+     * @param mixed $expected
+     * @param mixed $actual
+     * @param string $message
+     */
+    public static function assertLessThanOrEqual($expected, $actual, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_LessThanOrEqual($expected);
+        self::assertThat($actual, $constraint, $message);
+    }
+    
     /**
      *
      * @param mixed $value            

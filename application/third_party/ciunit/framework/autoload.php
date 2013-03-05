@@ -81,6 +81,9 @@ function ciunit_autoloader($class)
                 'ciunit_framework_constraint_samesize' => '/core/constraint/SameSize.php',
                 'ciunit_framework_constraint_isequal'     => '/core/constraint/IsEqual.php',
                 'ciunit_framework_constraint_greaterthan' => '/core/constraint/GreaterThan.php',
+                'ciunit_framework_constraint_greaterthanorequal' => '/core/constraint/GreaterThanOrEqual.php',
+                'ciunit_framework_constraint_lessthan' => '/core/constraint/LessThan.php',
+                'ciunit_framework_constraint_lessthanorequal' => '/core/constraint/LessThanOrEqual.php',
 
                 // comparator
                 'ciunit_framework_comparator_type' => '/core/comparator/Type.php',
