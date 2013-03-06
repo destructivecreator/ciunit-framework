@@ -424,6 +424,19 @@ abstract class CIUnit_Framework_Assert
     }
     
     /**
+     * Asserts that string does not start with prefix
+     * @param string $prefix
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringNotStartsWith($prefix, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringStartsWith($prefix);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($string, $notConstraint, $message);
+    }
+    
+    /**
      * Asserts that string ends with suffix
      * 
      * @param string $suffix
@@ -434,6 +447,20 @@ abstract class CIUnit_Framework_Assert
     {
         $constraint = new CIUnit_Framework_Constraint_StringEndsWith($suffix);
         self::assertThat($string, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that string does not end with suffix
+     *
+     * @param string $suffix
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringNotEndsWith($suffix, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringEndsWith($suffix);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($string, $notConstraint, $message);
     }
     
     /**

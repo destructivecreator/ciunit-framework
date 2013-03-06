@@ -601,6 +601,23 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers CIUnit_Framework_Assert::assertStringNotStartsWith()
+     */
+    public function testAssertStringNotStartsWith()
+    {
+        CIUnit_Framework_Assert::assertStringNotStartsWith('abv', 'presentation');
+    
+        try {
+            CIUnit_Framework_Assert::assertStringNotStartsWith('prese', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
      * @covers CIUnit_Framework_Assert::assertStringEndsWith()
      */
     public function testAssertStringEndsWith()
@@ -609,6 +626,23 @@ class AssertTest extends PHPUnit_Framework_TestCase
     
         try {
             CIUnit_Framework_Assert::assertStringEndsWith('abc', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringNotEndsWith()
+     */
+    public function testAssertStringNotEndsWith()
+    {
+        CIUnit_Framework_Assert::assertStringNotEndsWith('tationr', 'presentation');
+    
+        try {
+            CIUnit_Framework_Assert::assertStringNotEndsWith('ion', 'presentation');
         }
         catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;

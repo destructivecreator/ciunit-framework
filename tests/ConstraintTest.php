@@ -1218,6 +1218,33 @@ EOF
     
     /**
      * @covers CIUnit_Framework_Constraint_StringEndsWith
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringNotStartsWith()
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringStartsWith('fa');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+         
+        $this->assertFalse($notConstraint->evaluate('fabric', '', TRUE));
+        $this->assertEquals('string does not start with \'fa\'', $notConstraint->toString());
+    
+        try {
+            $notConstraint->evaluate('fabric');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'fabric' string does not start with 'fa'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringEndsWith
      * @covers CIUnit_Framework_Constraint_StringEndsWith::count
      * @covers CIUnit_Framework_Constraint_StringEndsWith::toString
      * @covers CIUnit_ExpectationFailureException::toString
@@ -1236,6 +1263,31 @@ EOF
         }
         catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
             $this->assertEquals("Failed asserting that 'testing' string ends with 'abc'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringEndsWith
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringNotEndsWith()
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringEndsWith('ric');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+         
+        $this->assertFalse($notConstraint->evaluate('fabric', '', TRUE));
+        $this->assertEquals('string does not end with \'ric\'', $notConstraint->toString());
+    
+        try {
+            $notConstraint->evaluate('fabric');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'fabric' string does not end with 'ric'.", $e->__toString());
     
             return;
         }

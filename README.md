@@ -691,7 +691,7 @@ Failed asserting that 21 is less than 13.
 Method asserts that a value is less than or equal to another value
 
 ```AssertLessThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
-Reports an error identified by ```$message``` if ```$expected``` is not less than or equal to ```$actual```. 
+Reports an error identified by ```$message``` if ```$expected``` is not less than or equal to ```$actual```.  
 
 ```php
 <?php
@@ -706,6 +706,47 @@ class LessThanOrEqualTest extends CIUnit_Framework_TestCase
 Failure description
 ```
 Failed asserting that 15 is less or equal to 13.  
+```
+### assertStringStartsWith
+Method assert that string starts with a give prefix
+
+```assertStringStartsWith(string $prefix, string $string, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$string``` does not start with ```$prefix```. <br/>
+```assertStringNotStartsWith()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class assertStringStartsWithTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertStringStartsWith('prse', 'presentation');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'presentation' string starts with 'prse'. 
+```
+
+### assertStringEndsWith
+Method assert that string starts with a give prefix
+
+```assertStringEndsWith(string $suffix, string $string, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$string``` does not end with ```$suffix```. <br/>
+```assertStringNotEndsWith()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class assertStringEndsWithTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertStringEndsWith('tatiodn', 'presentation');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'presentation' string ends with 'tatiodn'. 
 ```
 
 Issues
