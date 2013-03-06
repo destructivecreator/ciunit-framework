@@ -582,5 +582,39 @@ class AssertTest extends PHPUnit_Framework_TestCase
     
         $this->fail();
     }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringStartsWith()
+     */
+    public function testAssertStringStartsWith()
+    {
+        CIUnit_Framework_Assert::assertStringStartsWith('pre', 'presentation');
+        
+        try {
+            CIUnit_Framework_Assert::assertStringStartsWith('abc', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringEndsWith()
+     */
+    public function testAssertStringEndsWith()
+    {
+        CIUnit_Framework_Assert::assertStringEndsWith('tation', 'presentation');
+    
+        try {
+            CIUnit_Framework_Assert::assertStringEndsWith('abc', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
 }
 

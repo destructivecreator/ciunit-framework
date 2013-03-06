@@ -412,6 +412,31 @@ abstract class CIUnit_Framework_Assert
     }
     
     /**
+     * Asserts that string starts with prefix
+     * @param string $prefix
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringStartsWith($prefix, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringStartsWith($prefix);
+        self::assertThat($string, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that string ends with suffix
+     * 
+     * @param string $suffix
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringEndsWith($suffix, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringEndsWith($suffix);
+        self::assertThat($string, $constraint, $message);
+    }
+    
+    /**
      *
      * @param mixed $value            
      * @param CIUnit_Framework_ConstraintAbstract $constraint            
