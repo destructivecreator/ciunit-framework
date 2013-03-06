@@ -624,7 +624,7 @@ Failure description
 Failed asserting that false is true.  
 ```
 
-### AssertGreaterThan
+### assertGreaterThan
 Method asserts that a value is greater than another value
 
 ```assertGreaterThan(mixed $expected, mixed $actual, string $message = '')```<br/>
@@ -645,7 +645,7 @@ Failure description
 Failed asserting that 2 is greater than 12. 
 ```
 
-### AssertGreaterThanOrEqual
+### assertGreaterThanOrEqual
 Method asserts that a value is greater than or equal to another value
 
 ```AssertGreaterThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
@@ -666,7 +666,7 @@ Failure description
 Failed asserting that 12 is greater or equal to 13. 
 ```
 
-### AssertLessThan
+### assertLessThan
 Method asserts that a value is less than another value
 
 ```AssertLessThan(mixed $expected, mixed $actual, string $message = '')```<br/>
@@ -687,7 +687,7 @@ Failure description
 Failed asserting that 21 is less than 13. 
 ```
 
-### AssertLessThanOrEqual
+### assertLessThanOrEqual
 Method asserts that a value is less than or equal to another value
 
 ```AssertLessThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
@@ -790,6 +790,9 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertgreaterthanorequal]: #assertgreaterthanorequal
 [assertlessthan]: #assertlessthan
 [assertlessthanorequal]: #assertlessthanorequal
+[assertStringStartsWith]: #assertStringStartsWith
+[assertStringEndsWith]: #assertStringEndsWith
+
 
 [issues]: #issues
 [credits]: #credits
