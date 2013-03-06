@@ -756,12 +756,15 @@ Change Log
 ----------
 ### Version 1.1.0
  Release date: <br/>
-
- #### Changes:
+#### Changes:
   * Added [assertGreaterThan][assertgreaterthan]
   * Added [assertGreaterThanOrEqual][assertgreaterthanorequal]
+  * Added [assertLessThan][assertlessthan]
+  * Added [assertLessThanOrEqual][assertlessthanorequal]
+  * Added [assertStringStartsWith][assertstringstartswith]
+  * Added [assertStringEndsWith][assertstringendswith]
 
- #### Bug fixes:
+#### Bug fixes:
 
 Issues
 ------
