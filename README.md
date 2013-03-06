@@ -30,6 +30,8 @@ Table of Contents
  * [AssertGreaterThanOrEqual][assertgreaterthanorequal]
  * [AssertLessThan][assertlessthan]
  * [AssertLessThanOrEqual][assertlessthanorequal]
+ * [AssertStringStartsWith][assertstringstartswith]
+ * [AssertStringEndsWith][assertstringendswith]
 * [Issues][issues]
 * [Credits][credits]
 
@@ -790,8 +792,8 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertgreaterthanorequal]: #assertgreaterthanorequal
 [assertlessthan]: #assertlessthan
 [assertlessthanorequal]: #assertlessthanorequal
-[assertStringStartsWith]: #assertStringStartsWith
-[assertStringEndsWith]: #assertStringEndsWith
+[assertstringstartswith]: #assertstringstartswith
+[assertstringendswith]: #assertstringendswith
 
 
 [issues]: #issues
