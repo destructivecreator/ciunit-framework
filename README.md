@@ -777,7 +777,7 @@ Failed asserting that 'presentation' string matches the regular expression '/^pr
 Change Log
 ----------
 ### Version 1.1.0
- Release date: <br/>
+ Release date:  March 6, 2013
 #### Changes:
   * Added [assertGreaterThan][assertgreaterthan]
   * Added [assertGreaterThanOrEqual][assertgreaterthanorequal]
