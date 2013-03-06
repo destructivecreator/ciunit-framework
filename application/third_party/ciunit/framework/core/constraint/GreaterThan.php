@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CIUnit
  *
@@ -36,52 +35,55 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package    CIUnit
- * @subpackage Constraint
+ * @subpackage constraint
  * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright  2013, Agop Seropyan <agopseropyan@gmail.com>
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @since      File available since Release 1.1.0
  */
 
 /**
- * Constraint that asserts that the value it is evaluated for is empty.
+ * Class asserts that the value it is evaluated for is greater 
  *
- * @package CIUnit
- * @subpackage Constraint
- * @author Agop Seropyan <agopseropyan@gmail.com>
- * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
- *          License
- * @since File available since Release 1.0.0
+ * @package    CIUnit
+ * @subpackage ciunit/core/constraint
+ * @author     Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright  2013, Agop Seropyan <agopseropyan@gmail.com>
+ * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
+ * @since      File available since Release 1.1.0
  */
-class CIUnit_Framework_Constraint_IsEmpty extends CIUnit_Framework_ConstraintAbstract
+class CIUnit_Framework_Constraint_GreaterThan extends CIUnit_Framework_ConstraintAbstract
 {
-
+    /**
+     * @var mixed
+     */
+    protected  $evaluated;
+    
+    /**
+     * Class constructor
+     * @param mixed $evaluated
+     */
+    public function __construct($evaluated)
+    {
+        $this->evaluated = $evaluated;
+    }
+    
     /**
      * (non-PHPdoc)
-     * 
      * @see CIUnit_Framework_ConstraintAbstract::matches()
      */
-    protected function matches ($value)
+    protected function matches($value)
     {
-        return empty($value);
-    }
-
+        return $value > $this->evaluated;
+    } 
+    
     /**
-     * (non-PHPdoc)
-     * 
-     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
+     * String representation of the constraint
+     * @return string
      */
-    public function failureDescription ($evaluated)
+    public function toString()
     {
-        $type = gettype($evaluated);
-        return sprintf('%s %s is empty', 
-                $type[0] == 'a' || $type[0] == 'o' ? 'an' : 'a', $type);
-    }
-
-    public function toString ()
-    {
-        return 'is empty';
+        return sprintf('is greater than %s', CIUnit_Util_Type::export($this->evaluated));
     }
 }
 

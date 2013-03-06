@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CIUnit 1.0 Beta  [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
+=======
+CIUnit 1.1 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
+>>>>>>> development
 ---------------
 CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runs on top
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
@@ -26,6 +30,14 @@ Table of Contents
  * [AssertNull][assertnull]
  * [AssertSameSize][assertsamesize]
  * [AssertTrue][asserttrue]
+ * [AssertGreaterThan][assertgreaterthan]
+ * [AssertGreaterThanOrEqual][assertgreaterthanorequal]
+ * [AssertLessThan][assertlessthan]
+ * [AssertLessThanOrEqual][assertlessthanorequal]
+ * [AssertStringStartsWith][assertstringstartswith]
+ * [AssertStringEndsWith][assertstringendswith]
+ * [AssertStringMatchesRegex][assertstringmatchesregex]
+* [Change Log][change-log]
 * [Issues][issues]
 * [Credits][credits]
 
@@ -620,6 +632,167 @@ Failure description
 Failed asserting that false is true.  
 ```
 
+### assertGreaterThan
+Method asserts that a value is greater than another value
+
+```assertGreaterThan(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not greater than ```$actual```. 
+
+```php
+<?php
+class GreaterThanTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertGreaterThan(12, 2);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 2 is greater than 12. 
+```
+
+### assertGreaterThanOrEqual
+Method asserts that a value is greater than or equal to another value
+
+```AssertGreaterThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not greater than or equal to ```$actual```. 
+
+```php
+<?php
+class GreaterThanOrEqualTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->AssertGreaterThanOrEqual(13, 12);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 12 is greater or equal to 13. 
+```
+
+### assertLessThan
+Method asserts that a value is less than another value
+
+```AssertLessThan(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not less than ```$actual```. 
+
+```php
+<?php
+class LessThanTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertLessThan(13, 21);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 21 is less than 13. 
+```
+
+### assertLessThanOrEqual
+Method asserts that a value is less than or equal to another value
+
+```AssertLessThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not less than or equal to ```$actual```.  
+
+```php
+<?php
+class LessThanOrEqualTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertLessThanOrEqual(13, 15);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 15 is less or equal to 13.  
+```
+### assertStringStartsWith
+Method assert that string starts with a give prefix
+
+```assertStringStartsWith(string $prefix, string $string, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$string``` does not start with ```$prefix```. <br/>
+```assertStringNotStartsWith()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class StringStartsWithTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertStringStartsWith('prse', 'presentation');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'presentation' string starts with 'prse'. 
+```
+
+### assertStringEndsWith
+Method assert that string starts with a give prefix
+
+```assertStringEndsWith(string $suffix, string $string, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$string``` does not end with ```$suffix```. <br/>
+```assertStringNotEndsWith()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class StringEndsWithTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertStringEndsWith('tatiodn', 'presentation');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'presentation' string ends with 'tatiodn'. 
+```
+
+### assertStringMatchesRegex
+Method asserts that a string matches a given regular expression
+
+```assertStringMatchesRegex(string $regex, string $string, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$string``` does not match ```$regex```. <br/>
+```assertStringNotMatchesRegex()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class StringMatchesRegexTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertStringMatchesRegex('/^prez/', 'presentation');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'presentation' string matches the regular expression '/^prez/'. 
+```
+
+Change Log
+----------
+### Version 1.1.0
+ Release date: <br/>
+#### Changes:
+  * Added [assertGreaterThan][assertgreaterthan]
+  * Added [assertGreaterThanOrEqual][assertgreaterthanorequal]
+  * Added [assertLessThan][assertlessthan]
+  * Added [assertLessThanOrEqual][assertlessthanorequal]
+  * Added [assertStringStartsWith][assertstringstartswith]
+  * Added [assertStringEndsWith][assertstringendswith]
+  * Added [assertStringMatchesRegex][assertstringmatchesregex]
+
+#### Bug fixes:
+
 Issues
 ------
 
@@ -657,6 +830,15 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertnull]: #assertnull
 [assertsamesize]: #assertsamesize
 [asserttrue]: #asserttrue
+[assertgreaterthan]: #assertgreaterthan
+[assertgreaterthanorequal]: #assertgreaterthanorequal
+[assertlessthan]: #assertlessthan
+[assertlessthanorequal]: #assertlessthanorequal
+[assertstringstartswith]: #assertstringstartswith
+[assertstringendswith]: #assertstringendswith
+[assertstringmatchesregex]: #assertstringmatchesregex
+
+[change-log]: #change-log
 [issues]: #issues
 [credits]: #credits
 

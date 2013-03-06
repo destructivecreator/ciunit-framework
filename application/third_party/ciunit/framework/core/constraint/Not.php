@@ -104,12 +104,16 @@ class CIUnit_Framework_Constraint_Not extends CIUnit_Framework_ConstraintAbstrac
         $possitive = array(
                 'has',
                 'matches',
-                'is'
+                'is',
+                'starts',
+                'ends',
         );
         $negative = array(
                 'does not have',
                 'does not match',
-                'is not'
+                'is not',
+                'does not start',
+                'does not end',
         );
         
         return str_replace($possitive, $negative, $string);

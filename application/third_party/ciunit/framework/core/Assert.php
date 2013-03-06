@@ -358,7 +358,138 @@ abstract class CIUnit_Framework_Assert
                         $delta, $canonicalize, $ignoreCase));
         self::assertThat($actual, $constraint, $message);
     }
+    
+    /**
+     * Asserts that a value is greater than another value
+     * 
+     * @param mixed $expected
+     * @param mixed $actual
+     * @param string $message
+     */
+    public static function assertGreaterThan($expected, $actual, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_GreaterThan($expected);
+        self::assertThat($actual, $constraint, $message);
+    }
 
+    /**
+     * Asserts that a value is greater than or equal to another value
+     * 
+     * @param mixed $expected
+     * @param mixed $actual
+     * @param string $message
+     */
+    public static function assertGreaterThanOrEqual($expected, $actual, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_GreaterThanOrEqual($expected);
+        self::assertThat($actual, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that a value is less than another value
+     * 
+     * @param mixed $expected
+     * @param mixed $actual
+     * @param string $message
+     */
+    public static function assertLessThan($expected, $actual, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_LessThan($expected);
+        self::assertThat($actual, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that a value is less than or equal to another value
+     *
+     * @param mixed $expected
+     * @param mixed $actual
+     * @param string $message
+     */
+    public static function assertLessThanOrEqual($expected, $actual, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_LessThanOrEqual($expected);
+        self::assertThat($actual, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that string starts with prefix
+     * @param string $prefix
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringStartsWith($prefix, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringStartsWith($prefix);
+        self::assertThat($string, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that string does not start with prefix
+     * @param string $prefix
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringNotStartsWith($prefix, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringStartsWith($prefix);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($string, $notConstraint, $message);
+    }
+    
+    /**
+     * Asserts that string ends with suffix
+     * 
+     * @param string $suffix
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringEndsWith($suffix, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringEndsWith($suffix);
+        self::assertThat($string, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that string does not end with suffix
+     *
+     * @param string $suffix
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringNotEndsWith($suffix, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringEndsWith($suffix);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($string, $notConstraint, $message);
+    }
+    
+    /**
+     * Asserts that a string matches a given regular expression
+     * 
+     * @param string $regex
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringMatchesRegex($regex, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringMatchesRegex($regex);
+        self::assertThat($string, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that a string does not match a given regular expression
+     *
+     * @param string $regex
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringNotMatchesRegex($regex, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringMatchesRegex($regex);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($string, $notConstraint, $message);
+    }
+    
     /**
      *
      * @param mixed $value            

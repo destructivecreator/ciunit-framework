@@ -3,7 +3,7 @@
 // Load the autoload file for t
 require_once APPPATH . "third_party/ciunit/framework/autoload.php";
 
-define('CIUNIT_VERSION', '1.0 Beta');
+define('CIUNIT_VERSION', '1.1 Beta');
 
 /**
  * CIUnit library class to use with CodeIgniter

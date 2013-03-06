@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CIUnit
  *
@@ -36,52 +35,54 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package    CIUnit
- * @subpackage Constraint
+ * @subpackage constraint
  * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright  2013, Agop Seropyan <agopseropyan@gmail.com>
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @since      File available since Release 1.1.0
  */
 
 /**
- * Constraint that asserts that the value it is evaluated for is empty.
+ * Constraint that asserts that a string matches an regex
  *
- * @package CIUnit
- * @subpackage Constraint
- * @author Agop Seropyan <agopseropyan@gmail.com>
- * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
- *          License
- * @since File available since Release 1.0.0
+ * @package    CIUnit
+ * @subpackage ciunit/core/constraint
+ * @author     Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright  2013, Agop Seropyan <agopseropyan@gmail.com>
+ * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
+ * @since      File available since Release 1.1.0
  */
-class CIUnit_Framework_Constraint_IsEmpty extends CIUnit_Framework_ConstraintAbstract
+class CIUnit_Framework_Constraint_StringMatchesRegex extends CIUnit_Framework_ConstraintAbstract
 {
-
+    /**
+     * @var string
+     */
+    protected $regex;
+    
+    /**
+     * Class constructor
+     * @param string $regex
+     */
+    public function __construct($regex)
+    {
+        $this->regex = $regex;
+    }
+    
     /**
      * (non-PHPdoc)
-     * 
      * @see CIUnit_Framework_ConstraintAbstract::matches()
      */
-    protected function matches ($value)
+    protected function matches($value)
     {
-        return empty($value);
+        return preg_match($this->regex, $value) === 1;
     }
-
+    
     /**
-     * (non-PHPdoc)
-     * 
-     * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
+     * Returns string representation fo the constraint
      */
-    public function failureDescription ($evaluated)
+    public function toString()
     {
-        $type = gettype($evaluated);
-        return sprintf('%s %s is empty', 
-                $type[0] == 'a' || $type[0] == 'o' ? 'an' : 'a', $type);
-    }
-
-    public function toString ()
-    {
-        return 'is empty';
+        return sprintf('string matches the regular expression \'%s\'', $this->regex);
     }
 }
 

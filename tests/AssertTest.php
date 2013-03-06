@@ -468,7 +468,9 @@ class AssertTest extends PHPUnit_Framework_TestCase
         $this->fail();
     }
     
-    
+    /**
+     * @covers CIUnit_Framework_Assert::assertInternalType()
+     */
     public function testAssertInternalType()
     {
     	$this->assertInternalType('integer', 1);
@@ -480,7 +482,9 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	}
     	$this->fail();
     }
-    
+    /**
+     * @covers CIUnit_Framework_Assert::assertNotInternalType()
+     */
     public function testAssertNotInternalType()
     {
     	CIUnit_Framework_Assert::assertNotInternalType('integer', 'ww');
@@ -492,7 +496,9 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	}
     	$this->fail();
     }
-    
+    /**
+     * @covers CIUnit_Framework_Assert::assertSameSize()
+     */
     public function testAssertSameSize()
     {
     	CIUnit_Framework_Assert::assertSameSize(array('one'), array(1));
@@ -504,6 +510,180 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	}
     	
     	$this->fail();
+    }
+    
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertGreaterThan()
+     */
+    public function testAssertGreaterThan()
+    {
+        CIUnit_Framework_Assert::assertGreaterThan(1, 2);
+        
+        try {
+            CIUnit_Framework_Assert::assertGreaterThan(2, 1);
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertGreaterThanOrEqual()
+     */
+    public function testAssertGreaterThanOrEqual()
+    {
+        CIUnit_Framework_Assert::assertGreaterThanOrEqual(12, 12);
+        CIUnit_Framework_Assert::assertGreaterThanOrEqual(2, 12);
+        
+        try {
+            CIUnit_Framework_Assert::assertGreaterThanOrEqual(2, 1);
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertLessThan()
+     */
+    public function testAssertLessThan()
+    {
+        CIUnit_Framework_Assert::assertLessThan(13, 2);
+    
+        try {
+            CIUnit_Framework_Assert::assertLessThan(2, 11);
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertLessThanOrEqual()
+     */
+    public function testAssertLessThanOrEqual()
+    {
+        CIUnit_Framework_Assert::assertLessThanOrEqual(13, 13);
+        CIUnit_Framework_Assert::assertLessThanOrEqual(13, 3);
+    
+        try {
+            CIUnit_Framework_Assert::assertLessThanOrEqual(1, 11);
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringStartsWith()
+     */
+    public function testAssertStringStartsWith()
+    {
+        CIUnit_Framework_Assert::assertStringStartsWith('pre', 'presentation');
+        
+        try {
+            CIUnit_Framework_Assert::assertStringStartsWith('abc', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringNotStartsWith()
+     */
+    public function testAssertStringNotStartsWith()
+    {
+        CIUnit_Framework_Assert::assertStringNotStartsWith('abv', 'presentation');
+    
+        try {
+            CIUnit_Framework_Assert::assertStringNotStartsWith('prese', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringEndsWith()
+     */
+    public function testAssertStringEndsWith()
+    {
+        CIUnit_Framework_Assert::assertStringEndsWith('tation', 'presentation');
+    
+        try {
+            CIUnit_Framework_Assert::assertStringEndsWith('abc', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringNotEndsWith()
+     */
+    public function testAssertStringNotEndsWith()
+    {
+        CIUnit_Framework_Assert::assertStringNotEndsWith('tationr', 'presentation');
+    
+        try {
+            CIUnit_Framework_Assert::assertStringNotEndsWith('ion', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringMatchesRegex()
+     */
+    public function testAssertStringMatchesRegex()
+    {
+        CIUnit_Framework_Assert::assertStringMatchesRegex('/^pre/', 'presentation');
+        
+        try {
+            CIUnit_Framework_Assert::assertStringMatchesRegex('/^def/', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringMatchesRegex()
+     */
+    public function testAssertStringNotMatchesRegex()
+    {
+        CIUnit_Framework_Assert::assertStringNotMatchesRegex('/^prez/', 'presentation');
+    
+        try {
+            CIUnit_Framework_Assert::assertStringNotMatchesRegex('/^pr/', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
     }
 }
 

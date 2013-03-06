@@ -1078,6 +1078,274 @@ EOF
         
         $this->fail();
     }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_GreaterThan
+     * @covers CIUnit_Framework_Constraint_GreaterThan::count
+     * @covers CIUnit_Framework_Constraint_GreaterThan::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintGreaterThan()
+    {
+        $constraint = new CIUnit_Framework_Constraint_GreaterThan(13);
+        
+        $this->assertTrue($constraint->evaluate(21, '', TRUE));
+        $this->assertFalse($constraint->evaluate(4, '', TRUE));
+        $this->assertEquals('is greater than 13', $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+        
+        try {
+            $constraint->evaluate(3);
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 3 is greater than 13.", $e->__toString());
+        
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_GreaterThanOrEqual
+     * @covers CIUnit_Framework_Constraint_GreaterThanOrEqual::count
+     * @covers CIUnit_Framework_Constraint_GreaterThanOrEqual::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintGreaterThanOrEqual()
+    {
+        $constraint = new CIUnit_Framework_Constraint_GreaterThanOrEqual(13);
+    
+        $this->assertTrue($constraint->evaluate(13, '', TRUE));
+        $this->assertTrue($constraint->evaluate(31, '', TRUE));
+        $this->assertFalse($constraint->evaluate(4, '', TRUE));
+        $this->assertEquals('is greater or equal to 13', $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+    
+        try {
+            $constraint->evaluate(3);
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 3 is greater or equal to 13.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_LessThan
+     * @covers CIUnit_Framework_Constraint_LessThan::count
+     * @covers CIUnit_Framework_Constraint_LessThan::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintLessThan()
+    {
+        $constraint = new CIUnit_Framework_Constraint_LessThan(13);
+    
+        $this->assertTrue($constraint->evaluate(2, '', TRUE));
+        $this->assertFalse($constraint->evaluate(47, '', TRUE));
+        $this->assertEquals('is less than 13', $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+    
+        try {
+            $constraint->evaluate(53);
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 53 is less than 13.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_LessThanOrEqual
+     * @covers CIUnit_Framework_Constraint_LessThanOrEqual::count
+     * @covers CIUnit_Framework_Constraint_LessThanOrEqual::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintLessThanOrEqual()
+    {
+        $constraint = new CIUnit_Framework_Constraint_LessThanOrEqual(13);
+    
+        $this->assertTrue($constraint->evaluate(13, '', TRUE));
+        $this->assertTrue($constraint->evaluate(5, '', TRUE));
+        $this->assertFalse($constraint->evaluate(40, '', TRUE));
+        $this->assertEquals('is less or equal to 13', $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+    
+        try {
+            $constraint->evaluate(33);
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 33 is less or equal to 13.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringStartsWith
+     * @covers CIUnit_Framework_Constraint_StringStartsWith::count
+     * @covers CIUnit_Framework_Constraint_StringStartsWith::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringStartsWith()
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringStartsWith('abc');
+    
+        $this->assertTrue($constraint->evaluate('abcdef', '', TRUE)); 
+        $this->assertFalse($constraint->evaluate('wrftwfg', '', TRUE));
+        $this->assertEquals('string starts with \'abc\'', $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+    
+        try {
+            $constraint->evaluate('testing');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'testing' string starts with 'abc'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringEndsWith
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringNotStartsWith()
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringStartsWith('fa');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+         
+        $this->assertFalse($notConstraint->evaluate('fabric', '', TRUE));
+        $this->assertEquals('string does not start with \'fa\'', $notConstraint->toString());
+    
+        try {
+            $notConstraint->evaluate('fabric');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'fabric' string does not start with 'fa'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringEndsWith
+     * @covers CIUnit_Framework_Constraint_StringEndsWith::count
+     * @covers CIUnit_Framework_Constraint_StringEndsWith::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringEndsWith()
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringEndsWith('abc');
+    
+        $this->assertTrue($constraint->evaluate('wdwdabc', '', TRUE));
+        $this->assertFalse($constraint->evaluate('abcf', '', TRUE));
+        $this->assertEquals('string ends with \'abc\'', $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+    
+        try {
+            $constraint->evaluate('testing');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'testing' string ends with 'abc'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringEndsWith
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringNotEndsWith()
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringEndsWith('ric');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+         
+        $this->assertFalse($notConstraint->evaluate('fabric', '', TRUE));
+        $this->assertEquals('string does not end with \'ric\'', $notConstraint->toString());
+    
+        try {
+            $notConstraint->evaluate('fabric');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'fabric' string does not end with 'ric'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringMatchesRegex
+     * @covers CIUnit_Framework_Constraint_StringMatchesRegex::count
+     * @covers CIUnit_Framework_Constraint_StringMatchesRegex::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringMatchesRegex()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_StringMatchesRegex('/^workspace/');
+        
+        $this->assertTrue($constraint->evaluate('workspace is mine', '', TRUE));
+        $this->assertFalse($constraint->evaluate('this is my workspace', '', TRUE));
+        $this->assertEquals('string matches the regular expression \'/^workspace/\'', $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+        
+        try {
+            $constraint->evaluate('1workspace');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that '1workspace' string matches the regular expression '/^workspace/'.", $e->__toString());
+        
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringMatchesRegex 
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringNotMatchesRegex()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_StringMatchesRegex('/^workspace/');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+    
+        $this->assertFalse($notConstraint->evaluate('workspace is mine', '', TRUE)); 
+        $this->assertEquals('string does not match the regular expression \'/^workspace/\'', $notConstraint->toString()); 
+    
+        try {
+            $notConstraint->evaluate('workspace');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'workspace' string does not match the regular expression '/^workspace/'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
 }
 
 ?>
