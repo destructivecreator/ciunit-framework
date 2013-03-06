@@ -1,4 +1,4 @@
-CIUnit 1.1 Beta ![Build Status](https://travis-ci.org/agop/ciunit-framework.png)
+CIUnit 1.1 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
 ---------------
 CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runs on top
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
