@@ -32,7 +32,7 @@ Table of Contents
  * [AssertLessThanOrEqual][assertlessthanorequal]
  * [AssertStringStartsWith][assertstringstartswith]
  * [AssertStringEndsWith][assertstringendswith]
- * [AssertStringMatchesRegex][assertstrinmatchesregex]
+ * [AssertStringMatchesRegex][assertstringmatchesregex]
 * [Change Log][change-log]
 * [Issues][issues]
 * [Credits][credits]
@@ -719,7 +719,7 @@ Reports an error identified by ```$message``` if ```$string``` does not start wi
 ```assertStringNotStartsWith()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
-class assertStringStartsWithTest extends CIUnit_Framework_TestCase
+class StringStartsWithTest extends CIUnit_Framework_TestCase
 {
     public function testFailure()
     {
@@ -740,7 +740,7 @@ Reports an error identified by ```$message``` if ```$string``` does not end with
 ```assertStringNotEndsWith()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
-class assertStringEndsWithTest extends CIUnit_Framework_TestCase
+class StringEndsWithTest extends CIUnit_Framework_TestCase
 {
     public function testFailure()
     {
@@ -757,11 +757,11 @@ Failed asserting that 'presentation' string ends with 'tatiodn'.
 Method asserts that a string matches a given regular expression
 
 ```assertStringMatchesRegex(string $regex, string $string, string $message = '')```<br/>
-Reports an error identified by ```$message``` if ```$string``` does not match ```$suffix``` regular expression. <br/>
+Reports an error identified by ```$message``` if ```$string``` does not match ```$regex```. <br/>
 ```assertStringNotMatchesRegex()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
-class assertStringMatchesRegexTest extends CIUnit_Framework_TestCase
+class StringMatchesRegexTest extends CIUnit_Framework_TestCase
 {
     public function testFailure()
     {
@@ -832,7 +832,7 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertlessthanorequal]: #assertlessthanorequal
 [assertstringstartswith]: #assertstringstartswith
 [assertstringendswith]: #assertstringendswith
-[assertstrinmatchesregex]: #assertstrinmatchesregex
+[assertstringmatchesregex]: #assertstringmatchesregex
 
 [change-log]: #change-log
 [issues]: #issues
