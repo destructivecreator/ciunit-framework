@@ -32,6 +32,7 @@ Table of Contents
  * [AssertLessThanOrEqual][assertlessthanorequal]
  * [AssertStringStartsWith][assertstringstartswith]
  * [AssertStringEndsWith][assertstringendswith]
+* [Change Log][change-log]
 * [Issues][issues]
 * [Credits][credits]
 
@@ -751,6 +752,17 @@ Failure description
 Failed asserting that 'presentation' string ends with 'tatiodn'. 
 ```
 
+Change Log
+----------
+### Version 1.1.0
+ Release date: <br/>
+
+ #### Changes:
+  * Added [assertGreaterThan][assertgreaterthan]
+  * Added [assertGreaterThanOrEqual][assertgreaterthanorequal]
+
+ #### Bug fixes:
+
 Issues
 ------
 
@@ -795,7 +807,7 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertstringstartswith]: #assertstringstartswith
 [assertstringendswith]: #assertstringendswith
 
-
+[change-log]: #change-log
 [issues]: #issues
 [credits]: #credits
 
