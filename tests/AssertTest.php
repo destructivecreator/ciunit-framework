@@ -650,5 +650,40 @@ class AssertTest extends PHPUnit_Framework_TestCase
     
         $this->fail();
     }
+    
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringMatchesRegex()
+     */
+    public function testAssertStringMatchesRegex()
+    {
+        CIUnit_Framework_Assert::assertStringMatchesRegex('/^pre/', 'presentation');
+        
+        try {
+            CIUnit_Framework_Assert::assertStringMatchesRegex('/^def/', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringMatchesRegex()
+     */
+    public function testAssertStringNotMatchesRegex()
+    {
+        CIUnit_Framework_Assert::assertStringNotMatchesRegex('/^prez/', 'presentation');
+    
+        try {
+            CIUnit_Framework_Assert::assertStringNotMatchesRegex('/^pr/', 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
 }
 

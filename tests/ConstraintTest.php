@@ -1294,6 +1294,58 @@ EOF
     
         $this->fail();
     }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringMatchesRegex
+     * @covers CIUnit_Framework_Constraint_StringMatchesRegex::count
+     * @covers CIUnit_Framework_Constraint_StringMatchesRegex::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringMatchesRegex()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_StringMatchesRegex('/^workspace/');
+        
+        $this->assertTrue($constraint->evaluate('workspace is mine', '', TRUE));
+        $this->assertFalse($constraint->evaluate('this is my workspace', '', TRUE));
+        $this->assertEquals('string matches the regular expression \'/^workspace/\'', $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+        
+        try {
+            $constraint->evaluate('1workspace');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that '1workspace' string matches the regular expression '/^workspace/'.", $e->__toString());
+        
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_StringMatchesRegex 
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintStringNotMatchesRegex()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_StringMatchesRegex('/^workspace/');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+    
+        $this->assertFalse($notConstraint->evaluate('workspace is mine', '', TRUE)); 
+        $this->assertEquals('string does not match the regular expression \'/^workspace/\'', $notConstraint->toString()); 
+    
+        try {
+            $notConstraint->evaluate('workspace');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'workspace' string does not match the regular expression '/^workspace/'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
 }
 
 ?>

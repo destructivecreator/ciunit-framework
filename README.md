@@ -32,6 +32,7 @@ Table of Contents
  * [AssertLessThanOrEqual][assertlessthanorequal]
  * [AssertStringStartsWith][assertstringstartswith]
  * [AssertStringEndsWith][assertstringendswith]
+ * [AssertStringMatchesRegex][assertstrinmatchesregex]
 * [Change Log][change-log]
 * [Issues][issues]
 * [Credits][credits]
@@ -752,6 +753,27 @@ Failure description
 Failed asserting that 'presentation' string ends with 'tatiodn'. 
 ```
 
+### assertStringMatchesRegex
+Method asserts that a string matches a given regular expression
+
+```assertStringMatchesRegex(string $regex, string $string, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$string``` does not match ```$suffix``` regular expression. <br/>
+```assertStringNotMatchesRegex()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class assertStringMatchesRegexTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertStringMatchesRegex('/^prez/', 'presentation');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'presentation' string matches the regular expression '/^prez/'. 
+```
+
 Change Log
 ----------
 ### Version 1.1.0
@@ -763,6 +785,7 @@ Change Log
   * Added [assertLessThanOrEqual][assertlessthanorequal]
   * Added [assertStringStartsWith][assertstringstartswith]
   * Added [assertStringEndsWith][assertstringendswith]
+  * Added [assertStringMatchesRegex][assertstringmatchesregex]
 
 #### Bug fixes:
 
@@ -809,6 +832,7 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertlessthanorequal]: #assertlessthanorequal
 [assertstringstartswith]: #assertstringstartswith
 [assertstringendswith]: #assertstringendswith
+[assertstrinmatchesregex]: #assertstrinmatchesregex
 
 [change-log]: #change-log
 [issues]: #issues

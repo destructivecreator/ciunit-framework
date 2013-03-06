@@ -464,6 +464,33 @@ abstract class CIUnit_Framework_Assert
     }
     
     /**
+     * Asserts that a string matches a given regular expression
+     * 
+     * @param string $regex
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringMatchesRegex($regex, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringMatchesRegex($regex);
+        self::assertThat($string, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that a string does not match a given regular expression
+     *
+     * @param string $regex
+     * @param string $string
+     * @param string $message
+     */
+    public static function assertStringNotMatchesRegex($regex, $string, $message = '')
+    {
+        $constraint = new CIUnit_Framework_Constraint_StringMatchesRegex($regex);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($string, $notConstraint, $message);
+    }
+    
+    /**
      *
      * @param mixed $value            
      * @param CIUnit_Framework_ConstraintAbstract $constraint            
