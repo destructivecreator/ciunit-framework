@@ -787,8 +787,6 @@ Change Log
   * Added [assertStringEndsWith][assertstringendswith]
   * Added [assertStringMatchesRegex][assertstringmatchesregex]
 
-#### Bug fixes:
-
 Issues
 ------
 
