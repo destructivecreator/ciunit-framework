@@ -26,6 +26,10 @@ Table of Contents
  * [AssertNull][assertnull]
  * [AssertSameSize][assertsamesize]
  * [AssertTrue][asserttrue]
+ * [AssertGreaterThan][assertgreaterthan]
+ * [AssertGreaterThanOrEqual][assertgreaterthanorequal]
+ * [AssertLessThan][assertlessthan]
+ * [AssertLessThanOrEqual][assertlessthanorequal]
 * [Issues][issues]
 * [Credits][credits]
 
@@ -620,6 +624,90 @@ Failure description
 Failed asserting that false is true.  
 ```
 
+### AssertGreaterThan
+Method asserts that a value is greater than another value
+
+```assertGreaterThan(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not greater than ```$actual```. 
+
+```php
+<?php
+class GreaterThanTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertGreaterThan(12, 2);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 2 is greater than 12. 
+```
+
+### AssertGreaterThanOrEqual
+Method asserts that a value is greater than or equal to another value
+
+```AssertGreaterThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not greater than or equal to ```$actual```. 
+
+```php
+<?php
+class GreaterThanOrEqualTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->AssertGreaterThanOrEqual(13, 12);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 12 is greater or equal to 13. 
+```
+
+### AssertLessThan
+Method asserts that a value is less than another value
+
+```AssertLessThan(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not less than ```$actual```. 
+
+```php
+<?php
+class LessThanTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertLessThan(13, 21);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 21 is less than 13. 
+```
+
+### AssertLessThanOrEqual
+Method asserts that a value is less than or equal to another value
+
+```AssertLessThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
+Reports an error identified by ```$message``` if ```$expected``` is not less than or equal to ```$actual```. 
+
+```php
+<?php
+class LessThanOrEqualTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertLessThanOrEqual(13, 15);
+    }
+}
+```
+Failure description
+```
+Failed asserting that 15 is less or equal to 13.  
+```
+
 Issues
 ------
 
@@ -657,6 +745,11 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertnull]: #assertnull
 [assertsamesize]: #assertsamesize
 [asserttrue]: #asserttrue
+[assertgreaterthan]: #assertgreaterthan
+[assertgreaterthanorequal]: #assertgreaterthanorequal
+[assertlessthan]: #assertlessthan
+[assertlessthanorequal]: #assertlessthanorequal
+
 [issues]: #issues
 [credits]: #credits
 
