@@ -74,7 +74,7 @@ class CIUnit_Framework_Constraint_StringMatchesRegex extends CIUnit_Framework_Co
      */
     protected function matches($value)
     {
-        return preg_match($this->regex, $value) === 1;
+        return @preg_match($this->regex, $value) === 1;
     }
     
     /**

@@ -173,6 +173,9 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertTrue ($expected, $message = '')
     {
+        if(!is_bool($expected))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'boolean');
+            
         $constraint = new CIUnit_Framework_Constraint_IsTrue();
         self::assertThat($expected, $constraint, $message);
     }
@@ -185,6 +188,9 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertFalse ($expected, $message = '')
     {
+        if(!is_bool($expected))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'boolean');
+        
         $constraint = new CIUnit_Framework_Constraint_IsFalse();
         self::assertThat($expected, $constraint, $message);
     }
@@ -198,6 +204,12 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertInstanceOf ($expected, $actual, $message = '')
     {
+        if(!is_string($expected) && !is_object($expected))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string or object');
+        
+        if(!is_object($actual))
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'object');
+        
         $constraint = new CIUnit_Framework_Constraint_IsInstanceOf(
                 $expected);
         self::assertThat($actual, $constraint, $message);
@@ -210,11 +222,15 @@ abstract class CIUnit_Framework_Assert
      * @param mixed $actual            
      * @param string $message            
      */
-    public static function assertNotInstanceOf ($expected, $actual, 
-            $message = '')
+    public static function assertNotInstanceOf ($expected, $actual, $message = '')
     {
-        $constraint = new CIUnit_Framework_Constraint_Not(
-                new CIUnit_Framework_Constraint_IsInstanceOf($expected));
+        if(!is_string($expected) && !is_object($expected))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string or object');
+        
+        if(!is_string($actual) && !is_object($actual))
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'string or object');
+        
+        $constraint = new CIUnit_Framework_Constraint_Not(new CIUnit_Framework_Constraint_IsInstanceOf($expected));
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -332,11 +348,9 @@ abstract class CIUnit_Framework_Assert
      * @param boolean $ignoreCase            
      * @param string $message            
      */
-    public static function assertEquals ($expected, $actual, $delta = 0, 
-            $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
+    public static function assertEquals ($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
     {
-        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected, 
-                $delta, $canonicalize, $ignoreCase);
+        $constraint = new CIUnit_Framework_Constraint_IsEqual($expected, $delta, $canonicalize, $ignoreCase);
         self::assertThat($actual, $constraint, $message);
     }
 
@@ -350,12 +364,9 @@ abstract class CIUnit_Framework_Assert
      * @param boolean $ignoreCase            
      * @param string $message            
      */
-    public static function assertNotEquals ($expected, $actual, $delta = 0, 
-            $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
+    public static function assertNotEquals ($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE, $message = '')
     {
-        $constraint = new CIUnit_Framework_Constraint_Not(
-                new CIUnit_Framework_Constraint_IsEqual($expected, 
-                        $delta, $canonicalize, $ignoreCase));
+        $constraint = new CIUnit_Framework_Constraint_Not(new CIUnit_Framework_Constraint_IsEqual($expected, $delta, $canonicalize, $ignoreCase));
         self::assertThat($actual, $constraint, $message);
     }
     
@@ -419,6 +430,12 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertStringStartsWith($prefix, $string, $message = '')
     {
+        if(!is_string($prefix))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string'); 
+        
+        if(!is_string($string))
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'string');
+         
         $constraint = new CIUnit_Framework_Constraint_StringStartsWith($prefix);
         self::assertThat($string, $constraint, $message);
     }
@@ -431,6 +448,12 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertStringNotStartsWith($prefix, $string, $message = '')
     {
+        if(!is_string($prefix))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        
+        if(!is_string($string))
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'string');
+        
         $constraint = new CIUnit_Framework_Constraint_StringStartsWith($prefix);
         $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
         self::assertThat($string, $notConstraint, $message);
@@ -445,6 +468,12 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertStringEndsWith($suffix, $string, $message = '')
     {
+        if(!is_string($suffix))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        
+        if(!is_string($string))
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'string');
+        
         $constraint = new CIUnit_Framework_Constraint_StringEndsWith($suffix);
         self::assertThat($string, $constraint, $message);
     }
@@ -458,6 +487,12 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertStringNotEndsWith($suffix, $string, $message = '')
     {
+        if(!is_string($suffix))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        
+        if(!is_string($string))
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'string');
+        
         $constraint = new CIUnit_Framework_Constraint_StringEndsWith($suffix);
         $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
         self::assertThat($string, $notConstraint, $message);
@@ -472,6 +507,12 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertStringMatchesRegex($regex, $string, $message = '')
     {
+        if(!is_string($regex))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        
+        if(!is_string($string))
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'string');
+        
         $constraint = new CIUnit_Framework_Constraint_StringMatchesRegex($regex);
         self::assertThat($string, $constraint, $message);
     }
@@ -485,6 +526,12 @@ abstract class CIUnit_Framework_Assert
      */
     public static function assertStringNotMatchesRegex($regex, $string, $message = '')
     {
+        if(!is_string($regex))
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        
+        if(!is_string($string))
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'string');
+        
         $constraint = new CIUnit_Framework_Constraint_StringMatchesRegex($regex);
         $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
         self::assertThat($string, $notConstraint, $message);
@@ -497,8 +544,7 @@ abstract class CIUnit_Framework_Assert
      * @param string $message            
      * @since version 1.0.0
      */
-    public static function assertThat ($value, 
-            CIUnit_Framework_ConstraintAbstract $constraint, $message = '')
+    public static function assertThat ($value, CIUnit_Framework_ConstraintAbstract $constraint, $message = '')
     {
         self::$assertionCount += count($constraint);
         $constraint->evaluate($value, $message);
