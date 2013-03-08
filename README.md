@@ -188,6 +188,7 @@ class ExceptionTest extends CIUnit_Framework_TestCase
     }
 }
 ```
+<b>NB!</b> With this approach your test will be mark as ```Incomplete```, because it is not performing any assertions.
 
 Fixtures
 --------
@@ -638,6 +639,8 @@ Method asserts that a value is greater than another value
 ```assertGreaterThan(mixed $expected, mixed $actual, string $message = '')```<br/>
 Reports an error identified by ```$message``` if ```$expected``` is not greater than ```$actual```. 
 
+For various types, comparison is done according to this [table][operatorcomparison].
+
 ```php
 <?php
 class GreaterThanTest extends CIUnit_Framework_TestCase
@@ -658,6 +661,8 @@ Method asserts that a value is greater than or equal to another value
 
 ```AssertGreaterThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
 Reports an error identified by ```$message``` if ```$expected``` is not greater than or equal to ```$actual```. 
+
+For various types, comparison is done according to this [table][operatorcomparison].
 
 ```php
 <?php
@@ -680,6 +685,8 @@ Method asserts that a value is less than another value
 ```AssertLessThan(mixed $expected, mixed $actual, string $message = '')```<br/>
 Reports an error identified by ```$message``` if ```$expected``` is not less than ```$actual```. 
 
+For various types, comparison is done according to this [table][operatorcomparison].
+
 ```php
 <?php
 class LessThanTest extends CIUnit_Framework_TestCase
@@ -700,6 +707,8 @@ Method asserts that a value is less than or equal to another value
 
 ```AssertLessThanOrEqual(mixed $expected, mixed $actual, string $message = '')```<br/>
 Reports an error identified by ```$message``` if ```$expected``` is not less than or equal to ```$actual```.  
+
+For various types, comparison is done according to this [table][operatorcomparison].
 
 ```php
 <?php
@@ -791,8 +800,6 @@ Change Log
   * Added [assertStringEndsWith][assertstringendswith]
   * Added [assertStringMatchesRegex][assertstringmatchesregex]
 
-#### Bug fixes:
-
 Issues
 ------
 
@@ -847,5 +854,6 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [twitter-bootstrap]: http://twitter.github.com/bootstrap/
 [phpunit]: https://github.com/sebastianbergmann/phpunit
 [junit]: https://github.com/junit-team/junit
+[operatorcomparison]: http://php.net/manual/en/language.operators.comparison.php
 
 

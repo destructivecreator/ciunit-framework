@@ -15,8 +15,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertArrayHasIntegerKey ()
     {  
-        CIUnit_Framework_Assert::assertArrayHasKey(0, array('foo'));
-        
+       CIUnit_Framework_Assert::assertArrayHasKey(0, array('foo')); 
         try {
             CIUnit_Framework_Assert::assertArrayHasKey(1, array('foo'));
         } catch (CIUnit_Framework_Exception_AssertionFailed $e) {
@@ -231,6 +230,15 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers CIUnit_Framework_Assert::assertFalse()
+     * @expectedException CIUnit_Framework_Exception_InvalidArgument
+     */
+    public function testAssertFalseProperlyFailsWithNotBoolean()
+    {
+        CIUnit_Framework_Assert::assertFalse('FALSE');
+    }
+    
+    /**
      * @covers CIUnit_Framework_Assert::assertTrue()
      */
     public function testAssertTrue()
@@ -245,6 +253,15 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	}
     	
         $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertTrue()
+     * @expectedException CIUnit_Framework_Exception_InvalidArgument
+     */
+    public function testAssertTrueProperlyFailsWithNotBoolean()
+    {
+        CIUnit_Framework_Assert::assertTrue('TRUE');
     }
     
     /**
@@ -418,6 +435,30 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers CIUnit_Framework_Assert::assertInstanceOf() 
+     */
+    public function testAssertThatIsInstanceOfProperlyFailsWithInvalidArgument()
+    {
+        // #2 has to be an object
+        try {
+            CIUnit_Framework_Assert::assertInstanceOf('RuntimeException', 'RuntimeException');
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+         
+        }
+        
+        // #1 has to be string or object
+        try {
+            CIUnit_Framework_Assert::assertInstanceOf(array(), new RuntimeException());
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
      * @covers CIUnit_Framework_Assert::assertNotInstanceOf()
      */
     public function testAssertThatIsNotInstanceOf()
@@ -512,6 +553,28 @@ class AssertTest extends PHPUnit_Framework_TestCase
     	$this->fail();
     }
     
+    /**
+     * @covers CIUnit_Framework_Assert::assertSameSize()
+     */
+    public function testAssertSameSizeProperlyFailsWithInvalidTypeException()
+    {
+        // #1 Countable, Iterator,or Array
+        try {
+            CIUnit_Framework_Assert::assertSameSize(1920, array());
+        } catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+            
+        }
+        
+        // #2 Countable, Iterator,or Array
+        try {
+            CIUnit_Framework_Assert::assertSameSize(array('one'), new stdClass());
+        } catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+            return;
+        }
+         
+        $this->fail();
+    }
+    
     
     /**
      * @covers CIUnit_Framework_Assert::assertGreaterThan()
@@ -601,6 +664,30 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers CIUnit_Framework_Assert::assertStringStartsWith()
+     */
+    public function testAssertStringStartsWithProperlyFailsWithInvalidTypeException()
+    {
+        // #1 must be string
+        try {
+            CIUnit_Framework_Assert::assertStringStartsWith(array(1), 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+            
+        }
+        
+        // #2 String as well
+        try {
+            CIUnit_Framework_Assert::assertStringStartsWith('abc', array('abc'));
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
      * @covers CIUnit_Framework_Assert::assertStringNotStartsWith()
      */
     public function testAssertStringNotStartsWith()
@@ -628,6 +715,30 @@ class AssertTest extends PHPUnit_Framework_TestCase
             CIUnit_Framework_Assert::assertStringEndsWith('abc', 'presentation');
         }
         catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringEndsWith()
+     */
+    public function testAssertStringEndsWithProperlyFailsWithInvalidTypeException()
+    {
+        // #1 must be string
+        try {
+            CIUnit_Framework_Assert::assertStringEndsWith(array(1), 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+    
+        }
+    
+        // #2 String as well
+        try {
+            CIUnit_Framework_Assert::assertStringEndsWith('abc', array('abc'));
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
             return;
         }
     
@@ -680,6 +791,30 @@ class AssertTest extends PHPUnit_Framework_TestCase
             CIUnit_Framework_Assert::assertStringNotMatchesRegex('/^pr/', 'presentation');
         }
         catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertStringMatchesRegex()
+     */
+    public function testAssertStringMatchesRegexProperlyFailsWithInvalidTypeException()
+    {
+        // #1 must be string
+        try {
+            CIUnit_Framework_Assert::assertStringMatchesRegex(1, 'presentation');
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+            return;
+        }
+    
+        // #2 String as well
+        try {
+            CIUnit_Framework_Assert::assertStringMatchesRegex('/^pre/', array('a', 'b'));
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
             return;
         }
     
