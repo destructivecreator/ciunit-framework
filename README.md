@@ -796,9 +796,6 @@ Change Log
   * Added [assertStringEndsWith][assertstringendswith]
   * Added [assertStringMatchesRegex][assertstringmatchesregex]
 
-#### Bug fixes:
-  * Fixed bug when passing invalid data types to assertions.
-
 Issues
 ------
 
