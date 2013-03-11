@@ -87,6 +87,8 @@ function ciunit_autoloader($class)
                 'ciunit_framework_constraint_stringstartswith' => '/core/constraint/StringStartsWith.php',
                 'ciunit_framework_constraint_stringendswith' => '/core/constraint/StringEndsWith.php',
                 'ciunit_framework_constraint_stringmatchesregex' => '/core/constraint/StringMatchesRegex.php',
+                'ciunit_framework_constraint_classhasattribute' => '/core/constraint/ClassHasAttribute.php',
+                'ciunit_framework_constraint_classhasstaticattribute' => '/core/constraint/ClassHasStaticAttribute.php',
 
                 // comparator
                 'ciunit_framework_comparator_type' => '/core/comparator/Type.php',

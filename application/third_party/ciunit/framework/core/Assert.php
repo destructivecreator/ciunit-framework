@@ -375,7 +375,8 @@ abstract class CIUnit_Framework_Assert
      * 
      * @param mixed $expected
      * @param mixed $actual
-     * @param string $message
+     * @param string $message        
+     * @since version 1.1.0
      */
     public static function assertGreaterThan($expected, $actual, $message = '')
     {
@@ -388,7 +389,8 @@ abstract class CIUnit_Framework_Assert
      * 
      * @param mixed $expected
      * @param mixed $actual
-     * @param string $message
+     * @param string $message        
+     * @since version 1.1.0
      */
     public static function assertGreaterThanOrEqual($expected, $actual, $message = '')
     {
@@ -414,7 +416,8 @@ abstract class CIUnit_Framework_Assert
      *
      * @param mixed $expected
      * @param mixed $actual
-     * @param string $message
+     * @param string $message        
+     * @since version 1.1.0
      */
     public static function assertLessThanOrEqual($expected, $actual, $message = '')
     {
@@ -426,7 +429,8 @@ abstract class CIUnit_Framework_Assert
      * Asserts that string starts with prefix
      * @param string $prefix
      * @param string $string
-     * @param string $message
+     * @param string $message        
+     * @since version 1.1.0
      */
     public static function assertStringStartsWith($prefix, $string, $message = '')
     {
@@ -444,7 +448,8 @@ abstract class CIUnit_Framework_Assert
      * Asserts that string does not start with prefix
      * @param string $prefix
      * @param string $string
-     * @param string $message
+     * @param string $message        
+     * @since version 1.1.0
      */
     public static function assertStringNotStartsWith($prefix, $string, $message = '')
     {
@@ -464,7 +469,8 @@ abstract class CIUnit_Framework_Assert
      * 
      * @param string $suffix
      * @param string $string
-     * @param string $message
+     * @param string $message        
+     * @since version 1.1.0
      */
     public static function assertStringEndsWith($suffix, $string, $message = '')
     {
@@ -483,7 +489,8 @@ abstract class CIUnit_Framework_Assert
      *
      * @param string $suffix
      * @param string $string
-     * @param string $message
+     * @param string $message        
+     * @since version 1.1.0
      */
     public static function assertStringNotEndsWith($suffix, $string, $message = '')
     {
@@ -503,7 +510,8 @@ abstract class CIUnit_Framework_Assert
      * 
      * @param string $regex
      * @param string $string
-     * @param string $message
+     * @param string $message        
+     * @since version 1.1.0
      */
     public static function assertStringMatchesRegex($regex, $string, $message = '')
     {
@@ -522,7 +530,8 @@ abstract class CIUnit_Framework_Assert
      *
      * @param string $regex
      * @param string $string
-     * @param string $message
+     * @param string $message           
+     * @since version 1.1.0
      */
     public static function assertStringNotMatchesRegex($regex, $string, $message = '')
     {
@@ -535,6 +544,128 @@ abstract class CIUnit_Framework_Assert
         $constraint = new CIUnit_Framework_Constraint_StringMatchesRegex($regex);
         $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
         self::assertThat($string, $notConstraint, $message);
+    }
+    
+    /**
+     * Asserts that a class has a specified attribute
+     * 
+     * @param string $attribute
+     * @param string $class
+     * @param string $message      
+     * @since version 1.2.0
+     */
+    public static function assertClassHasAttribute($attribute, $className, $message = '')
+    {
+        if(!is_string($attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        }
+        
+        // Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore, 
+        // followed by any number of letters, numbers, or underscores. 
+        // As a regular expression, it would be expressed thus: '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+        // See: http://www.php.net/manual/en/language.variables.basics.php
+        if(!preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid name of attribute');
+        }
+        
+        if (!is_string($className) || !class_exists($className, FALSE)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid class name');
+        }
+        
+        $constraint = new CIUnit_Framework_Constraint_ClassHasAttribute($attribute);
+        self::assertThat($className, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that a class does not have a specified attribute
+     *
+     * @param string $attribute
+     * @param string $class
+     * @param string $message
+     * @since version 1.2.0
+     */
+    public static function assertClassNotHasAttribute($attribute, $className, $message = '')
+    {
+        if(!is_string($attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        }
+        
+        // Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore,
+        // followed by any number of letters, numbers, or underscores.
+        // As a regular expression, it would be expressed thus: '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+        // See: http://www.php.net/manual/en/language.variables.basics.php
+        if(!preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid name of attribute');
+        }
+        
+        if (!is_string($className) || !class_exists($className, FALSE)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid class name');
+        }
+        
+        $constraint = new CIUnit_Framework_Constraint_ClassHasAttribute($attribute);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($className, $notConstraint, $message);
+    }
+    
+    /**
+     * Asserts that a class has a specified static attribute
+     *
+     * @param string $attribute
+     * @param string $class
+     * @param string $message
+     * @since version 1.2.0
+     */
+    public static function assertClassHasStaticAttribute($attribute, $className, $message = '')
+    {
+        if(!is_string($attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        }
+        
+        // Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore,
+        // followed by any number of letters, numbers, or underscores.
+        // As a regular expression, it would be expressed thus: '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+        // See: http://www.php.net/manual/en/language.variables.basics.php
+        if(!preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid name of attribute');
+        }
+        
+        if (!is_string($className) || !class_exists($className, FALSE)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid class name');
+        }
+        
+        $constraint = new CIUnit_Framework_Constraint_ClassHasStaticAttribute($attribute);
+        self::assertThat($className, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that a class does not have a specified static attribute
+     *
+     * @param string $attribute
+     * @param string $class
+     * @param string $message
+     * @since version 1.2.0
+     */
+    public static function assertClassNotHasStaticAttribute($attribute, $className, $message = '')
+    {
+        if(!is_string($attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        }
+        
+        // Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore,
+        // followed by any number of letters, numbers, or underscores.
+        // As a regular expression, it would be expressed thus: '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+        // See: http://www.php.net/manual/en/language.variables.basics.php
+        if(!preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid name of attribute');
+        }
+        
+        if (!is_string($className) || !class_exists($className, FALSE)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid class name');
+        }
+        
+        $constraint = new CIUnit_Framework_Constraint_ClassHasStaticAttribute($attribute);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($className, $notConstraint, $message);
     }
     
     /**

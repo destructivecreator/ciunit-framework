@@ -33,6 +33,8 @@ Table of Contents
  * [аssertStringStartsWith][assertstringstartswith]
  * [аssertStringEndsWith][assertstringendswith]
  * [аssertStringMatchesRegex][assertstringmatchesregex]
+ * [assertClassHasAttribute][assertclasshasattribute]
+ * [assertClassHasStaticAttribute][assertclasshasstaticattribute]
 * [Change Log][change-log]
 * [Issues][issues]
 * [Credits][credits]
@@ -783,6 +785,48 @@ Failure description
 Failed asserting that 'presentation' string matches the regular expression '/^prez/'. 
 ```
 
+### assertClassHasAttribute
+Method asserts that a class has a specified attribute
+
+```assertClassHasAttribute(string $attribute, string $className, string $message = '')```<br/>
+Reports an error identified by ```$message``` if class ```$className``` does not have attribute ```$attribute```. <br/>
+```assertClassNotHasAttribute()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class ClassHasAttributeTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertClassHasAttribute('notExistingAttribute', 'ClassWithAttributes');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'ClassWithAttributes' class has attribute 'notExistingAttribute'.
+```
+
+### assertClassHasStaticAttribute
+Method asserts that a class has a specified static attribute
+
+```assertClassHasStaticAttribute(string $attribute, string $className, string $message = '')```<br/>
+Reports an error identified by ```$message``` if class ```$className``` does not have a static attribute ```$attribute```. <br/>
+```assertClassNotHasStaticAttribute()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class ClassHasStaticAttributeTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertClassHasStaticAttribute('nonStaticAttribute', 'ClassWithAttributes');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'ClassWithAttributes' class has attribute 'nonStaticAttribute'.
+```
+
 Change Log
 ----------
 ### Version 1.1.0
@@ -795,6 +839,12 @@ Change Log
   * Added [assertStringStartsWith][assertstringstartswith]
   * Added [assertStringEndsWith][assertstringendswith]
   * Added [assertStringMatchesRegex][assertstringmatchesregex]
+
+### Version 1.2.0
+ Release date:  March x, 2013
+#### Changes:
+  * Added [assertClassHasAttribute][assertclasshasattribute]
+  * Added [assertClassHasStaticAttribute][assertclasshasstaticattribute]
 
 Issues
 ------
@@ -840,6 +890,8 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertstringstartswith]: #assertstringstartswith
 [assertstringendswith]: #assertstringendswith
 [assertstringmatchesregex]: #assertstringmatchesregex
+[assertclasshasattribute]: #assertclasshasattribute
+[assertclasshasstaticattribute]: #assertclasshasstaticattribute
 
 [change-log]: #change-log
 [issues]: #issues
