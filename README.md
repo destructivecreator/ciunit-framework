@@ -1,4 +1,4 @@
-CIUnit 1.1 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
+CIUnit 1.1.2 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
 ---------------
 CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runs on top
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
@@ -785,7 +785,7 @@ Failed asserting that 'presentation' string matches the regular expression '/^pr
 
 Change Log
 ----------
-### Version 1.1.0
+### Version 1.1.x
  Release date:  March 6, 2013
 #### Changes:
   * Added [assertGreaterThan][assertgreaterthan]
@@ -795,6 +795,9 @@ Change Log
   * Added [assertStringStartsWith][assertstringstartswith]
   * Added [assertStringEndsWith][assertstringendswith]
   * Added [assertStringMatchesRegex][assertstringmatchesregex]
+  
+### Fixed bugs:
+  * Solved issues [#1][issue1] and [#2][issue2]
 
 Issues
 ------
@@ -851,5 +854,9 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [phpunit]: https://github.com/sebastianbergmann/phpunit
 [junit]: https://github.com/junit-team/junit
 [operatorcomparison]: http://php.net/manual/en/language.operators.comparison.php
+
+
+[issue1]: https://github.com/agop/ciunit-framework/issues/1
+[issue2]: https://github.com/agop/ciunit-framework/issues/2
 
 
