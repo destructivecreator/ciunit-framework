@@ -1,4 +1,4 @@
-CIUnit 1.1 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
+CIUnit 1.2 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
 ---------------
 CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runs on top
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
@@ -824,7 +824,7 @@ class ClassHasStaticAttributeTest extends CIUnit_Framework_TestCase
 ```
 Failure description
 ```
-Failed asserting that 'ClassWithAttributes' class has attribute 'nonStaticAttribute'.
+Failed asserting that 'ClassWithAttributes' class has static attribute 'nonStaticAttribute'.
 ```
 
 Change Log
