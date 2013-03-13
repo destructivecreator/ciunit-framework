@@ -858,7 +858,7 @@ Reports an error identified by ```$message``` if  ```$object``` does not have st
 ```assertObjectNotHasStaticAttribute()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
-class ObjectNotHasAttributeTest extends CIUnit_Framework_TestCase
+class ObjectNotHasStaticAttributeTest extends CIUnit_Framework_TestCase
 {
     public function testFailure()
     {
