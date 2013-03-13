@@ -35,6 +35,8 @@ Table of Contents
  * [аssertStringMatchesRegex][assertstringmatchesregex]
  * [assertClassHasAttribute][assertclasshasattribute]
  * [assertClassHasStaticAttribute][assertclasshasstaticattribute]
+ * [assertObjectHasAttribute][assertobjecthasattribute]
+ * [assertObjectHasStaticAttribute][assertobjecthasstaticattribute]
 * [Change Log][change-log]
 * [Issues][issues]
 * [Credits][credits]
@@ -810,7 +812,7 @@ Failed asserting that 'ClassWithAttributes' class has attribute 'notExistingAttr
 Method asserts that a class has a specified static attribute
 
 ```assertClassHasStaticAttribute(string $attribute, string $className, string $message = '')```<br/>
-Reports an error identified by ```$message``` if class ```$className``` does not have a static attribute ```$attribute```. <br/>
+Reports an error identified by ```$message``` if class ```$className``` does not have static attribute ```$attribute```. <br/>
 ```assertClassNotHasStaticAttribute()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
@@ -826,6 +828,49 @@ Failure description
 ```
 Failed asserting that 'ClassWithAttributes' class has static attribute 'nonStaticAttribute'.
 ```
+
+### assertObjectHasAttribute
+Method asserts that an object has a specified attribute
+
+```assertObjectHasAttribute(string $attribute, object $object, string $message = '')```<br/>
+Reports an error identified by ```$message``` if  ```$object``` does not have attribute ```$attribute```. <br/>
+```assertObjectNotHasAttribute()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class ObjectHasAttributeTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertObjectHasAttribute('publicAttribute',  new ClassWithAttributes());
+    }
+}
+```
+Failure description
+```
+Failed asserting that ClassWithAttributes Object(...) has attribute 'publicAttribute'.
+```
+
+### assertObjectHasStaticAttribute
+Method asserts that an object has a specified static attribute
+
+```assertObjectHasStaticAttribute(string $attribute, object $object, string $message = '')```<br/>
+Reports an error identified by ```$message``` if  ```$object``` does not have static attribute ```$attribute```. <br/>
+```assertObjectNotHasStaticAttribute()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class ObjectNotHasAttributeTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertObjectHasStaticAttribute('publicAttribute',  new ClassWithAttributes());
+    }
+}
+```
+Failure description
+```
+Failed asserting that ClassWithAttributes Object(...) has static attribute 'publicAttribute'.
+```
+
 
 Change Log
 ----------
@@ -845,6 +890,8 @@ Change Log
 #### Changes:
   * Added [assertClassHasAttribute][assertclasshasattribute]
   * Added [assertClassHasStaticAttribute][assertclasshasstaticattribute]
+  * Added [assertObjectHasAttribute][assertobjecthasattribute]
+  * Added [assertObjectHasStaticAttribute][assertobjecthasstaticattribute]
 
 Issues
 ------
@@ -892,6 +939,8 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertstringmatchesregex]: #assertstringmatchesregex
 [assertclasshasattribute]: #assertclasshasattribute
 [assertclasshasstaticattribute]: #assertclasshasstaticattribute
+[assertobjecthasattribute]: #assertobjecthasattribute
+[assertobjecthasstaticattribute]: #assertobjecthasstaticattribute
 
 [change-log]: #change-log
 [issues]: #issues
