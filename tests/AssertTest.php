@@ -859,7 +859,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Framework_Assert::assertClassHasAttribute()
+     * @covers CIUnit_Framework_Assert::assertClassHasStaticAttribute()
      */
     public function testAssertClassHasStaticAttribute()
     {
@@ -877,7 +877,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Framework_Assert::assertClassHasAttribute()
+     * @covers CIUnit_Framework_Assert::assertClassNotHasStaticAttribute()
      */
     public function testAssertClassNotHasStaticAttribute()
     {
@@ -895,7 +895,7 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Framework_Assert::assertClassHasAttribute()
+     * @covers CIUnit_Framework_Assert::assertClassNotHasStaticAttribute()
      */
     public function testAssertClassNotHasStaticAttributeProperlyFailsWithInvalidAttribute()
     {
@@ -910,12 +910,110 @@ class AssertTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers CIUnit_Framework_Assert::assertClassHasAttribute()
+     * @covers CIUnit_Framework_Assert::assertClassNotHasStaticAttribute()
      */
     public function testAssertClassNotHasStaticAttributeProperlyFailsWithInvalidClassName()
     {
         try {
             CIUnit_Framework_Assert::assertClassNotHasStaticAttribute('ab', 'NotExistingClassName');
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertObjectHasAttribute()
+     */
+    public function testAssertObjectHasAttribute()
+    {
+        CIUnit_Framework_Assert::assertObjectHasAttribute('publicAttribute', new  ClassWithAttributes());
+  
+        try {
+            CIUnit_Framework_Assert::assertObjectHasAttribute('notExistingObjectAttribute', new  ClassWithAttributes());
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertObjectNotHasAttribute()
+     */
+    public function testAssertObjectNotHasAttribute()
+    {
+        CIUnit_Framework_Assert::assertObjectNotHasAttribute('notExistingObjectAttribute', new  ClassWithAttributes());
+        
+        try {
+            CIUnit_Framework_Assert::assertObjectNotHasAttribute('privateAttribute', new  ClassWithAttributes());
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertObjectHasAttribute()
+     */
+    public function testAssertObjectHasAttributeProperlyFailsIfAttributeIsNotValid()
+    {
+        try {
+            CIUnit_Framework_Assert::assertObjectHasAttribute('1', 'ClassWithAttributes');
+        }
+        catch (CIUnit_Framework_Exception_InvalidArgument $e) {
+            return;
+        }
+     
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertObjectHasStaticAttribute()
+     */
+    public function testAssertObjectHasStaticAttribute()
+    {
+        CIUnit_Framework_Assert::assertObjectHasStaticAttribute('publicStaticAttribute', new  ClassWithAttributes());
+        
+        try {
+            CIUnit_Framework_Assert::assertObjectHasStaticAttribute('publicAttribute', new  ClassWithAttributes());
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertObjectNotHasStaticAttribute()
+     */
+    public function testAssertObjectNotHasStaticAttribute()
+    {
+        CIUnit_Framework_Assert::assertObjectNotHasStaticAttribute('publicAttribute', new  ClassWithAttributes());
+    
+        try {
+            CIUnit_Framework_Assert::assertObjectNotHasStaticAttribute('publicStaticAttribute', new  ClassWithAttributes());
+        }
+        catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assertObjectHasStaticAttribute()
+     */
+    public function testAssertObjectHasStaticAttributeProperlyFailsIfAttributeIsNotValid()
+    { 
+        try {
+            CIUnit_Framework_Assert::assertObjectHasStaticAttribute('1', new  ClassWithAttributes());
         }
         catch (CIUnit_Framework_Exception_InvalidArgument $e) {
             return;

@@ -669,6 +669,129 @@ abstract class CIUnit_Framework_Assert
     }
     
     /**
+     * Asserts that an object has a specified attribute
+     *
+     * @param string $attribute
+     * @param object $object
+     * @param string $message
+     * @since version 1.2.0
+     */
+    public static function assertObjectHasAttribute($attribute, $object, $message = '')
+    {
+        if(!is_string($attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        }
+        
+        // Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore,
+        // followed by any number of letters, numbers, or underscores.
+        // As a regular expression, it would be expressed thus: '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+        // See: http://www.php.net/manual/en/language.variables.basics.php
+        if(!preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid name of attribute');
+        }
+        
+        if(!is_object($object)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'object');
+        }
+        
+        $constraint = new CIUnit_Framework_Constraint_ObjectHasAttribute($attribute);
+        self::assertThat($object, $constraint, $message);
+        
+    }
+    
+    /**
+     * Asserts that an object does not have a specified attribute
+     *
+     * @param string $attribute
+     * @param object $object
+     * @param string $message
+     * @since version 1.2.0
+     */
+    public static function assertObjectNotHasAttribute($attribute, $object, $message = '')
+    {
+        if(!is_string($attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        }
+    
+        // Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore,
+        // followed by any number of letters, numbers, or underscores.
+        // As a regular expression, it would be expressed thus: '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+        // See: http://www.php.net/manual/en/language.variables.basics.php
+        if(!preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid name of attribute');
+        }
+    
+        if(!is_object($object)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'object');
+        }
+    
+        $constraint = new CIUnit_Framework_Constraint_ObjectHasAttribute($attribute);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($object, $notConstraint, $message);
+    }
+    
+    /**
+     * Asserts that an object has a specified static attribute
+     *
+     * @param string $attribute
+     * @param object $object
+     * @param string $message
+     * @since version 1.2.0
+     */
+    public static function assertObjectHasStaticAttribute($attribute, $object, $message = '')
+    {
+        if(!is_string($attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        }
+    
+        // Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore,
+        // followed by any number of letters, numbers, or underscores.
+        // As a regular expression, it would be expressed thus: '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+        // See: http://www.php.net/manual/en/language.variables.basics.php
+        if(!preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid name of attribute');
+        }
+    
+        if(!is_object($object)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'object');
+        }
+    
+        $constraint = new CIUnit_Framework_Constraint_ObjectHasStaticAttribute($attribute);
+        self::assertThat($object, $constraint, $message);
+    }
+    
+    /**
+     * Asserts that an object does not have a specified static attribute
+     *
+     * @param string $attribute
+     * @param object $object
+     * @param string $message
+     * @since version 1.2.0
+     */
+    public static function assertObjectNotHasStaticAttribute($attribute, $object, $message = '')
+    {
+        if(!is_string($attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'string');
+        }
+    
+        // Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore,
+        // followed by any number of letters, numbers, or underscores.
+        // As a regular expression, it would be expressed thus: '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+        // See: http://www.php.net/manual/en/language.variables.basics.php
+        if(!preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $attribute)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(1, 'a valid name of attribute');
+        }
+    
+        if(!is_object($object)) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(2, 'object');
+        }
+    
+        $constraint = new CIUnit_Framework_Constraint_ObjectHasStaticAttribute($attribute);
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+        self::assertThat($object, $notConstraint, $message);
+    }
+    
+    /**
      *
      * @param mixed $value            
      * @param CIUnit_Framework_ConstraintAbstract $constraint            

@@ -102,18 +102,18 @@ class CIUnit_Framework_Constraint_Not extends CIUnit_Framework_ConstraintAbstrac
     {
         // Convert constraint failureDescription() to match NOT
         $possitive = array(
-                'has',
-                'matches',
-                'is',
-                'starts',
-                'ends',
+                'has ',
+                'matches ',
+                'is ',
+                'starts ',
+                'ends ',
         );
         $negative = array(
-                'does not have',
-                'does not match',
-                'is not',
-                'does not start',
-                'does not end',
+                'does not have ',
+                'does not match ',
+                'is not ',
+                'does not start ',
+                'does not end ',
         );
         
         return str_replace($possitive, $negative, $string);
