@@ -1,4 +1,3 @@
-
 CIUnit 1.2 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
 ---------------
 CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runs on top
@@ -859,7 +858,7 @@ Reports an error identified by ```$message``` if  ```$object``` does not have st
 ```assertObjectNotHasStaticAttribute()``` is the inverse of this assertion and takes the same arguments.
 ```php
 <?php
-class ObjectNotHasStaticAttributeTest extends CIUnit_Framework_TestCase
+class ObjectHasStaticAttributeTest extends CIUnit_Framework_TestCase
 {
     public function testFailure()
     {
