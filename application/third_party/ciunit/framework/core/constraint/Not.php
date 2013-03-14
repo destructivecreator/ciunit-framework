@@ -102,21 +102,49 @@ class CIUnit_Framework_Constraint_Not extends CIUnit_Framework_ConstraintAbstrac
     {
         // Convert constraint failureDescription() to match NOT
         $possitive = array(
-                'has',
-                'matches',
-                'is',
-                'starts',
-                'ends',
+                'has ',
+                'matches ',
+                'is ',
+                'starts ',
+                'ends ',
         );
         $negative = array(
-                'does not have',
-                'does not match',
-                'is not',
-                'does not start',
-                'does not end',
+                'does not have ',
+                'does not match ',
+                'is not ',
+                'does not start ',
+                'does not end ',
         );
         
-        return str_replace($possitive, $negative, $string);
+     $count = count($possitive);
+       
+       for($i=0; $i<$count; $i++) {
+           $string = self::str_replace_outside_quotes($possitive[$i], $negative[$i], $string);
+       }
+       
+       return $string;
+    }
+    
+    /**
+     * Method to replace stuff that is outside of single and double quotes
+     * 
+     * @param string $replace
+     * @param string $with
+     * @param string $string
+     * @return string
+     */
+    public static function str_replace_outside_quotes($replace,$with,$string)
+    {
+        $buffer = "";
+        // Split by quoted text
+        $replaceable = preg_split('/("[^"]*"|\'[^\']*\')/',$string,-1,PREG_SPLIT_DELIM_CAPTURE);
+        
+        while (!empty($replaceable)) {
+            // buffer = replaceable + notreplaceable
+            $buffer .= str_replace($replace,$with,array_shift($replaceable)) . array_shift($replaceable);
+        }
+        
+        return $buffer;
     }
 
     /**

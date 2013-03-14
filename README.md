@@ -1,4 +1,5 @@
-CIUnit 1.1.2 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
+
+CIUnit 1.2 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
 ---------------
 CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runs on top
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
@@ -33,6 +34,10 @@ Table of Contents
  * [аssertStringStartsWith][assertstringstartswith]
  * [аssertStringEndsWith][assertstringendswith]
  * [аssertStringMatchesRegex][assertstringmatchesregex]
+ * [assertClassHasAttribute][assertclasshasattribute]
+ * [assertClassHasStaticAttribute][assertclasshasstaticattribute]
+ * [assertObjectHasAttribute][assertobjecthasattribute]
+ * [assertObjectHasStaticAttribute][assertobjecthasstaticattribute]
 * [Change Log][change-log]
 * [Issues][issues]
 * [Credits][credits]
@@ -783,9 +788,94 @@ Failure description
 Failed asserting that 'presentation' string matches the regular expression '/^prez/'. 
 ```
 
+### assertClassHasAttribute
+Method asserts that a class has a specified attribute
+
+```assertClassHasAttribute(string $attribute, string $className, string $message = '')```<br/>
+Reports an error identified by ```$message``` if class ```$className``` does not have attribute ```$attribute```. <br/>
+```assertClassNotHasAttribute()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class ClassHasAttributeTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertClassHasAttribute('notExistingAttribute', 'ClassWithAttributes');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'ClassWithAttributes' class has attribute 'notExistingAttribute'.
+```
+
+### assertClassHasStaticAttribute
+Method asserts that a class has a specified static attribute
+
+```assertClassHasStaticAttribute(string $attribute, string $className, string $message = '')```<br/>
+Reports an error identified by ```$message``` if class ```$className``` does not have static attribute ```$attribute```. <br/>
+```assertClassNotHasStaticAttribute()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class ClassHasStaticAttributeTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertClassHasStaticAttribute('nonStaticAttribute', 'ClassWithAttributes');
+    }
+}
+```
+Failure description
+```
+Failed asserting that 'ClassWithAttributes' class has static attribute 'nonStaticAttribute'.
+```
+
+### assertObjectHasAttribute
+Method asserts that an object has a specified attribute
+
+```assertObjectHasAttribute(string $attribute, object $object, string $message = '')```<br/>
+Reports an error identified by ```$message``` if  ```$object``` does not have attribute ```$attribute```. <br/>
+```assertObjectNotHasAttribute()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class ObjectHasAttributeTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertObjectHasAttribute('publicAttribute',  new ClassWithAttributes());
+    }
+}
+```
+Failure description
+```
+Failed asserting that ClassWithAttributes Object(...) has attribute 'publicAttribute'.
+```
+
+### assertObjectHasStaticAttribute
+Method asserts that an object has a specified static attribute
+
+```assertObjectHasStaticAttribute(string $attribute, object $object, string $message = '')```<br/>
+Reports an error identified by ```$message``` if  ```$object``` does not have static attribute ```$attribute```. <br/>
+```assertObjectNotHasStaticAttribute()``` is the inverse of this assertion and takes the same arguments.
+```php
+<?php
+class ObjectNotHasStaticAttributeTest extends CIUnit_Framework_TestCase
+{
+    public function testFailure()
+    {
+        $this->assertObjectHasStaticAttribute('publicAttribute',  new ClassWithAttributes());
+    }
+}
+```
+Failure description
+```
+Failed asserting that ClassWithAttributes Object(...) has static attribute 'publicAttribute'.
+```
+
+
 Change Log
 ----------
-### Version 1.1.x
+### Version 1.1.0
  Release date:  March 6, 2013
 #### Changes:
   * Added [assertGreaterThan][assertgreaterthan]
@@ -798,6 +888,14 @@ Change Log
   
 ### Fixed bugs:
   * Solved issues [#1][issue1] and [#2][issue2]
+
+### Version 1.2.0
+ Release date:  March 14, 2013
+#### Changes:
+  * Added [assertClassHasAttribute][assertclasshasattribute]
+  * Added [assertClassHasStaticAttribute][assertclasshasstaticattribute]
+  * Added [assertObjectHasAttribute][assertobjecthasattribute]
+  * Added [assertObjectHasStaticAttribute][assertobjecthasstaticattribute]
 
 Issues
 ------
@@ -843,6 +941,10 @@ I took my inspiration from [JUnit][junit] and [PHPUnit][phpunit], thank you guys
 [assertstringstartswith]: #assertstringstartswith
 [assertstringendswith]: #assertstringendswith
 [assertstringmatchesregex]: #assertstringmatchesregex
+[assertclasshasattribute]: #assertclasshasattribute
+[assertclasshasstaticattribute]: #assertclasshasstaticattribute
+[assertobjecthasattribute]: #assertobjecthasattribute
+[assertobjecthasstaticattribute]: #assertobjecthasstaticattribute
 
 [change-log]: #change-log
 [issues]: #issues

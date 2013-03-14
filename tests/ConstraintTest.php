@@ -6,6 +6,9 @@ require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'application/third_party/c
 require_once 'PHPUnit/Framework/TestCase.php';
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'TestIterator.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ClassWithAttributes.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ClassWithNoAttributes.php';
+ 
  
 /**
  * Constraint test case.
@@ -1346,6 +1349,213 @@ EOF
     
         $this->fail();
     }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_ClassHasAttribute
+     * @covers CIUnit_Framework_Constraint_ClassHasAttribute::count
+     * @covers CIUnit_Framework_Constraint_ClassHasAttribute::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintClassHasAttribute()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_ClassHasAttribute('protectedAttribute');
+        
+        $this->assertTrue($constraint->evaluate('ClassWithAttributes', '', TRUE));
+        $this->assertFalse($constraint->evaluate('ClassWithNoAttributes', '', TRUE));
+        $this->assertEquals("class has attribute 'protectedAttribute'", $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+        
+        try {
+            $constraint->evaluate('ClassWithNoAttributes');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'ClassWithNoAttributes' class has attribute 'protectedAttribute'.", $e->__toString());
+        
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_ClassHasAttribute 
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintClassNotHasAttribute()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_ClassHasAttribute('protectedAttribute');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+     
+        $this->assertTrue($notConstraint->evaluate('ClassWithNoAttributes', '', TRUE));
+        $this->assertEquals("class does not have attribute 'protectedAttribute'", $notConstraint->toString()); 
+    
+        try {
+            $notConstraint->evaluate('ClassWithAttributes');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'ClassWithAttributes' class does not have attribute 'protectedAttribute'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_ClassHasStaticAttribute
+     * @covers CIUnit_Framework_Constraint_ClassHasStaticAttribute::count
+     * @covers CIUnit_Framework_Constraint_ClassHasStaticAttribute::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintClassHasStaticAttribute()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_ClassHasStaticAttribute('protectedStaticAttribute');
+    
+        $this->assertTrue($constraint->evaluate('ClassWithAttributes', '', TRUE));
+        $this->assertFalse($constraint->evaluate('ClassWithNoAttributes', '', TRUE));
+        $this->assertEquals("class has static attribute 'protectedStaticAttribute'", $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+    
+        try {
+            $constraint->evaluate('ClassWithNoAttributes');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'ClassWithNoAttributes' class has static attribute 'protectedStaticAttribute'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_ClassHasAttribute
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintClassNotHasStaticAttribute()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_ClassHasStaticAttribute('protectedStaticAttribute');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+         
+        $this->assertTrue($notConstraint->evaluate('ClassWithNoAttributes', '', TRUE));
+        $this->assertEquals("class does not have static attribute 'protectedStaticAttribute'", $notConstraint->toString());
+    
+        try {
+            $notConstraint->evaluate('ClassWithAttributes');
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that 'ClassWithAttributes' class does not have static attribute 'protectedStaticAttribute'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_ObjectHasAttribute
+     * @covers CIUnit_Framework_Constraint_ObjectHasAttribute::count
+     * @covers CIUnit_Framework_Constraint_ObjectHasAttribute::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintObjectHasAttribute()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_ObjectHasAttribute('protectedAttribute');
+        
+        $this->assertTrue($constraint->evaluate(new ClassWithAttributes(), '', TRUE));
+        $this->assertFalse($constraint->evaluate( new ClassWithNoAttributes(), '', TRUE));
+        $this->assertEquals("has attribute 'protectedAttribute'", $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+        
+        try {
+            $constraint->evaluate(new ClassWithNoAttributes());
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that ClassWithNoAttributes Object () has attribute 'protectedAttribute'.", $e->__toString());
+        
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_ObjectHasAttribute
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintObjectNotHasAttribute()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_ObjectHasAttribute('protectedAttribute');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+         
+        $this->assertTrue($notConstraint->evaluate(new ClassWithNoAttributes(), '', TRUE));
+        $this->assertEquals("does not have attribute 'protectedAttribute'", $notConstraint->toString());
+    
+        try {
+            $notConstraint->evaluate(new ClassWithAttributes());
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that ClassWithAttributes Object (...) does not have attribute 'protectedAttribute'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_ObjectHasStaticAttribute
+     * @covers CIUnit_Framework_Constraint_ObjectHasStaticAttribute::count
+     * @covers CIUnit_Framework_Constraint_ObjectHasStaticAttribute::toString
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintObjectHasStaticAttribute()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_ObjectHasStaticAttribute('protectedStaticAttribute');
+    
+        $this->assertTrue($constraint->evaluate(new ClassWithAttributes(), '', TRUE));
+        $this->assertFalse($constraint->evaluate( new ClassWithNoAttributes(), '', TRUE));
+        $this->assertEquals("has static attribute 'protectedStaticAttribute'", $constraint->toString());
+        $this->assertEquals(1, count($constraint));
+    
+        try {
+            $constraint->evaluate(new ClassWithNoAttributes());
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that ClassWithNoAttributes Object () has static attribute 'protectedStaticAttribute'.", $e->__toString());
+    
+            return;
+        }
+    
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Constraint_ObjectHasStaticAttribute
+     * @covers CIUnit_Framework_Constraint_Not
+     * @covers CIUnit_ExpectationFailureException::toString
+     */
+    public function testConstraintObjectNotHasStaticAttribute()
+    {
+        $constraint =  new CIUnit_Framework_Constraint_ObjectHasStaticAttribute('protectedAttribute');
+        $notConstraint = new CIUnit_Framework_Constraint_Not($constraint);
+         
+        $this->assertTrue($notConstraint->evaluate(new ClassWithNoAttributes(), '', TRUE));
+        $this->assertEquals("does not have static attribute 'protectedAttribute'", $notConstraint->toString());
+    
+        try {
+            $notConstraint->evaluate(new ClassWithAttributes());
+        }
+        catch (CIUnit_Framework_Exception_ExpectationFailed $e) {
+            $this->assertEquals("Failed asserting that ClassWithAttributes Object (...) does not have static attribute 'protectedAttribute'.", $e->__toString());
+    
+            return;
+        }
+    }
+    
 }
 
 ?>
