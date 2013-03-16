@@ -76,8 +76,7 @@ class CIUnit_Util_Type
      * @param integer $indentation            
      * @return string
      */
-    public static function recursiveExport ($value, $indentation = 0, 
-            &$processedObjects = array())
+    public static function recursiveExport ($value, $indentation = 0, &$processedObjects = array())
     {
         // Handle null
         if ($value === NULL) {
@@ -112,6 +111,10 @@ class CIUnit_Util_Type
         
         // Handle objects -> convert them to array
         if (is_object($value)) {
+            
+            if($value instanceof Exception) {
+                return "Exception Object (...)";
+            }
             
             // Handle recursice objects
             if (in_array($value, $processedObjects, TRUE)) {
