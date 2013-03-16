@@ -227,13 +227,18 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
             
             if (TRUE == $check) {
                 
-                $constraint = new CIUnit_Framework_Constraint_Exception(
-                        $this->expectedException);
+                $constraint = new CIUnit_Framework_Constraint_Exception($this->expectedException);
                 $this->assertThat($e, $constraint);
+                 
+                if(NULL != $this->expectedExceptionMessage) {
+                    $messageConstraint = new CIUnit_Framework_Constraint_ExceptionMessage($this->expectedExceptionMessage);
+                    $this->assertThat($e->getMessage(), $messageConstraint); 
+                }
                 
-                // TODO Assertion for message
-                
-                // TODO Assertion for code
+                if(NULL != $this->expectedExceptionCode) {
+                    $codeConstraint = new CIUnit_Framework_Constraint_ExceptionCode($this->expectedExceptionCode);
+                    $this->assertThat($e->getCode(), $codeConstraint);
+                }
             } else {
                 throw $e;
             }
@@ -305,7 +310,7 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
      * @param integer $code            
      * @since version 1.0.0
      */
-    public function setExpectedException ($name, $message = '', $code = NULL)
+    public function setExpectedException ($name, $message = NULL, $code = NULL)
     {
         $this->expectedException = $name;
         $this->expectedExceptionMessage = $message;
@@ -336,8 +341,6 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
     protected function setUp ()
     {}
 
-    public static function setUpBeforeClass ()
-    {}
 
     /**
      * This method is called after each test method
@@ -345,8 +348,5 @@ abstract class CIUnit_Framework_TestCase extends CIUnit_Framework_Assert impleme
      * @since version 1.0.0
      */
     protected function tearDown ()
-    {}
-
-    public static function tearDownAfterClass ()
     {}
 }

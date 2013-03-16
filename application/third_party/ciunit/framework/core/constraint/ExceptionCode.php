@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CIUnit
  *
@@ -36,82 +35,54 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package    CIUnit
- * @subpackage Constraint
+ * @subpackage constraint
  * @author     Agop Seropyan <agopseropyan@gmail.com>
- * @copyright  2012, Agop Seropyan <agopseropyan@gmail.com>
+ * @copyright  2013, Agop Seropyan <agopseropyan@gmail.com>
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since      File available since Release 1.0.0
+ * @since      File available since Release 1.2.x
  */
-
-/**
- * Constraint that asserts that the exception it is evaluated for is form a
- * given type.
- *
- * @package CIUnit
- * @subpackage Constraint
- * @author Agop Seropyan <agopseropyan@gmail.com>
- * @copyright 2012, Agop Seropyan <agopseropyan@gmail.com>
- * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause
- *          License
- * @since File available since Release 1.0.0
- */
-class CIUnit_Framework_Constraint_Exception extends CIUnit_Framework_ConstraintAbstract
+class CIUnit_Framework_Constraint_ExceptionCode extends CIUnit_Framework_ConstraintAbstract
 {
-
     /**
-     *
-     * @var string
+     * @var double code
      */
-    protected $exception;
-
+    protected $code;
+    
     /**
-     *
-     * @param string $exception            
+     * Class constructor
+     * @param double $code
      */
-    public function __construct ($exception)
+    public function __construct($code)
     {
-        $this->exception = $exception;
+        $this->code = $code;
     }
-
+    
     /**
      * (non-PHPdoc)
-     * 
      * @see CIUnit_Framework_ConstraintAbstract::matches()
      */
-    protected function matches ($value)
+    protected function matches($value)
     {
-        return $value instanceof $this->exception;
+        return $value == $this->code;
     }
-
+    
     /**
      * (non-PHPdoc)
-     * 
+     *
      * @see CIUnit_Framework_ConstraintAbstract::failureDescription()
      */
-    protected function failureDescription ($evaluated)
+    public function failureDescription ($evaluated)
     {
-        if ($evaluated !== NULL) {
-            $exceptionMessage = '';
-            if ($evaluated instanceof Exception && $evaluated->getMessage())
-                $exeptionMessage = $evaluated->getMessage();
-            
-            return sprintf(
-                    'exception of type "%s" matches expected exception "%s"%s', 
-                    
-                    get_class($evaluated), $this->exception, $exceptionMessage);
+        if(NULL !== $evaluated) {
+            return $this->toString();
         }
         
-        return sprintf('exception of type "%s" is thrown', $this->exception);
+        return sprintf('exception with code is thrown \'%d\'', $this->code);
     }
-
-    /**
-     * Returns a string representation of the constraint.
-     *
-     * @return string
-     */
-    public function toString ()
+    
+    public function toString()
     {
-        return sprintf("exception of type %s", $this->exception->getMessage());
+        return sprintf('expected exception has code \'%d\'', $this->code);
     }
 }
 

@@ -127,9 +127,7 @@ abstract class CIUnit_Framework_ConstraintAbstract implements Countable
     {
         return CIUnit_Util_Type::export($evaluated) . ' ' . $this->toString();
     }
-
-    protected function addFailureDescription ()
-    {}
+ 
 
     /**
      * Counts the number of constraint elements.
