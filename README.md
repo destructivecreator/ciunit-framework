@@ -1,4 +1,4 @@
-CIUnit 1.2 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
+CIUnit 1.2.1 Beta [![Build Status](https://travis-ci.org/agop/ciunit-framework.png?branch=master)](https://travis-ci.org/agop/ciunit-framework)
 ---------------
 CIUnit is simple and light-weight PHPUnit/JUnit like unit testing framework for CodeIgniter. The framework runs on top
 of CodeIgniter and provides a web interface for test execution. CIUnit is a good alternative
@@ -152,6 +152,9 @@ class CITest extends CIUnit_Framework_TestCase
 ```
 
 ### Testing Exceptions
+To test whether an exception is thrown inside the tested code use the ```setExpectedException (string $name, string $message, integer $code)``` method.
+The ```$message``` and ```$code``` parameters are optional. If present framework will try to match them with the corresponding 
+values from the exception thrown.
 
 The example introduces the basic steps for testing for expected exception
 
@@ -163,7 +166,8 @@ class ExceptionTest extends CIUnit_Framework_TestCase
 {
     public function testException()
     {
-        $this->setExpectedException('RunTimeException'); 
+        $this->setExpectedException('Exception'); 
+        throw new Exception("Error Processing Request", 1)
     }
 }
 ```
@@ -874,7 +878,7 @@ Failed asserting that ClassWithAttributes Object(...) has static attribute 'publ
 
 Change Log
 ----------
-### Version 1.1.0
+### Version 1.1.x
  Release date:  March 6, 2013
 #### Changes:
   * Added [assertGreaterThan][assertgreaterthan]
@@ -888,13 +892,16 @@ Change Log
 ### Fixed bugs:
   * Solved issues [#1][issue1] and [#2][issue2]
 
-### Version 1.2.0
+### Version 1.2.x
  Release date:  March 14, 2013
 #### Changes:
   * Added [assertClassHasAttribute][assertclasshasattribute]
   * Added [assertClassHasStaticAttribute][assertclasshasstaticattribute]
   * Added [assertObjectHasAttribute][assertobjecthasattribute]
   * Added [assertObjectHasStaticAttribute][assertobjecthasstaticattribute]
+
+### Fixed bugs:
+  * Fixed "Allowed memory exhausted" bug when processing exceptions
 
 Issues
 ------
