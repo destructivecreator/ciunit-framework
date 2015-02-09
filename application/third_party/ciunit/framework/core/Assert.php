@@ -114,6 +114,47 @@ abstract class CIUnit_Framework_Assert
                 new CIUnit_Framework_Constraint_ArrayHasKey($key));
         self::assertThat($array, $constraint, $message);
     }
+    
+    /**
+     * Assert that array has a specified value
+     *
+     * @param mixed $value
+     * @param array $array
+     * @param string $message
+     * @throws CIUnit_Framework_Exception_InvalidArgument
+     * @since version 1.0.0
+     */
+    public static function assertArrayHasValue ($value, $array, $message = '')
+    {
+        if (! (is_array($array) || ($array instanceof ArrayAccess))) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(2,
+                'array or arrayAccess');
+        }
+
+        $constraint = new CIUnit_Framework_Constraint_ArrayHasValue($value);
+        self::assertThat($array, $constraint, $message);
+    }
+
+    /**
+     * Assert that array does not have a specified value
+     *
+     * @param mixed $value
+     * @param array $array
+     * @param string $message
+     * @throws CIUnit_Framework_Exception_InvalidArgument
+     * @since version 1.0.0
+     */
+    public static function assertArrayNotHasValue ($value, $array, $message = '')
+    {
+        if (! (is_array($array) || ($array instanceof ArrayAccess))) {
+            throw new CIUnit_Framework_Exception_InvalidArgument(2,
+                'array or ArrayAccess');
+        }
+
+        $constraint = new CIUnit_Framework_Constraint_Not(
+            new CIUnit_Framework_Constraint_ArrayHasValue($value));
+        self::assertThat($array, $constraint, $message);
+    }
 
     /**
      * Asserts the number of elements of an array, Countable or Iterator
