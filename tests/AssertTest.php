@@ -139,7 +139,127 @@ class AssertTest extends PHPUnit_Framework_TestCase
     {
         CIUnit_Framework_Assert::assertArrayNotHasKey('foo', array('foo' => 'bar'));
     }
-
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assetArrayHasValue()
+     */
+    public function testAssertArrayHasIntegerValue ()
+    {  
+       CIUnit_Framework_Assert::assertArrayHasValue("foo", array('foo')); 
+        try {
+            CIUnit_Framework_Assert::assertArrayHasValue("bar", array('foo'));
+        } catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+         
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assetArrayHasValue()
+     */
+    public function testAssertArrayHasStringValue ()
+    {
+        CIUnit_Framework_Assert::assertArrayHasValue('bar', array('foo' => 'bar'));
+        
+        try {
+            CIUnit_Framework_Assert::assertArrayHasValue('foo', array('foo' => 'bar'));
+        } catch (CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assetArrayHasValue()
+     */
+    public function testAssertArrayHasValueAcceptsArrayAccessValue ()
+    {
+        $array = new ArrayObject();
+        $array['foo'] = 'bar';
+ 
+        CIUnit_Framework_Assert::assertArrayHasValue('bar', $array);
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assetArrayHasValue()
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
+     */
+    public function testAssertArrayHasValueProperlyFailsWithArrayAccessValue ()
+    {
+        $array = new ArrayObject();
+        $array['foo'] = 'bar';
+         
+        CIUnit_Framework_Assert::assertArrayHasValue('foo', $array);
+    }
+    
+    /**
+     * @covers Tests CIUnit_Framework_Assert::assetArrayNotHasValue()
+     */
+    public function testAssertArrayNotHasIntegerValue ()
+    {
+        CIUnit_Framework_Assert::assertArrayNotHasValue( 1, array(1));
+        
+        try{
+            CIUnit_Framework_Assert::assertArrayNotHasValue( 0, array(1));
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e){
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers Tests CIUnit_Framework_Assert::assetArrayNotHasValue()
+     */
+    public function testAssertArrayNotHasStringValue ()
+    {
+        CIUnit_Framework_Assert::assertArrayNotHasValue('foo', array('bar'));
+        
+        try{
+            CIUnit_Framework_Assert::assertArrayNotHasValue('bar', array('bar'));
+        }
+        catch(CIUnit_Framework_Exception_AssertionFailed $e) {
+            return;
+        }
+        
+        $this->fail();
+    }
+    
+    /**
+     * @covers Tests CIUnit_Framework_Assert::assetArrayNotHasValue()
+     */
+    public function testAssertArrayNotHasValueAcceptsArrayAccessValue ()
+    {
+        $array = new ArrayObject();
+        $array['foo'] = 'bar';
+        
+        CIUnit_Framework_Assert::assertArrayNotHasValue('foo', $array);
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assetArrayNotHasValue()
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
+     */
+    public function testAssertArrayNotHasValueProperlyFailsWithArrayAccessValue ()
+    {
+        $array = new ArrayObject();
+        $array['foo'] = 'bar';
+        
+        CIUnit_Framework_Assert::assertArrayNotHasValue('bar', $array);
+    }
+    
+    /**
+     * @covers CIUnit_Framework_Assert::assetArrayNotHasValue()
+     * @expectedException CIUnit_Framework_Exception_AssertionFailed
+     */
+    public function tetsAssertArrayNotHasValueThrowsException ()
+    {
+        CIUnit_Framework_Assert::assertArrayNotHasValue('bar', array('foo' => 'bar'));
+    }
     
     /**
      * @covers Tests CIUnit_Framework_Assert::assetCount()
