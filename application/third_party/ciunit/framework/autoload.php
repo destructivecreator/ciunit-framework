@@ -69,6 +69,7 @@ function ciunit_autoloader($class)
 
                 // constraint
                 'ciunit_framework_constraint_arrayhaskey'                  => '/core/constraint/ArrayHasKey.php',
+                'ciunit_framework_constraint_arrayhasvalue'                => '/core/constraint/ArrayHasValue.php',
                 'ciunit_framework_constraint_not'                          => '/core/constraint/Not.php',
                 'ciunit_framework_constraint_exception'                    => '/core/constraint/Exception.php',
                 'ciunit_framework_constraint_exceptioncode'                => '/core/constraint/ExceptionCode.php',
