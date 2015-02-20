@@ -145,14 +145,13 @@ class AssertTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertArrayHasIntegerValue ()
     {  
-       CIUnit_Framework_Assert::assertArrayHasValue("foo", array('foo')); 
+       CIUnit_Framework_Assert::assertArrayHasValue(123, array(123)); 
         try {
-            CIUnit_Framework_Assert::assertArrayHasValue("bar", array('foo'));
+            CIUnit_Framework_Assert::assertArrayHasValue(456, array(123));
         } catch (CIUnit_Framework_Exception_AssertionFailed $e) {
             return;
         }
          
-        
         $this->fail();
     }
     
